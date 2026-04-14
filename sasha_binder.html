@@ -113,17 +113,17 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .edit-toggle{font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--rsm);border:1px solid var(--bd);background:transparent;color:var(--tx3);cursor:pointer;transition:all .12s;}
 .edit-toggle:hover,.edit-toggle.on{background:var(--pkl);color:var(--pk);border-color:var(--rose);}
 /* BUDGET */
-.b-hdr{display:grid;grid-template-columns:1fr 92px 92px;gap:6px;padding:5px 1.25rem;background:var(--sf2);}
-.b-row{display:grid;grid-template-columns:1fr 92px 92px;gap:6px;align-items:center;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);}
+.b-hdr{display:grid;grid-template-columns:1fr 88px 88px 28px;gap:6px;padding:5px 1.25rem;background:var(--sf2);}
+.b-row{display:grid;grid-template-columns:1fr 88px 88px 28px;gap:6px;align-items:center;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);}
 .b-row:hover{background:var(--sf2);}
 .b-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);text-align:right;}
 .b-lbl:first-child{text-align:left;}
 .b-inp{width:100%;text-align:right;padding:5px 7px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);}
 .b-inp:focus{outline:none;border-color:var(--pk2);background:#fff;}
-.sav-hdr{display:grid;grid-template-columns:1fr 88px 88px 88px;gap:8px;padding:6px 1.25rem;background:var(--sf2);}
-.sav-row{display:grid;grid-template-columns:1fr 88px 88px 88px;gap:8px;align-items:center;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);}
+.sav-hdr{display:grid;grid-template-columns:1fr 80px 80px 80px 28px;gap:6px;padding:5px 1.25rem;background:var(--sf2);}
+.sav-row{display:grid;grid-template-columns:1fr 80px 80px 80px 28px;gap:6px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
 .sav-row:hover{background:var(--sf2);}
-.inc-row{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center;padding:7px 1.25rem;border-bottom:1px solid var(--bd2);}
+.inc-row{display:grid;grid-template-columns:1fr 110px 28px;gap:6px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
 .inc-row:hover{background:var(--sf2);}
 /* HABITS */
 .hab-hdr{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;padding:6px 1.25rem;background:var(--sf2);}
@@ -174,18 +174,14 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .dash-hero{background:linear-gradient(135deg,#fce8ee 0%,var(--bg) 70%);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
 @media(max-width:900px){
   :root{--sb:52px;}
+  #drive-status{display:none;}
   .budget-charts{grid-template-columns:1fr!important;}
   .ni span:not(.ni-ic),.ngl,.sb-title,.sb-sub{display:none;}
   .sb-brand{padding:.75rem 0;display:flex;justify-content:center;}
   .g2,.g4{grid-template-columns:1fr;}
   .page{padding:1rem;}
-  .sv-btn{font-size:0;padding:8px 4px;}
-  .sv-btn::before{content:'✓';font-size:14px;}
-  .sb-foot{padding:.75rem 0;display:flex;justify-content:center;}
 }
-</style>e>
-</head>
-<body>
+</style>
 
 <div class="sidebar">
   <div class="sb-brand">
@@ -222,13 +218,9 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <button class="ni" onclick="go('semester',this)"><span class="ni-ic">▦</span><span>Semester Plan</span></button>
   </div>
   <div class="sb-foot">
-    <button class="sv-btn" onclick="saveAll();showToast('All saved!')">Save everything</button>
-    <div style="margin-top:8px;">
-      <button id="drive-btn" class="sv-btn" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);font-size:11px;" onclick="handleDriveAuth()">
-        Connect Google Drive
-      </button>
-      <div id="drive-status" style="font-size:10px;color:rgba(255,255,255,0.4);text-align:center;margin-top:4px;padding:0 .5rem;"></div>
-    </div>
+    <button class="ni" onclick="saveAll();showToast('All saved!')" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.7);"><span class="ni-ic">✓</span><span>Save everything</span></button>
+    <button id="drive-btn" class="ni" onclick="handleDriveAuth()" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.5);"><span class="ni-ic">☁</span><span id="drive-btn-text">Connect Drive</span></button>
+    <div id="drive-status" style="font-size:10px;color:rgba(255,255,255,0.35);padding:0 1.1rem 4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"></div>
   </div>
 </div>
 
@@ -663,16 +655,38 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       <span id="exp-toggle-arrow" style="font-size:13px;color:var(--tx3);">&#9660;</span>
     </div>
     <div id="expense-panel">
-      <div class="b-hdr"><div class="b-lbl" style="text-align:left;">Category</div><div class="b-lbl">Budgeted $</div><div class="b-lbl">Spent $</div></div>
+      <div class="b-hdr"><div class="b-lbl" style="text-align:left;">Category</div><div class="b-lbl">Budgeted $</div><div class="b-lbl">Spent $</div><div></div></div>
       <div id="expense-rows"></div>
       <button class="add-btn" onclick="addExpenseRow()">+ add category</button>
+    </div>
+  </div>
+
+  <!-- Subscription tracker -->
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch" style="cursor:pointer;" onclick="toggleSubs()">
+      <div class="ct">Subscriptions <span class="tag tn" style="margin-left:6px;">auto-calculates</span></div>
+      <span id="sub-toggle-arrow" style="font-size:13px;color:var(--tx3);">&#9658;</span>
+    </div>
+    <div id="sub-panel" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 90px 130px 28px;gap:6px;padding:5px 1.25rem;background:var(--sf2);">
+        <div class="b-lbl" style="text-align:left;">Name</div>
+        <div class="b-lbl">Amount $</div>
+        <div class="b-lbl">Frequency</div>
+        <div></div>
+      </div>
+      <div id="sub-rows"></div>
+      <button class="add-btn" onclick="addSubRow()">+ add subscription</button>
+      <div style="padding:8px 1.25rem;border-top:1px solid var(--bd2);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:11px;color:var(--tx3);">Fortnightly total</span>
+        <span style="font-size:1rem;font-family:'Cormorant Garamond',serif;color:var(--pk);" id="sub-total">$0</span>
+      </div>
     </div>
   </div>
 
   <!-- Savings goals -->
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch"><div class="ct">Savings goals</div></div>
-    <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div></div>
+    <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div><div></div></div>
     <div id="savings-rows"></div>
     <button class="add-btn" onclick="addSavingsRow()">+ add goal</button>
   </div>
@@ -876,16 +890,15 @@ function handleDriveAuth() {
 
 function updateDriveBtn(connected) {
   const btn = document.getElementById('drive-btn');
+  const txt = document.getElementById('drive-btn-text');
   if (!btn) return;
   if (connected) {
-    btn.textContent = 'Drive connected ✓';
-    btn.style.background = 'rgba(58,122,90,0.35)';
-    btn.style.borderColor = 'rgba(58,122,90,0.6)';
-    btn.onclick = () => { syncToDrive(); showToast('Syncing to Drive...'); };
+    btn.style.color = 'rgba(58,200,120,0.9)';
+    if (txt) txt.textContent = 'Drive connected';
+    btn.onclick = () => { syncToDrive(); showToast('Syncing...'); };
   } else {
-    btn.textContent = 'Connect Google Drive';
-    btn.style.background = 'rgba(255,255,255,0.1)';
-    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+    btn.style.color = 'rgba(255,255,255,0.5)';
+    if (txt) txt.textContent = 'Connect Drive';
     btn.onclick = handleDriveAuth;
   }
 }
@@ -1438,14 +1451,15 @@ function recalcBudget() {
 function addIncomeRow(label='', val='') {
   const c = document.getElementById('income-rows'); if (!c) return;
   const row = document.createElement('div'); row.className = 'inc-row';
-  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget();saveAll()">${label||'Income source'}</div><input class="b-inp inc-val" type="number" placeholder="0" value="${val}" oninput="recalcBudget();saveAll()">`;
+  const incIdx = Array.from(c.children).length;
+  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget();saveAll()">${label||'Income source'}</div><input class="b-inp inc-val" type="number" placeholder="0" value="${val}" oninput="recalcBudget();saveAll()"><button class="btn btn-sm btn-danger" onclick="this.closest('.inc-row').remove();recalcBudget();saveAll()" style="flex-shrink:0;">&#x2715;</button>`;
   c.appendChild(row);
 }
 
 function addExpenseRow(label='', budget='', spent='') {
   const c = document.getElementById('expense-rows'); if (!c) return;
   const row = document.createElement('div'); row.className = 'b-row exp-row';
-  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget()">${label||'Category'}</div><div><input class="b-inp bud-val" type="number" placeholder="0" value="${budget}" oninput="recalcBudget();saveAll()"><div class="prog-wrap"><div class="prog-bar" style="width:0%"></div></div></div><input class="b-inp spt-val" type="number" placeholder="0" value="${spent}" oninput="recalcBudget()">`;
+  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget();saveAll()">${label||'Category'}</div><div><input class="b-inp bud-val" type="number" placeholder="0" value="${budget}" oninput="recalcBudget();saveAll()"><div class="prog-wrap"><div class="prog-bar" style="width:0%"></div></div></div><input class="b-inp spt-val" type="number" placeholder="0" value="${spent}" oninput="recalcBudget();saveAll()"><button class="btn btn-sm btn-danger" onclick="this.closest('.exp-row').remove();recalcBudget();saveAll()" style="flex-shrink:0;">&#x2715;</button>`;
   c.appendChild(row);
 }
 
@@ -1453,7 +1467,7 @@ function addSavingsRow(name='', contrib='', saved='', target='') {
   const c = document.getElementById('savings-rows'); if (!c) return;
   const row = document.createElement('div'); row.className = 'sav-row';
   const pct = saved && target ? Math.min(Math.round((parseFloat(saved)/parseFloat(target))*100),100) : 0;
-  row.innerHTML = `<div><div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget()">${name||'Goal'}</div><div class="sav-pct" style="font-size:11px;color:var(--tx3);">${pct}% of target</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:var(--pk2);"></div></div></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-c" type="number" placeholder="0" value="${contrib}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-s" type="number" placeholder="0" value="${saved}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-t" type="number" placeholder="0" value="${target}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div>`;
+  row.innerHTML = `<div><div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget();saveAll()">${name||'Goal'}</div><div class="sav-pct" style="font-size:11px;color:var(--tx3);">${pct}% of target</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:var(--pk2);"></div></div></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-c" type="number" placeholder="0" value="${contrib}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-s" type="number" placeholder="0" value="${saved}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-t" type="number" placeholder="0" value="${target}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><button class="btn btn-sm btn-danger" onclick="this.closest('.sav-row').remove();recalcBudget();saveAll()" style="flex-shrink:0;align-self:center;">&#x2715;</button>`;
   c.appendChild(row);
 }
 
@@ -2079,6 +2093,69 @@ function renderNWBreakdown() {
   el.innerHTML = html;
 }
 
+
+// ── SUBSCRIPTION TRACKER ──
+function toFortnight(amount, freq) {
+  const a = parseFloat(amount) || 0;
+  if (freq === 'weekly')       return a * 2;
+  if (freq === 'fortnightly')  return a;
+  if (freq === 'monthly')      return a * 12 / 26;
+  if (freq === 'annually')     return a / 26;
+  return 0;
+}
+
+function toggleSubs() {
+  const panel = document.getElementById('sub-panel');
+  const arrow = document.getElementById('sub-toggle-arrow');
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  if (arrow) arrow.innerHTML = open ? '&#9658;' : '&#9660;';
+}
+
+function addSubRow(name='', amount='', freq='monthly') {
+  const c = document.getElementById('sub-rows'); if (!c) return;
+  const row = document.createElement('div');
+  row.className = 'sub-row';
+  row.style.cssText = 'display:grid;grid-template-columns:1fr 90px 130px 28px;gap:6px;align-items:center;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);';
+  const freqs = ['weekly','fortnightly','monthly','annually'];
+  row.innerHTML =
+    `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcSubs();saveAll()">${name||'Subscription'}</div>` +
+    `<input type="number" class="b-inp sub-amt" placeholder="0" value="${amount}" oninput="recalcSubs();saveAll()" style="text-align:right;">` +
+    `<select class="sub-freq" onchange="recalcSubs();saveAll()" style="font-size:12px;padding:4px 6px;">` +
+    freqs.map(f => `<option value="${f}"${f===freq?' selected':''}>${f.charAt(0).toUpperCase()+f.slice(1)}</option>`).join('') +
+    `</select>` +
+    `<button class="btn btn-sm btn-danger" onclick="this.closest('.sub-row').remove();recalcSubs();saveAll()">&#x2715;</button>`;
+  c.appendChild(row);
+  recalcSubs();
+}
+
+function recalcSubs() {
+  let total = 0;
+  document.querySelectorAll('.sub-row').forEach(row => {
+    const amt = row.querySelector('.sub-amt')?.value || 0;
+    const freq = row.querySelector('.sub-freq')?.value || 'monthly';
+    total += toFortnight(amt, freq);
+  });
+  const el = document.getElementById('sub-total');
+  if (el) el.textContent = '$' + total.toFixed(2);
+  // Autofill the "Subscriptions" expense row budgeted amount
+  document.querySelectorAll('.exp-row').forEach(row => {
+    const lbl = (row.querySelector('[contenteditable]')?.textContent || '').toLowerCase();
+    if (lbl.includes('subscript')) {
+      const inp = row.querySelector('.bud-val');
+      if (inp) { inp.value = total.toFixed(2); recalcBudget(); }
+    }
+  });
+}
+
+function getSubData() {
+  return Array.from(document.querySelectorAll('.sub-row')).map(row => ({
+    name: row.querySelector('[contenteditable]')?.textContent || '',
+    amount: row.querySelector('.sub-amt')?.value || '',
+    freq: row.querySelector('.sub-freq')?.value || 'monthly'
+  }));
+}
+
 function saveAll() {
   const d=getData();
   const tfs={
@@ -2096,6 +2173,7 @@ function saveAll() {
   const ss=document.getElementById('sem-start')?.value,se=document.getElementById('sem-end')?.value;
   if(ss)d.semStart=ss;if(se)d.semEnd=se;
   d.budgetPeriod=document.getElementById('period-start')?.value||'';
+  d.subscriptions=getSubData();
   d.incomeRows=Array.from(document.querySelectorAll('.inc-row')).map(r=>({label:r.querySelector('[contenteditable]')?.textContent||'',value:r.querySelector('.inc-val')?.value||''}));
   d.expenses=Array.from(document.querySelectorAll('.exp-row')).map(r=>({label:r.querySelector('[contenteditable]')?.textContent||'',budget:r.querySelector('.bud-val')?.value||'',spent:r.querySelector('.spt-val')?.value||''}));
   d.savings=Array.from(document.querySelectorAll('.sav-row')).map(r=>({name:r.querySelector('[contenteditable]')?.textContent||'',contrib:r.querySelector('.sav-c')?.value||'',saved:r.querySelector('.sav-s')?.value||'',target:r.querySelector('.sav-t')?.value||''}));
@@ -2125,7 +2203,11 @@ function loadData() {
   else{const el=document.getElementById('period-start');if(el)el.value=new Date().toISOString().split('T')[0];updatePeriod();}
   const ic=document.getElementById('income-rows');
   if(ic){ic.innerHTML='';if(d.incomeRows&&d.incomeRows.length)d.incomeRows.forEach(r=>addIncomeRow(r.label,r.value));else{addIncomeRow('Primary salary (after tax)','');addIncomeRow('Other income','');}}
+  const subRows=document.getElementById('sub-rows');if(subRows)subRows.innerHTML='';
+  if(d.subscriptions&&d.subscriptions.length)d.subscriptions.forEach(s=>addSubRow(s.name,s.amount,s.freq));
+  const er=document.getElementById('expense-rows');if(er)er.innerHTML='';
   if(d.expenses&&d.expenses.length)d.expenses.forEach(e=>addExpenseRow(e.label,e.budget,e.spent));else DEF_EXP.forEach(e=>addExpenseRow(e));
+  const sr=document.getElementById('savings-rows');if(sr)sr.innerHTML='';
   if(d.savings&&d.savings.length)d.savings.forEach(s=>addSavingsRow(s.name,s.contrib,s.saved,s.target));else DEF_SAV.forEach(s=>addSavingsRow(s.n,'','',s.t));
   if(d.prs)renderPRs(d.prs);
   if(d.products)renderProducts(d.products);
