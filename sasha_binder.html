@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sasha — Life Binder</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#fff8f9;--sf:#ffffff;--sf2:#fdf0f3;--sf3:#f5dce4;
+  --tx:#1a0d10;--tx2:#6b4a52;--tx3:#c0909a;
+  --bd:rgba(192,67,106,0.13);--bd2:rgba(192,67,106,0.07);
+  --pk:#c0436a;--pk2:#d9648a;--pkl:#fce8ee;--pkd:#8c2a47;
+  --rose:#e8a0b4;--mauve:#7a3d52;
+  --gold:#b8933a;--gdl:#f7f0e0;
+  --grn:#3a7a5a;--gnl:#e4f5ec;
+  --bl:#3a5a7a;--bll:#e4ecf5;
+  --r:12px;--rsm:7px;--sb:214px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13.5px;line-height:1.6;display:flex;}
+.sidebar{width:var(--sb);min-height:100vh;background:linear-gradient(170deg,#2a0d17 0%,#4a1a2e 55%,#3a1222 100%);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:200;overflow-y:auto;}
+.sb-brand{padding:1.5rem 1.2rem 1rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.sb-title{font-family:'DM Serif Display',serif;font-size:1.45rem;color:#fff;line-height:1.2;letter-spacing:0.01em;}
+.sb-title em{font-style:italic;color:var(--rose);}
+.sb-sub{font-size:10px;color:rgba(255,255,255,0.35);margin-top:3px;letter-spacing:.05em;}
+.ng{padding:.5rem 0 .2rem;}
+.ngl{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.28);padding:0 1.1rem;margin-bottom:2px;}
+.ni{display:flex;align-items:center;gap:8px;padding:6px 1.1rem;font-size:12.5px;color:rgba(255,255,255,0.55);cursor:pointer;transition:all .13s;border:none;background:none;width:100%;text-align:left;font-family:'Inter',sans-serif;}
+.ni:hover{color:#fff;background:rgba(255,255,255,0.07);}
+.ni.active{color:#fff;background:rgba(192,67,106,0.3);font-weight:500;}
+.ni-ic{font-size:12px;width:14px;text-align:center;flex-shrink:0;}
+.sb-foot{margin-top:auto;padding:1rem 1.1rem;border-top:1px solid rgba(255,255,255,0.08);}
+.sv-btn{width:100%;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:8px;overflow:hidden;white-space:nowrap;border-radius:var(--rsm);border:1px solid rgba(192,67,106,0.4);background:rgba(192,67,106,0.2);color:#fff;cursor:pointer;}
+.sv-btn:hover{background:rgba(192,67,106,0.4);}
+.main-wrap{margin-left:var(--sb);flex:1;min-width:0;overflow-x:hidden;}
+.page{display:none;padding:1.75rem 2rem 2rem;width:100%;}
+.page.active{display:block;}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;}
+.ch{padding:.85rem 1.25rem;border-bottom:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.ct{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--tx);}
+.stat{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;display:flex;flex-direction:column;}
+.stat.pk{background:linear-gradient(135deg,var(--pk),var(--pkd));border-color:var(--pkd);}
+.stat.pk .sl2,.stat.pk .ss{color:rgba(255,255,255,0.65);}
+.stat.pk .sv{color:#fff;}
+.stat.soft{background:linear-gradient(135deg,#fdf0f3,#fce8ee);border-color:var(--rose);}
+.sl2{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:5px;}
+.sv{font-family:'DM Serif Display',serif;font-size:1.9rem;line-height:1;color:var(--tx);}
+.ss{font-size:11px;color:var(--tx3);margin-top:3px;}
+.ph{font-family:'DM Serif Display',serif;font-size:2.1rem;margin-bottom:3px;letter-spacing:-0.01em;}
+.ph em{font-style:italic;color:var(--pk);}
+.ps-sub{font-size:13px;color:var(--tx2);margin-bottom:1.5rem;}
+.section-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--tx3);margin:1.5rem 0 .6rem;}
+.tag{display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;}
+.tpk{background:var(--pkl);color:var(--pk);}
+.tgold{background:var(--gdl);color:var(--gold);}
+.tgrn{background:var(--gnl);color:var(--grn);}
+.tbl{background:var(--bll);color:var(--bl);}
+.tn{background:var(--sf2);color:var(--tx2);}
+.tr{background:#fce8ee;color:#a0243a;}
+.pill{font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;white-space:nowrap;flex-shrink:0;}
+.p-gym{background:var(--gnl);color:var(--grn);}
+.p-work{background:var(--bll);color:var(--bl);}
+.p-study{background:var(--gdl);color:var(--gold);}
+.p-social{background:var(--pkl);color:var(--pk);}
+.p-free{background:var(--sf2);color:var(--tx2);}
+.p-prep{background:#eef5e8;color:#2d5016;}
+.prog-wrap{height:4px;background:var(--sf3);border-radius:99px;overflow:hidden;margin-top:4px;}
+.prog-bar{height:100%;border-radius:99px;background:var(--pk);transition:width .3s;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+input[type=text],input[type=number],input[type=date],select,textarea{font-family:'Inter',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);transition:border-color .15s;width:100%;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pk2);background:#fff;}
+textarea{resize:vertical;min-height:70px;}
+label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-bottom:3px;}
+.field{margin-bottom:10px;}
+.field-row{display:flex;gap:10px;align-items:flex-end;}
+.field-row .field{flex:1;margin-bottom:0;}
+.btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--rsm);border:1px solid var(--bd);background:var(--sf);color:var(--tx2);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.btn:hover{background:var(--sf2);color:var(--tx);}
+.btn-primary{background:var(--pk);border-color:var(--pk);color:#fff;}
+.btn-primary:hover{background:var(--pkd);}
+.btn-sm{padding:4px 9px;font-size:11px;}
+.btn-danger{color:#a0243a;border-color:transparent;background:transparent;}
+.btn-danger:hover{background:#fce8ee;}
+.add-btn{display:flex;align-items:center;gap:6px;padding:8px 1.25rem;font-size:12px;color:var(--tx3);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;}
+.add-btn:hover{color:var(--pk);}
+.dt{width:100%;border-collapse:collapse;table-layout:fixed;}
+.dt th{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);padding:7px 12px;text-align:left;background:var(--sf2);border-bottom:1px solid var(--bd);}
+.dt td{padding:8px 12px;border-bottom:1px solid var(--bd2);font-size:13px;color:var(--tx);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;}
+.dt tr:last-child td{border-bottom:none;}
+.dt tr:hover td{background:var(--sf2);}
+.note-box{background:var(--sf2);border-left:3px solid var(--rose);border-radius:0 var(--rsm) var(--rsm) 0;padding:10px 14px;font-size:13px;color:var(--tx2);line-height:1.6;margin-bottom:1rem;}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--pk);color:#fff;padding:10px 18px;border-radius:var(--rsm);font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;transform:translateY(0);}
+/* SCHEDULE */
+.sch-row{display:grid;grid-template-columns:168px 1fr;gap:0;align-items:stretch;padding:0;border-bottom:1px solid var(--bd2);}
+.sch-row:last-child{border-bottom:none;}
+.sch-time-col{font-size:11.5px;color:var(--tx3);padding:11px 1rem 11px 1.25rem;font-weight:500;letter-spacing:0.01em;line-height:1.5;border-right:1px solid var(--bd2);background:var(--sf2);white-space:nowrap;display:flex;align-items:center;}
+.sch-plan-col{padding:10px 1.25rem;display:flex;flex-direction:column;gap:2px;justify-content:center;min-width:0;}
+.sch-label{font-size:13px;color:var(--tx);line-height:1.4;}
+.sch-sub{font-size:11px;color:var(--tx3);width:100%;margin-top:2px;}
+/* GYM */
+.gym-row{display:grid;grid-template-columns:1fr 90px 68px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--bd2);}
+.gym-row:last-child{border-bottom:none;}
+.gym-section{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);padding:8px 0 3px;border-bottom:1px solid var(--bd2);margin-top:4px;}
+.gym-log{font-size:12px;padding:4px 6px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);text-align:center;font-family:'Inter',sans-serif;width:100%;}
+.gym-log:focus{outline:none;border-color:var(--pk2);background:#fff;}
+/* EDIT MODE */
+.editable-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd2);}
+.editable-row:last-child{border-bottom:none;}
+.editable-row input{font-family:'Inter',sans-serif;font-size:13px;border:none;background:transparent;color:var(--tx);padding:2px 4px;outline:none;border-bottom:1px solid transparent;}
+.editable-row input:focus{border-bottom-color:var(--pk2);}
+.edit-toggle{font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--rsm);border:1px solid var(--bd);background:transparent;color:var(--tx3);cursor:pointer;transition:all .12s;}
+.edit-toggle:hover,.edit-toggle.on{background:var(--pkl);color:var(--pk);border-color:var(--rose);}
+/* BUDGET */
+.b-hdr{display:grid;grid-template-columns:1fr 92px 92px;gap:6px;padding:5px 1.25rem;background:var(--sf2);}
+.b-row{display:grid;grid-template-columns:1fr 92px 92px;gap:6px;align-items:center;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);}
+.b-row:hover{background:var(--sf2);}
+.b-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);text-align:right;}
+.b-lbl:first-child{text-align:left;}
+.b-inp{width:100%;text-align:right;padding:5px 7px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);}
+.b-inp:focus{outline:none;border-color:var(--pk2);background:#fff;}
+.sav-hdr{display:grid;grid-template-columns:1fr 88px 88px 88px;gap:8px;padding:6px 1.25rem;background:var(--sf2);}
+.sav-row{display:grid;grid-template-columns:1fr 88px 88px 88px;gap:8px;align-items:center;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);}
+.sav-row:hover{background:var(--sf2);}
+.inc-row{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center;padding:7px 1.25rem;border-bottom:1px solid var(--bd2);}
+.inc-row:hover{background:var(--sf2);}
+/* HABITS */
+.hab-hdr{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;padding:6px 1.25rem;background:var(--sf2);}
+.hab-row{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
+.hab-row:hover{background:var(--sf2);}
+.hab-check{width:24px;height:24px;border-radius:5px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;margin:auto;display:flex;align-items:center;justify-content:center;transition:all .1s;font-size:11px;user-select:none;}
+.hab-check.done{background:var(--pk);border-color:var(--pk);color:#fff;}
+.hab-name{font-family:'Inter',sans-serif;font-size:13px;border:none;background:transparent;color:var(--tx);width:100%;padding:0;outline:none;}
+.hab-col{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);font-weight:500;text-align:center;}
+/* SKINCARE */
+.sk-row{display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);}
+.sk-row:last-child{border-bottom:none;}
+.sk-num{width:22px;height:22px;border-radius:50%;background:var(--pkl);border:1px solid var(--rose);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--pk);flex-shrink:0;}
+.sk-name{font-size:13px;flex:1;color:var(--tx);}
+.sk-prod{font-size:12px;background:transparent;border:none;font-family:'Inter',sans-serif;border-bottom:1px solid var(--bd);padding:2px 4px;width:160px;text-align:right;color:var(--tx3);outline:none;}
+.sk-prod:focus{border-color:var(--pk2);}
+/* GROCERY */
+.groc-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd2);}
+.groc-item:last-child{border-bottom:none;}
+.groc-check{width:18px;height:18px;border-radius:4px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .1s;}
+.groc-check.done{background:var(--pk);border-color:var(--pk);color:#fff;}
+/* TIMER */
+.timer-block{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:.85rem 1.25rem;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s;}
+.timer-block:hover{background:var(--sf2);}
+.timer-block.active{border-color:var(--pk);background:var(--pkl);}
+.timer-disp{font-family:'Cormorant Garamond',serif;font-size:4.5rem;text-align:center;color:var(--pk);line-height:1;margin:1rem 0;}
+/* FORMULA */
+.fcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:10px;}
+.feq{font-family:monospace;font-size:13px;background:var(--pkl);padding:7px 12px;border-radius:var(--rsm);color:var(--pkd);margin:5px 0;}
+/* SEMESTER */
+.sem-row{display:flex;gap:10px;align-items:start;padding:7px 0;border-bottom:1px solid var(--bd2);}
+.sem-wk{font-size:11px;font-weight:600;color:var(--tx3);min-width:48px;padding-top:2px;}
+/* CAREER JOURNAL */
+.journal-entry{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:10px;}
+.journal-date{font-size:11px;color:var(--tx3);margin-bottom:6px;}
+.journal-body{font-size:13px;color:var(--tx);line-height:1.7;white-space:pre-wrap;}
+/* UNI COURSES */
+.course-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;}
+.course-hdr{padding:1rem 1.25rem;background:linear-gradient(135deg,var(--pkl),var(--sf));border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.course-code{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--pk);}
+.course-name{font-size:12px;color:var(--tx2);}
+.course-body{padding:1.25rem;display:none;}
+.course-body.open{display:block;}
+.asgn-row{display:grid;grid-template-columns:1fr 100px 90px auto;gap:10px;align-items:center;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);}
+.asgn-row:hover{background:var(--sf2);}
+/* DASHBOARD girly */
+.dash-hero-text{font-size:1.45rem;color:var(--pk);font-family:'Playfair Display',serif;font-style:italic;font-weight:400;letter-spacing:0.02em;line-height:1.35;}
+.dash-hero{background:linear-gradient(135deg,#fce8ee 0%,var(--bg) 70%);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+@media(max-width:900px){
+  :root{--sb:52px;}
+  .budget-charts{grid-template-columns:1fr!important;}
+  .ni span:not(.ni-ic),.ngl,.sb-title,.sb-sub{display:none;}
+  .sb-brand{padding:.75rem 0;display:flex;justify-content:center;}
+  .g2,.g4{grid-template-columns:1fr;}
+  .page{padding:1rem;}
+  .sv-btn{font-size:0;padding:8px 4px;}
+  .sv-btn::before{content:'✓';font-size:14px;}
+  .sb-foot{padding:.75rem 0;display:flex;justify-content:center;}
+}
+</style>e>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-title">Sasha<br><em>Life Binder</em></div>
+  </div>
+  <div class="ng">
+    <div class="ngl">Overview</div>
+    <button class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">⌂</span><span>Home</span></button>
+    <button class="ni" onclick="go('social',this)"><span class="ni-ic">◈</span><span>Social Calendar</span></button>
+    <button class="ni" onclick="go('mood',this)"><span class="ni-ic">◉</span><span>Mood Log</span></button>
+  </div>
+  <div class="ng">
+    <div class="ngl">Health</div>
+    <button class="ni" onclick="go('schedule',this)"><span class="ni-ic">◷</span><span>Schedule</span></button>
+    <button class="ni" onclick="go('gym',this)"><span class="ni-ic">◈</span><span>Gym</span></button>
+    <button class="ni" onclick="go('timer',this)"><span class="ni-ic">◔</span><span>AM Timer</span></button>
+    <button class="ni" onclick="go('progress',this)"><span class="ni-ic">↑</span><span>Progress</span></button>
+    <button class="ni" onclick="go('skincare',this)"><span class="ni-ic">✦</span><span>Skincare</span></button>
+    <button class="ni" onclick="go('meals',this)"><span class="ni-ic">◍</span><span>Meals</span></button>
+    <button class="ni" onclick="go('grocery',this)"><span class="ni-ic">☰</span><span>Grocery</span></button>
+    <button class="ni" onclick="go('habits',this)"><span class="ni-ic">✓</span><span>Habits</span></button>
+  </div>
+  <div class="ng">
+    <div class="ngl">Money</div>
+    <button class="ni" onclick="go('budget',this)"><span class="ni-ic">$</span><span>Budget</span></button>
+  </div>
+  <div class="ng">
+    <div class="ngl">Career</div>
+    <button class="ni" onclick="go('career',this)"><span class="ni-ic">◎</span><span>Career Journal</span></button>
+  </div>
+  <div class="ng">
+    <div class="ngl">Study</div>
+    <button class="ni" onclick="go('uni',this)"><span class="ni-ic">◑</span><span>Uni</span></button>
+    <button class="ni" onclick="go('semester',this)"><span class="ni-ic">▦</span><span>Semester Plan</span></button>
+  </div>
+  <div class="sb-foot">
+    <button class="sv-btn" onclick="saveAll();showToast('All saved!')">Save everything</button>
+    <div style="margin-top:8px;">
+      <button id="drive-btn" class="sv-btn" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);font-size:11px;" onclick="handleDriveAuth()">
+        Connect Google Drive
+      </button>
+      <div id="drive-status" style="font-size:10px;color:rgba(255,255,255,0.4);text-align:center;margin-top:4px;padding:0 .5rem;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page active">
+  <div style="margin-bottom:1.25rem;">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;" id="dash-date"></div>
+    <div class="ph">Good <span id="dash-greet">morning</span>, <em>Sasha.</em></div>
+  </div>
+  <div class="dash-hero">
+    <div class="dash-hero-text" id="dash-affirmation" contenteditable="false" onclick="startEditQuote()" style="flex:1;outline:none;cursor:pointer;" title="Click pencil to edit"></div>
+    <button onclick="startEditQuote()" style="background:none;border:none;cursor:pointer;padding:4px 6px;color:var(--tx3);font-size:14px;flex-shrink:0;" title="Edit quote">&#x270F;</button>
+  </div>
+  <div class="g4" style="margin-bottom:1.25rem;">
+ <div class="stat soft"><div class="sl2">Today's gym</div><div class="sv" id="dash-gym" style="font-size:.95rem;padding-top:6px;">—</div></div>
+ <div class="stat soft"><div class="sl2">Budget leftover</div><div class="sv" id="dash-left">$—</div></div>
+ <div class="stat soft"><div class="sl2">Habits today</div><div class="sv" id="dash-hab">—</div></div>
+ <div class="stat soft"><div class="sl2">Uni tasks due</div><div class="sv" id="dash-uni-due">—</div></div>
+</div>
+  <div class="g2" style="margin-bottom:1.25rem;">
+    <div class="card"><div class="ch"><div class="ct">Today's schedule</div><span class="tag tn" id="dash-day-tag"></span></div><div id="dash-sch-body"></div></div>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div class="card"><div class="ch"><div class="ct">Habit check-in</div></div><div id="dash-hab-mini"></div></div>
+      <div class="card"><div class="ch"><div class="ct">Mood today</div></div>
+        <div style="padding:.75rem 1.25rem;">
+          <div style="display:flex;gap:6px;margin-bottom:8px;" id="dash-mood-row">
+            <button class="btn btn-sm" style="flex:1;" onclick="quickMood(1,this)">1</button>
+            <button class="btn btn-sm" style="flex:1;" onclick="quickMood(2,this)">2</button>
+            <button class="btn btn-sm" style="flex:1;" onclick="quickMood(3,this)">3</button>
+            <button class="btn btn-sm" style="flex:1;" onclick="quickMood(4,this)">4</button>
+            <button class="btn btn-sm" style="flex:1;" onclick="quickMood(5,this)">5</button>
+          </div>
+          <textarea id="dash-mood-note" style="min-height:40px;font-size:12px;margin-bottom:8px;" placeholder="Anything behind the mood..."></textarea>
+          <button class="btn btn-primary" style="width:100%;font-size:12px;" onclick="logDashMood()">Log mood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:1.25rem;">
+    <div class="card"><div class="ch"><div class="ct">Tomorrow</div><span class="tag tn" id="dash-tomorrow-tag"></span></div><div id="dash-tomorrow-body" style="font-size:13px;color:var(--tx2);padding:.75rem 1.25rem;">Loading...</div></div>
+    <div class="card"><div class="ch"><div class="ct">Quick notes</div></div><textarea id="quick-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:'Inter',sans-serif;font-size:13px;resize:vertical;" placeholder="Anything on your mind..." oninput="saveAll()"></textarea></div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div id="page-social" class="page">
+  <div class="ph">Social <em>Calendar</em></div>
+
+  <div style="margin-bottom:1.25rem;">
+    <div style="display:flex;gap:8px;margin-bottom:1rem;">
+      <button class="btn btn-primary" onclick="setCalView('day',this)">Day</button>
+      <button class="btn" onclick="setCalView('week',this)">Week</button>
+      <button class="btn" onclick="setCalView('month',this)">Month</button>
+      <button class="btn" onclick="setCalView('year',this)">Year</button>
+      <button class="btn" style="margin-left:auto;" onclick="calPrev()">&#8592;</button>
+      <span id="cal-label" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--tx);display:flex;align-items:center;min-width:160px;justify-content:center;"></span>
+      <button class="btn" onclick="calNext()">&#8594;</button>
+    </div>
+    <div class="card" id="cal-grid" style="overflow:auto;"></div>
+  </div>
+
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Upcoming plans</div></div>
+      <div id="social-list"></div>
+      <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+        <div class="field-row">
+          <div class="field"><input type="text" id="soc-who" placeholder="Who"></div>
+          <div class="field"><input type="text" id="soc-what" placeholder="What"></div>
+          <div class="field" style="max-width:145px;"><input type="date" id="soc-date"></div>
+          <button class="btn btn-primary" onclick="addSocial()">Add</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="ch"><div class="ct">Protected windows</div><button class="edit-toggle" id="pw-edit-btn" onclick="togglePWEdit()">Edit</button></div>
+        <div id="pw-list"></div>
+        <div id="pw-edit-panel" style="display:none;padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+          <div class="field-row">
+            <div class="field"><input type="text" id="pw-new" placeholder="e.g. Tuesday 4–6:30pm"></div>
+            <button class="btn btn-primary" onclick="addPW()">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="card"><div class="ch"><div class="ct">Notes</div></div>
+        <div style="padding:.75rem 1.25rem;">
+          <textarea id="social-notes" style="min-height:80px;" placeholder="Plans, who to catch up with..." oninput="saveAll()"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOOD -->
+<div id="page-mood" class="page">
+  <div class="ph">Mood &amp; <em>Energy Log</em></div>
+  <div class="ps-sub">Daily check-in. Spot patterns over time.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div class="ch"><div class="ct">Log today</div></div><div style="padding:1.25rem;">
+      <div class="field"><label>Date</label><input type="date" id="mood-date"></div>
+      <div class="field"><label>Mood (1–5)</label>
+        <div style="display:flex;gap:5px;">
+          <button class="btn btn-sm mood-sel" data-v="1" onclick="selMood(1)">1 Rough</button>
+          <button class="btn btn-sm mood-sel" data-v="2" onclick="selMood(2)">2 Meh</button>
+          <button class="btn btn-sm mood-sel" data-v="3" onclick="selMood(3)">3 Okay</button>
+          <button class="btn btn-sm mood-sel" data-v="4" onclick="selMood(4)">4 Good</button>
+          <button class="btn btn-sm mood-sel" data-v="5" onclick="selMood(5)">5 Great</button>
+        </div>
+      </div>
+      <div class="field"><label>Energy (1–5)</label>
+        <div style="display:flex;gap:5px;">
+          <button class="btn btn-sm energy-sel" data-v="1" onclick="selEnergy(1)">1</button>
+          <button class="btn btn-sm energy-sel" data-v="2" onclick="selEnergy(2)">2</button>
+          <button class="btn btn-sm energy-sel" data-v="3" onclick="selEnergy(3)">3</button>
+          <button class="btn btn-sm energy-sel" data-v="4" onclick="selEnergy(4)">4</button>
+          <button class="btn btn-sm energy-sel" data-v="5" onclick="selEnergy(5)">5</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Sleep hrs</label><input type="number" id="mood-sleep" placeholder="7" min="0" max="14" step="0.5"></div>
+        <div class="field"><label>Gym?</label><select id="mood-gym"><option value="">—</option><option>Yes</option><option>No</option><option>Rest day</option></select></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="mood-note-inp" placeholder="What\'s affecting mood or energy..."></textarea></div>
+      <button class="btn btn-primary" style="width:100%;" onclick="addMood()">Log entry</button>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Last 14 days</div></div><div style="padding:1rem;"><canvas id="moodChart" height="240"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">History</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:14%;">Date</th><th style="width:12%;">Mood</th><th style="width:12%;">Energy</th><th style="width:10%;">Sleep</th><th style="width:10%;">Gym</th><th>Notes</th><th style="width:6%;"></th></tr></thead><tbody id="mood-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div id="page-schedule" class="page">
+  <div class="ph">Weekly <em>Schedule</em></div>
+  <div class="ps-sub">Click a day to view. Edit any day's rows inline — reset to default anytime.</div>
+  <div style="display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap;" id="day-nav">
+    <button class="btn btn-primary" onclick="showDay(this,'mon')">Monday</button>
+    <button class="btn" onclick="showDay(this,'tue')">Tuesday</button>
+    <button class="btn" onclick="showDay(this,'wed')">Wednesday</button>
+    <button class="btn" onclick="showDay(this,'thu')">Thursday</button>
+    <button class="btn" onclick="showDay(this,'fri')">Friday</button>
+    <button class="btn" onclick="showDay(this,'sat')">Saturday</button>
+    <button class="btn" onclick="showDay(this,'sun')">Sunday</button>
+  </div>
+  <div id="sch-content"></div>
+</div>
+
+<!-- GYM -->
+<div id="page-gym" class="page">
+  <div class="ph">Gym <em>Routine</em></div>
+  <div class="ps-sub">5-day glutes-focused program. Log weights inline. Edit exercises anytime — reset to default if needed.</div>
+  <div style="display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap;" id="gym-nav">
+    <button class="btn btn-primary" onclick="showGym(this,'d1')">Day 1 — Glutes Heavy</button>
+    <button class="btn" onclick="showGym(this,'d2')">Day 2 — Core + Cardio</button>
+    <button class="btn" onclick="showGym(this,'d3')">Day 3 — Glutes Shape</button>
+    <button class="btn" onclick="showGym(this,'d4')">Day 4 — Full Body</button>
+    <button class="btn" onclick="showGym(this,'d5')">Day 5 — Pump</button>
+    <button class="btn" onclick="showGym(this,'d6')">Day 6 — Cardio</button>
+  </div>
+  <div id="gym-content"></div>
+  <div class="section-label">Personal records</div>
+  <div class="card">
+    <div class="ch"><div class="ct">PRs &amp; milestones</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:34%;">Exercise</th><th style="width:15%;">Weight</th><th style="width:18%;">Date</th><th>Notes</th><th style="width:7%;"></th></tr></thead><tbody id="pr-body"></tbody></table></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row"><div class="field"><input type="text" id="pr-ex" placeholder="Exercise"></div><div class="field" style="max-width:90px;"><input type="text" id="pr-kg" placeholder="e.g. 70kg"></div><div class="field" style="max-width:140px;"><input type="date" id="pr-date"></div><div class="field"><input type="text" id="pr-notes" placeholder="Notes"></div><button class="btn btn-primary" onclick="addPR()">Add</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- AM TIMER -->
+<div id="page-timer" class="page">
+  <div class="ph">Morning <em>Timer</em></div>
+  <div class="ps-sub">4:30–6:00am window. Customise your blocks — add, remove, reorder.</div>
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:1.5rem;align-items:start;">
+    <div>
+      <div class="timer-disp" id="timer-disp" style="margin:0 0 1.5rem;">00:00</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:1.25rem;">
+        <button class="btn btn-primary" onclick="startTimer()">Start</button>
+        <button class="btn" onclick="pauseTimer()">Pause</button>
+        <button class="btn" onclick="resetTimer()">Reset</button>
+        <button class="btn" onclick="nextBlock()">Next →</button>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--tx3);margin-bottom:1.25rem;" id="timer-status">Select a block to begin</div>
+      <div class="section-label">Blocks — click to select</div>
+      <div id="timer-blocks-ui"></div>
+    </div>
+    <div>
+      <div class="section-label">Edit blocks</div>
+      <div class="card"><div style="padding:.75rem 1.25rem;">
+        <div id="timer-edit"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <input type="text" id="tb-name" placeholder="Block name" style="flex:1;">
+          <input type="number" id="tb-mins" placeholder="min" min="1" style="width:64px;">
+          <button class="btn btn-primary" onclick="addTimerBlock()">Add</button>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div id="page-progress" class="page">
+  <div class="ph">Progress <em>Tracker</em></div>
+  <div class="ps-sub">Body measurements and weight trend over time.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div class="ch"><div class="ct">Log measurements</div></div><div style="padding:1.25rem;">
+      <div class="field"><label>Date</label><input type="date" id="meas-date"></div>
+      <div class="g2" style="gap:8px;">
+        <div class="field"><label>Weight (kg)</label><input type="number" id="meas-w" placeholder="0.0" step="0.1"></div>
+        <div class="field"><label>Waist (cm)</label><input type="number" id="meas-wa" placeholder="0" step="0.5"></div>
+        <div class="field"><label>Hips (cm)</label><input type="number" id="meas-h" placeholder="0" step="0.5"></div>
+        <div class="field"><label>Glutes (cm)</label><input type="number" id="meas-g" placeholder="0" step="0.5"></div>
+        <div class="field"><label>Thighs (cm)</label><input type="number" id="meas-t" placeholder="0" step="0.5"></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="meas-notes" placeholder="How you feel, photo taken?"></textarea></div>
+      <button class="btn btn-primary" style="width:100%;" onclick="addMeas()">Log</button>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Weight trend</div></div><div style="padding:1rem;"><canvas id="weightChart" height="230"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">History</div></div>
+    <div style="overflow-x:auto;"><table class="dt" style="min-width:600px;"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Hips</th><th>Glutes</th><th>Thighs</th><th>Notes</th><th></th></tr></thead><tbody id="meas-body"></tbody></table></div>
+  </div>
+</div>
+
+<!-- SKINCARE -->
+<div id="page-skincare" class="page">
+  <div class="ph">Skincare <em>Routine</em></div>
+  <div class="ps-sub">Edit your steps, fill in your products. All saves automatically.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
+        <div class="section-label" style="margin:0;">Morning (AM)</div>
+        <button class="edit-toggle" id="am-edit-btn" onclick="toggleSkinEdit('am')">Edit steps</button>
+      </div>
+      <div class="card" id="am-routine"></div>
+      <div id="am-edit-panel" style="display:none;margin-top:8px;">
+        <div class="card"><div style="padding:.75rem 1.25rem;">
+          <div id="am-step-list"></div>
+          <div class="field-row" style="margin-top:8px;">
+            <div class="field"><input type="text" id="am-new-step" placeholder="New AM step..."></div>
+            <button class="btn btn-primary" onclick="addSkinStep('am')">Add</button>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
+        <div class="section-label" style="margin:0;">Evening (PM)</div>
+        <button class="edit-toggle" id="pm-edit-btn" onclick="toggleSkinEdit('pm')">Edit steps</button>
+      </div>
+      <div class="card" id="pm-routine"></div>
+      <div id="pm-edit-panel" style="display:none;margin-top:8px;">
+        <div class="card"><div style="padding:.75rem 1.25rem;">
+          <div id="pm-step-list"></div>
+          <div class="field-row" style="margin-top:8px;">
+            <div class="field"><input type="text" id="pm-new-step" placeholder="New PM step..."></div>
+            <button class="btn btn-primary" onclick="addSkinStep('pm')">Add</button>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section-label">Product inventory</div>
+  <div class="card" style="margin-bottom:1.25rem;">
+    <div class="ch"><div class="ct">Products &amp; replenishment</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:28%;">Product</th><th style="width:18%;">Category</th><th style="width:18%;">Replenish by</th><th>Notes</th><th style="width:7%;"></th></tr></thead><tbody id="prod-body"></tbody></table></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row"><div class="field"><input type="text" id="prod-name" placeholder="Product name"></div><div class="field" style="max-width:110px;"><input type="text" id="prod-cat" placeholder="Category"></div><div class="field" style="max-width:140px;"><input type="date" id="prod-date"></div><div class="field"><input type="text" id="prod-notes" placeholder="Notes"></div><button class="btn btn-primary" onclick="addProduct()">Add</button></div>
+    </div>
+  </div>
+  <div class="section-label">Skin notes</div>
+  <div class="card"><textarea id="skin-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:90px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Breakouts, reactions, what\'s working..." oninput="saveAll()"></textarea></div>
+</div>
+
+<!-- MEALS -->
+<div id="page-meals" class="page">
+  <div class="ph">Meal <em>Plan</em></div>
+  <div class="ps-sub">Dairy-free · high protein · batch-cook friendly. Edit your templates anytime.</div>
+  <div class="g2" style="margin-bottom:1.25rem;">
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
+        <div class="section-label" style="margin:0;">Gym day meals</div>
+        <button class="edit-toggle" id="gym-meal-btn" onclick="toggleMealEdit('gym')">Edit</button>
+      </div>
+      <div class="card" id="gym-meals-view"></div>
+      <div id="gym-meals-edit" style="display:none;margin-top:8px;">
+        <div class="card"><div style="padding:.75rem 1.25rem;">
+          <div id="gym-meal-list"></div>
+          <div class="field-row" style="margin-top:8px;">
+            <div class="field"><input type="text" id="gym-meal-time" placeholder="Time (e.g. 4:15am)"></div>
+            <div class="field"><input type="text" id="gym-meal-name" placeholder="Meal name"></div>
+            <div class="field"><input type="text" id="gym-meal-desc" placeholder="Notes (optional)"></div>
+            <button class="btn btn-primary" onclick="addMealItem('gym')">Add</button>
+          </div>
+        </div></div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
+        <div class="section-label" style="margin:0;">Rest day swaps</div>
+        <button class="edit-toggle" id="rest-meal-btn" onclick="toggleMealEdit('rest')">Edit</button>
+      </div>
+      <div class="card" id="rest-meals-view"></div>
+      <div id="rest-meals-edit" style="display:none;margin-top:8px;">
+        <div class="card"><div style="padding:.75rem 1.25rem;">
+          <div id="rest-meal-list"></div>
+          <div class="field-row" style="margin-top:8px;">
+            <div class="field"><input type="text" id="rest-meal-time" placeholder="Time (e.g. Breakfast)"></div>
+            <div class="field"><input type="text" id="rest-meal-name" placeholder="Meal name"></div>
+            <div class="field"><input type="text" id="rest-meal-desc" placeholder="Notes (optional)"></div>
+            <button class="btn btn-primary" onclick="addMealItem('rest')">Add</button>
+          </div>
+        </div></div>
+      </div>
+      <div class="section-label" style="margin-top:1rem;">Saturday batch cook</div>
+      <div class="card"><div id="batch-list"></div>
+        <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);display:flex;gap:8px;">
+          <input type="text" id="batch-new" placeholder="Add task..." style="flex:1;">
+          <button class="btn btn-primary" onclick="addBatch()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-label">Meal notes</div>
+  <div class="card"><textarea id="meal-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:80px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Recipe ideas, adjustments..." oninput="saveAll()"></textarea></div>
+</div>
+
+<!-- GROCERY -->
+<div id="page-grocery" class="page">
+  <div class="ph">Grocery <em>List</em></div>
+  <div class="ps-sub">Tied to your meal plan. Check off as you shop.</div>
+  <div class="g2">
+    <div>
+      <div style="display:flex;gap:8px;margin-bottom:1rem;">
+        <button class="btn btn-primary" onclick="loadStaples()">Load staples</button>
+        <button class="btn" onclick="clearDoneGroc()">Clear checked</button>
+        <button class="btn" onclick="clearAllGroc()">Clear all</button>
+      </div>
+      <div class="card"><div id="groc-list" style="padding:.75rem 1.25rem;min-height:80px;"></div>
+        <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+          <div class="field-row"><div class="field"><input type="text" id="groc-name" placeholder="Item"></div><div class="field" style="max-width:120px;"><input type="text" id="groc-cat" placeholder="Category"></div><div class="field" style="max-width:80px;"><input type="text" id="groc-qty" placeholder="Qty"></div><button class="btn btn-primary" onclick="addGroc()">Add</button></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Your staples (one per line)</div>
+      <div class="note-box">Edit below then click "Load staples" to add all at once.</div>
+      <div class="card"><textarea id="staples-txt" style="border:none;background:transparent;padding:1rem;width:100%;min-height:200px;font-family:'Inter',sans-serif;font-size:13px;" oninput="saveAll()"></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- HABITS -->
+<div id="page-habits" class="page">
+  <div class="ph">Habit <em>Tracker</em></div>
+  <div class="ps-sub">7-day view. Click to check off. Rename or add habits anytime.</div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">This week</div></div>
+    <div class="hab-hdr"><div class="hab-col" style="text-align:left;">Habit</div><div class="hab-col">Mon</div><div class="hab-col">Tue</div><div class="hab-col">Wed</div><div class="hab-col">Thu</div><div class="hab-col">Fri</div><div class="hab-col">Sat</div><div class="hab-col">Sun</div><div></div></div>
+    <div id="habits-rows"></div>
+    <button class="add-btn" onclick="addHabit()">+ add habit</button>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Weekly streaks</div></div><div style="padding:1.25rem;" id="habit-streaks"></div></div>
+    <div class="card"><div class="ch"><div class="ct">Notes</div></div><textarea id="habit-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="What\'s working, what to adjust..." oninput="saveAll()"></textarea></div>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div id="page-budget" class="page">
+  <div class="ph">Fortnightly <em>Budget</em></div>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;flex-wrap:wrap;">
+    <span style="font-size:13px;color:var(--tx2);">Period starting</span>
+    <input type="date" id="period-start" style="width:160px;" onchange="updatePeriod()">
+    <span style="font-size:13px;color:var(--tx3);" id="period-end-lbl"></span>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="g4" style="margin-bottom:1rem;">
+    <div class="stat pk"><div class="sl2">Income</div><div class="sv" id="b-income">$0</div></div>
+    <div class="stat"><div class="sl2">Expenses budgeted</div><div class="sv" id="b-budgeted">$0</div></div>
+    <div class="stat"><div class="sl2">Savings this period</div><div class="sv" id="b-savings">$0</div></div>
+    <div class="stat"><div class="sl2">Total spent</div><div class="sv" id="b-spent">$0</div></div>
+  </div>
+
+  <!-- Total expenses summary card -->
+  <div class="card" style="margin-bottom:1rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
+      <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
+        <div class="sl2">Total expenses budgeted</div>
+        <div class="sv" id="b-budgeted-2" style="font-size:1.5rem;">$0</div>
+      </div>
+      <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
+        <div class="sl2">Total spent</div>
+        <div class="sv" id="b-spent-2" style="font-size:1.5rem;">$0</div>
+      </div>
+      <div style="padding:.85rem 1.25rem;">
+        <div class="sl2">Leftover</div>
+        <div class="sv" id="b-leftover" style="font-size:1.5rem;">$0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts row: spending + savings (no net worth here) -->
+  <div class="g2" style="margin-bottom:1.25rem;">
+    <div class="card"><div class="ch"><div class="ct">Spending breakdown</div></div>
+      <div style="padding:.75rem .75rem 0;"><canvas id="budgetChart" height="200"></canvas></div>
+      <div id="chart-legend" style="padding:.5rem 1rem .75rem;display:flex;flex-wrap:wrap;gap:5px;"></div>
+    </div>
+    <div class="card"><div class="ch"><div class="ct">Savings — goal vs actual</div></div>
+      <div style="padding:1rem 1.25rem;">
+        <canvas id="savingsChart" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Income -->
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Income</div></div>
+    <div id="income-rows"></div>
+    <button class="add-btn" onclick="addIncomeRow()">+ add income source</button>
+  </div>
+
+  <!-- Expenses — collapsible, condensed -->
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch" style="cursor:pointer;" onclick="toggleExpenses()">
+      <div class="ct">Expenses <span class="tag tn" style="margin-left:6px;">fortnightly</span></div>
+      <span id="exp-toggle-arrow" style="font-size:13px;color:var(--tx3);">&#9660;</span>
+    </div>
+    <div id="expense-panel">
+      <div class="b-hdr"><div class="b-lbl" style="text-align:left;">Category</div><div class="b-lbl">Budgeted $</div><div class="b-lbl">Spent $</div></div>
+      <div id="expense-rows"></div>
+      <button class="add-btn" onclick="addExpenseRow()">+ add category</button>
+    </div>
+  </div>
+
+  <!-- Savings goals -->
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Savings goals</div></div>
+    <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div></div>
+    <div id="savings-rows"></div>
+    <button class="add-btn" onclick="addSavingsRow()">+ add goal</button>
+  </div>
+
+  <!-- Save -->
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:2rem;">
+    <button class="btn" onclick="exportCSV()">Export CSV</button>
+    <button class="btn btn-primary" onclick="recalcBudget();saveAll();showToast('Budget saved!')">Save</button>
+  </div>
+
+  <!-- Net worth — full width at bottom -->
+  <div style="border-top:2px solid var(--bd);padding-top:1.5rem;margin-bottom:1.5rem;">
+    <div class="ph" style="font-size:1.6rem;margin-bottom:.25rem;">Net <em>Worth</em></div>
+    <div class="ps-sub" style="margin-bottom:1rem;">Your total assets minus liabilities.</div>
+    <div class="g2">
+      <div class="card">
+        <div class="ch"><div class="ct">Net worth</div><button class="edit-toggle" id="nw-edit-btn" onclick="toggleNWEdit()">Edit</button></div>
+        <div style="padding:1.25rem;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--tx);margin-bottom:4px;" id="nw-total">$0</div>
+          <div style="font-size:11px;color:var(--tx3);margin-bottom:1rem;">assets minus liabilities</div>
+          <canvas id="nwChart" height="160"></canvas>
+          <div id="nw-legend" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;"></div>
+        </div>
+        <div id="nw-edit-panel" style="display:none;border-top:1px solid var(--bd2);padding:1rem 1.25rem;">
+          <div class="section-label" style="margin-top:0;">Assets</div>
+          <div id="nw-assets"></div>
+          <button class="add-btn" onclick="addNWRow('asset')">+ add asset</button>
+          <div class="section-label">Liabilities</div>
+          <div id="nw-liabilities"></div>
+          <button class="add-btn" onclick="addNWRow('liability')">+ add liability</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct">Asset &amp; liability breakdown</div></div>
+        <div style="padding:1.25rem;">
+          <div id="nw-breakdown-list" style="font-size:13px;color:var(--tx2);">Add assets and liabilities to see breakdown.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAREER JOURNAL -->
+<div id="page-career" class="page">
+  <div class="ph">Career <em>Journal</em></div>
+  <div class="ps-sub">Your space — role, challenges, priorities, and where you\'re headed.</div>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div style="padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="toggleNotice()">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--tx);">Notice Period</span>
+        <span class="tag tn" id="notice-tag">hidden</span>
+      </div>
+      <span style="font-size:13px;color:var(--tx3);" id="notice-arrow">▸</span>
+    </div>
+    <div id="notice-panel" style="display:none;border-top:1px solid var(--bd2);">
+      <div style="text-align:center;padding:1.5rem 1.25rem .5rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:4.5rem;color:var(--pk);line-height:1;" id="cd-num">—</div>
+        <div style="font-size:13px;color:var(--tx2);margin-top:4px;">working days remaining · Final day 30 April 2026</div>
+      </div>
+      <div class="g2" style="padding:1.25rem;">
+        <div>
+          <div class="section-label">Wrap-up checklist</div>
+          <div id="wrap-list"></div>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input type="text" id="wrap-new" placeholder="Add task..." style="flex:1;">
+            <button class="btn btn-primary" onclick="addWrap()">Add</button>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">Handover notes</div>
+          <textarea id="handover-notes" style="min-height:120px;" placeholder="Projects, contacts, system access..." oninput="saveAll()"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Current role</div>
+  <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
+    <div class="g2" style="gap:1rem;margin-bottom:10px;">
+      <div class="field" style="margin-bottom:0;"><label>Role title</label><input type="text" id="career-role" placeholder="e.g. Project Coordinator" oninput="saveAll()"></div>
+      <div class="field" style="margin-bottom:0;"><label>Company</label><input type="text" id="career-company" placeholder="e.g. Saltire Infrastructure" oninput="saveAll()"></div>
+    </div>
+    <div class="field"><label>What I actually do</label><textarea id="career-actual" placeholder="The real scope of your role day to day..." oninput="saveAll()"></textarea></div>
+    <div class="field"><label>What\'s going well</label><textarea id="career-good" placeholder="Wins, things clicking, growth you\'re seeing..." oninput="saveAll()"></textarea></div>
+  </div></div>
+
+  <div class="section-label">Where I\'m heading</div>
+  <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
+    <div class="field"><label>Next role target</label><input type="text" id="career-next-role" placeholder="e.g. Resource Planner" oninput="saveAll()"></div>
+    <div class="g2" style="gap:1rem;">
+      <div class="field" style="margin-bottom:0;"><label>Long-term vision</label><textarea id="career-longterm" style="min-height:90px;" placeholder="BBA then MBA then governance, compliance, senior leadership..." oninput="saveAll()"></textarea></div>
+      <div class="field" style="margin-bottom:0;"><label>Skills I\'m building</label><textarea id="career-skills" style="min-height:90px;" placeholder="What you\'re actively working on right now..." oninput="saveAll()"></textarea></div>
+    </div>
+  </div></div>
+
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">This week</div></div>
+    <div style="padding:1.25rem;">
+      <div class="g2" style="gap:1rem;">
+        <div class="field" style="margin-bottom:0;"><label>Challenges</label><textarea id="career-challenges" style="min-height:90px;" placeholder="What\'s hard, what\'s draining you..." oninput="saveAll()"></textarea></div>
+        <div class="field" style="margin-bottom:0;"><label>Priorities</label><textarea id="career-priorities" style="min-height:90px;" placeholder="Top 3–5 things to move forward this week..." oninput="saveAll()"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Journal entries</div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div style="padding:1.25rem;">
+      <div class="field"><label>New entry</label><textarea id="journal-new" style="min-height:100px;" placeholder="Reflect, vent, plan, note. No rules. Date-stamped automatically..."></textarea></div>
+      <button class="btn btn-primary" onclick="addJournalEntry()">Save entry</button>
+    </div>
+  </div>
+  <div id="journal-list"></div>
+</div>
+
+<!-- UNI -->
+<div id="page-uni" class="page">
+  <div class="ph">Uni <em>Tracker</em></div>
+  <div class="ps-sub">Add your courses. Each one gets its own section with tasks, grades, and due dates. FNCE2000 includes your formula bank.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div class="ch"><div class="ct">Add a course</div></div>
+      <div style="padding:1.25rem;">
+        <div class="field"><label>Course code</label><input type="text" id="course-code" placeholder="e.g. FNCE2000"></div>
+        <div class="field"><label>Course name</label><input type="text" id="course-name" placeholder="e.g. Corporate Finance"></div>
+        <div class="field-row">
+          <div class="field"><label>Study period start</label><input type="date" id="course-start"></div>
+          <div class="field"><label>Study period end</label><input type="date" id="course-end"></div>
+        </div>
+        <div class="field"><label>Notes / overview</label><textarea id="course-notes" placeholder="Textbook, contact hours, assessment breakdown..."></textarea></div>
+        <button class="btn btn-primary" style="width:100%;" onclick="addCourse()">Add course</button>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Study session notes</div>
+      <div class="card"><textarea id="study-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:170px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Today's topics, concepts covered, questions to follow up..." oninput="saveAll()"></textarea></div>
+    </div>
+  </div>
+  <div class="section-label">My courses</div>
+  <div id="course-list"></div>
+</div>
+
+<!-- SEMESTER -->
+<div id="page-semester" class="page">
+  <div class="ph">Semester <em>Planner</em></div>
+  <div class="ps-sub">Visual week-by-week map. Add tasks and see your whole semester at once.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div style="padding:1.25rem;">
+      <div class="field-row"><div class="field"><label>Semester start</label><input type="date" id="sem-start" onchange="renderSem()"></div><div class="field"><label>Semester end</label><input type="date" id="sem-end" onchange="renderSem()"></div></div>
+      <div class="field-row" style="margin-top:8px;">
+        <div class="field"><input type="text" id="sem-task" placeholder="Task / exam / deadline"></div>
+        <div class="field" style="max-width:80px;"><input type="number" id="sem-week" placeholder="Week #" min="1"></div>
+        <div class="field" style="max-width:130px;"><select id="sem-type"><option value="tgold">Assignment</option><option value="tr">Exam</option><option value="tbl">Quiz</option><option value="tn">Other</option></select></div>
+        <button class="btn btn-primary" onclick="addSemEv()">Add</button>
+      </div>
+    </div></div>
+    <div class="card"><div style="padding:1.25rem;">
+      <div class="section-label" style="margin-top:0;">Semester notes</div>
+      <textarea id="sem-notes" style="min-height:120px;" placeholder="Course load, exam block, expectations..." oninput="saveAll()"></textarea>
+    </div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">Semester map</div></div><div id="sem-grid" style="padding:1.25rem;"></div></div>
+</div>
+
+</div><!-- end main-wrap -->
+<div class="toast" id="toast"></div>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://apis.google.com/js/api.js" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<script>
+// ══════════════════════════════════════════
+// GOOGLE DRIVE SYNC
+// ══════════════════════════════════════════
+
+// ── GOOGLE DRIVE SYNC ──
+const GDRIVE_CLIENT_ID = '6777088204-k503tcopnj1t4eo7ool1a6064a4bu6fn.apps.googleusercontent.com';
+const GDRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
+const GDRIVE_FILE_NAME = 'sasha_binder_data.json';
+let driveAccessToken = null, driveFileId = null, driveReady = false;
+
+function handleDriveAuth() {
+  if (!window.google || !window.google.accounts) {
+    showToast('Google library not loaded yet — try again in a moment');
+    return;
+  }
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GDRIVE_CLIENT_ID,
+    scope: GDRIVE_SCOPE,
+    callback: (resp) => {
+      if (resp.error) { setDriveStatus('Sign-in failed', true); return; }
+      driveAccessToken = resp.access_token;
+      driveReady = true;
+      updateDriveBtn(true);
+      setDriveStatus('Connecting...', false);
+      loadFromDrive();
+    },
+  });
+  client.requestAccessToken();
+}
+
+function updateDriveBtn(connected) {
+  const btn = document.getElementById('drive-btn');
+  if (!btn) return;
+  if (connected) {
+    btn.textContent = 'Drive connected ✓';
+    btn.style.background = 'rgba(58,122,90,0.35)';
+    btn.style.borderColor = 'rgba(58,122,90,0.6)';
+    btn.onclick = () => { syncToDrive(); showToast('Syncing to Drive...'); };
+  } else {
+    btn.textContent = 'Connect Google Drive';
+    btn.style.background = 'rgba(255,255,255,0.1)';
+    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+    btn.onclick = handleDriveAuth;
+  }
+}
+
+function setDriveStatus(msg, isError) {
+  const el = document.getElementById('drive-status');
+  if (el) { el.textContent = msg; el.style.color = isError ? '#e8a0b4' : 'rgba(255,255,255,0.45)'; }
+}
+
+async function findDriveFile() {
+  const resp = await fetch(
+    "https://www.googleapis.com/drive/v3/files?q=name%3D'" + GDRIVE_FILE_NAME + "'+and+trashed%3Dfalse&fields=files(id,name)",
+    { headers: { Authorization: 'Bearer ' + driveAccessToken } }
+  );
+  const data = await resp.json();
+  return (data.files && data.files.length > 0) ? data.files[0].id : null;
+}
+
+async function loadFromDrive() {
+  if (!driveAccessToken) return;
+  try {
+    setDriveStatus('Loading from Drive...', false);
+    const fid = await findDriveFile();
+    if (!fid) {
+      setDriveStatus('No file yet — saving now', false);
+      await syncToDrive();
+      return;
+    }
+    driveFileId = fid;
+    const resp = await fetch(
+      'https://www.googleapis.com/drive/v3/files/' + fid + '?alt=media',
+      { headers: { Authorization: 'Bearer ' + driveAccessToken } }
+    );
+    if (!resp.ok) throw new Error('Fetch failed ' + resp.status);
+    const data = await resp.json();
+    localStorage.setItem(SK, JSON.stringify(data));
+    loadData();
+    const t = new Date().toLocaleTimeString('en-AU', {hour:'2-digit', minute:'2-digit'});
+    setDriveStatus('Loaded ' + t, false);
+    showToast('Drive data loaded!');
+  } catch(e) {
+    setDriveStatus('Load failed', true);
+    console.error('Drive load:', e);
+  }
+}
+
+async function syncToDrive() {
+  if (!driveAccessToken) return;
+  try {
+    const payload = JSON.stringify(getData());
+    const metaStr = JSON.stringify({ name: GDRIVE_FILE_NAME, mimeType: 'application/json' });
+    const body = '--b\r\nContent-Type: application/json\r\n\r\n' + metaStr + '\r\n--b\r\nContent-Type: application/json\r\n\r\n' + payload + '\r\n--b--';
+    if (!driveFileId) driveFileId = await findDriveFile();
+    const url = driveFileId
+      ? 'https://www.googleapis.com/upload/drive/v3/files/' + driveFileId + '?uploadType=multipart'
+      : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
+    const method = driveFileId ? 'PATCH' : 'POST';
+    const resp = await fetch(url, {
+      method,
+      headers: { Authorization: 'Bearer ' + driveAccessToken, 'Content-Type': 'multipart/related; boundary=b' },
+      body
+    });
+    if (!resp.ok) throw new Error('Upload failed ' + resp.status);
+    if (!driveFileId) { const r = await resp.json(); driveFileId = r.id; }
+    const t = new Date().toLocaleTimeString('en-AU', {hour:'2-digit', minute:'2-digit'});
+    setDriveStatus('Saved ' + t, false);
+  } catch(e) {
+    setDriveStatus('Sync error', true);
+    console.error('Drive sync:', e);
+  }
+}
+
+// === SASHA LIFE BINDER v4 — one script, no duplicates ===
+const SK = 'sasha_binder_v4';
+const SCHEDULE = {
+  mon:{label:'Monday · gym day',rows:[{t:'4:30–6:00am',p:'p-gym',l:'Day 1 — Glutes heavy',s:''},{t:'6:00–7:45am',p:'p-free',l:'Get ready · shower · breakfast',s:''},{t:'8:00am–4:00pm',p:'p-work',l:'Work',s:''},{t:'4:00–6:00pm',p:'p-free',l:'Decompress',s:''},{t:'6:00–8:30pm',p:'p-study',l:'Study — FNCE2000',s:''},{t:'9:00pm',p:'p-free',l:'Wind down · sleep',s:''}]},
+  tue:{label:'Tuesday · gym day',rows:[{t:'4:30–6:00am',p:'p-gym',l:'Day 2 — Core + Cardio',s:''},{t:'6:00–7:45am',p:'p-free',l:'Get ready',s:''},{t:'8:00am–4:00pm',p:'p-work',l:'Work',s:''},{t:'4:00–6:30pm',p:'p-social',l:'Social window',s:'boyfriend / friends'},{t:'6:30–9:00pm',p:'p-study',l:'Study',s:''},{t:'9:00pm',p:'p-free',l:'Wind down · sleep',s:''}]},
+  wed:{label:'Wednesday · gym day · study night',rows:[{t:'4:30–6:00am',p:'p-gym',l:'Day 3 — Glutes shape',s:''},{t:'6:00–7:45am',p:'p-free',l:'Get ready',s:''},{t:'8:00am–4:00pm',p:'p-work',l:'Work',s:''},{t:'4:00–9:00pm',p:'p-study',l:'Study — mandatory block',s:'protected — not social'},{t:'9:00pm',p:'p-free',l:'Wind down · sleep',s:''}]},
+  thu:{label:'Thursday · rest day',rows:[{t:'Morning',p:'p-free',l:'Slow morning',s:'sleep in'},{t:'8:00am–4:00pm',p:'p-work',l:'Work',s:''},{t:'4:00–9:00pm',p:'p-study',l:'Study — heavy block',s:''},{t:'9:00pm',p:'p-free',l:'Wind down',s:''}]},
+  fri:{label:'Friday · gym day',rows:[{t:'4:30–6:00am',p:'p-gym',l:'Day 4 — Full body',s:''},{t:'6:00–7:45am',p:'p-free',l:'Get ready',s:''},{t:'8:00am–4:00pm',p:'p-work',l:'Work',s:''},{t:'4:00pm+',p:'p-social',l:'Friday night — free',s:'protected social window'}]},
+  sat:{label:'Saturday',rows:[{t:'Morning',p:'p-prep',l:'Meal prep · batch cook',s:'1.5–2 hrs'},{t:'Mid-morning',p:'p-gym',l:'Day 5 — Glutes pump',s:'optional'},{t:'Afternoon+',p:'p-social',l:'Social · free',s:'friends, boyfriend, errands'}]},
+  sun:{label:'Sunday · full rest',rows:[{t:'Morning',p:'p-free',l:'Sleep in · slow morning',s:'no alarms'},{t:'12:00pm+',p:'p-social',l:'Social / flexible',s:''},{t:'7:00pm–9:00pm',p:'p-study',l:'Light study or week prep',s:'nothing heavy'}]}};
+const DKEYS = ['sun','mon','tue','wed','thu','fri','sat'];
+const DGYM = {1:'Day 1 — Glutes Heavy',2:'Day 2 — Core + Cardio',3:'Day 3 — Glutes Shape',5:'Day 4 — Full Body',6:'Day 5 — Pump',0:'Day 6 — Cardio'};
+
+const GYM = {
+  d1:{title:'Day 1 — Glutes (heavy / growth driver)',focus:'Load, tension, progressive overload',time:'70–80 min',eq:'Barbell or Smith · Plates · Bench · Dumbbells · Hip Abduction · Treadmill',secs:[
+    {t:'Warm-up',items:[{n:'Incline treadmill walk',s:'10 min · incline 6–8',k:'d1w0'},{n:'Lunge with reach',s:'6 each leg',k:'d1w1'},{n:'Hamstring sweep',s:'10 each side',k:'d1w2'},{n:'Hip circles',s:'10 each direction',k:'d1w3'},{n:'Frog stretch',s:'30 sec',k:'d1w4'},{n:'Windshield wipers',s:'',k:'d1w5'}]},
+    {t:'Activation',items:[{n:'Dumbbell sumo squats',s:'3 × 10 · 20kg',k:'d1a0'},{n:'Side-lying leg lifts',s:'10 each side',k:'d1a1'}]},
+    {t:'Main lifts',items:[{n:'Hip thrust',s:'3 × 8 · 50kg (70kg machine)',k:'d1m0'},{n:'Bulgarian splits / step ups / Smith lunges',s:'3 × 8–10 each leg',k:'d1m1'},{n:'Single leg RDL',s:'3 × 10 · 15kg',k:'d1m2'},{n:'Hip abduction (forward lean)',s:'',k:'d1m3'}]},
+    {t:'Cool down',items:[{n:'Seated glute stretch',s:'30 sec each side',k:'d1c0'},{n:'Hamstring stretch',s:'30 sec each side',k:'d1c1'},{n:'Slow walk',s:'3–5 min',k:'d1c2'}]}]},
+  d2:{title:'Day 2 — Core + Cardio (waist-snatching)',focus:'Deep core, fat loss support',time:'45–60 min',eq:'Mat · Dumbbell/Plate · Treadmill or Bike',secs:[
+    {t:'Warm-up',items:[{n:'Treadmill walk',s:'5 min',k:'d2w0'},{n:'Cat–cow',s:'8 reps',k:'d2w1'},{n:'Hip circles',s:'10 each',k:'d2w2'}]},
+    {t:'Core — no obliques',items:[{n:'Dead bugs',s:'3 × 10',k:'d2c0'},{n:'Reverse crunch or lying leg raise',s:'3 × 12–15',k:'d2c1'},{n:'Tabletop toe taps',s:'3 × 12',k:'d2c2'}]},
+    {t:'Cardio',items:[{n:'Incline treadmill walk or bike',s:'20–30 min',k:'d2ca0'}]},
+    {t:'Cool down',items:[{n:"Child's pose",s:'1 min',k:'d2cd0'},{n:'Deep breathing',s:'2 min',k:'d2cd1'}]}]},
+  d3:{title:'Day 3 — Glutes (unilateral / shape)',focus:'Upper-glute tie-in, symmetry',time:'65–75 min',eq:'Leg Press · Dumbbells · Cable · Stairmaster',secs:[
+    {t:'Warm-up',items:[{n:'Stairmaster',s:'5 min',k:'d3w0'},{n:'Walking lunges',s:'8 each leg',k:'d3w1'},{n:'Hip circles',s:'10 each direction',k:'d3w2'},{n:'Frog stretch',s:'30 sec',k:'d3w3'}]},
+    {t:'Activation',items:[{n:'Sumo squats',s:'3 × 8 · 15kg',k:'d3a0'},{n:'Glute bridges',s:'2 × 15',k:'d3a1'}]},
+    {t:'Main lifts',items:[{n:'Hip thrust',s:'3 × 8 · 50kg (70kg machine)',k:'d3m0'},{n:'Single-leg press',s:'3 × 10–12 each leg',k:'d3m1'},{n:'Single-leg RDL',s:'3 × 10',k:'d3m2'},{n:'Hack squats',s:'3 × 10',k:'d3m3'},{n:'Cable kickbacks',s:'',k:'d3m4'}]},
+    {t:'Optional finisher',items:[{n:'Stairmaster',s:'6–8 min moderate',k:'d3f0'}]},
+    {t:'Cool down',items:[{n:'Figure-4 stretch',s:'30 sec each side',k:'d3c0'},{n:'Hip flexor stretch',s:'30 sec each side',k:'d3c1'}]}]},
+  d4:{title:'Day 4 — Full body (lower bias)',focus:'Balance, posture, recovery-friendly',time:'60 min',eq:'Leg Press · Ham Curl · Cable Row · Rower',secs:[
+    {t:'Warm-up',items:[{n:'Rowing machine',s:'6–8 min easy',k:'d4w0'},{n:'Inchworm walkouts',s:'6',k:'d4w1'}]},
+    {t:'Activation',items:[{n:'Bird dogs',s:'2 × 10 each side',k:'d4a0'},{n:'Glute marches',s:'2 × 12',k:'d4a1'}]},
+    {t:'Main lifts',items:[{n:'Leg press',s:'3 × 10–12',k:'d4m0'},{n:'Hamstring curl machine',s:'3 × 10',k:'d4m1'},{n:'Seated row or lat pulldown',s:'2–3 × 10–12',k:'d4m2'}]},
+    {t:'Cool down',items:[{n:'Chest opener',s:'30 sec',k:'d4c0'},{n:'Hamstring stretch',s:'30 sec each',k:'d4c1'},{n:'Easy walk',s:'5 min',k:'d4c2'}]}]},
+  d5:{title:'Day 5 — Glutes (pump / metabolic)',focus:'Blood flow, mind–muscle connection',time:'50–60 min',eq:'Stairmaster · Cable · Hip Abduction · Bike',secs:[
+    {t:'Warm-up',items:[{n:'Stairmaster',s:'8 min light · glute squeeze',k:'d5w0'}]},
+    {t:'Activation',items:[{n:'Glute bridges',s:'3 × 20',k:'d5a0'},{n:'Banded abductions',s:'2 × 20',k:'d5a1'},{n:'Frog pose',s:'45 sec',k:'d5a2'}]},
+    {t:'Main work',items:[{n:'Hip abduction (forward lean)',s:'3 × 15–20',k:'d5m0'},{n:'Kickback machine',s:'3 × 12–15',k:'d5m1'},{n:'Single-leg press (light)',s:'3 × 12',k:'d5m2'},{n:'Lying leg curl',s:'2 × 15',k:'d5m3'},{n:'Frog pumps',s:'2 × 25',k:'d5m4'}]},
+    {t:'Cardio',items:[{n:'Stationary bike',s:'10–15 min moderate',k:'d5ca0'}]},
+    {t:'Cool down',items:[{n:'Pigeon pose',s:'30 sec each side',k:'d5c0'},{n:'Forward fold',s:'1 min',k:'d5c1'}]}]},
+  d6:{title:'Day 6 — Active cardio / class',focus:'Low intensity, recovery support',time:'30–45 min',eq:'Treadmill or Bike',secs:[
+    {t:'Options — pick one',items:[{n:'Incline walk',s:'30 min',k:'d6o0'},{n:'Bike',s:'25–30 min',k:'d6o1'},{n:'Class (non-twisting)',s:'',k:'d6o2'}]},
+    {t:'Cool down',items:[{n:'Full lower-body stretch',s:'5–10 min',k:'d6c0'}]}]}
+};
+
+const DEF_HABITS = ['4:30am gym alarm','Pre-gym snack','8 glasses water','Skincare AM','Skincare PM','Study block','No phone before bed'];
+const AM_STEPS = ['Gentle cleanser','Vitamin C serum','Moisturiser','SPF 50+'];
+const PM_STEPS = ['Oil cleanser / balm','Gentle cleanser','Exfoliant (2–3×/week)','Treatment serum','Retinol (alternate nights)','Moisturiser / face oil'];
+const DEF_EXP = ['Rent / mortgage','Bills & utilities','Groceries','Fuel / transport','Gym membership','Subscriptions','Eating out / social','Clothing / personal'];
+const DEF_SAV = [{n:'Emergency fund',t:5000},{n:'Holiday / travel',t:3000},{n:'General savings',t:10000},{n:'Car / big purchase',t:15000},{n:'Investment',t:20000}];
+const WRAP_DEF = ['Brief all ongoing projects','Hand over key contacts','Document system access','Return company equipment','Final expenses submitted','LinkedIn updated','Thank you notes to colleagues','Last pay slip confirmed'];
+const BATCH_DEF = ['1kg chicken thighs — roast and portion','3 cups jasmine rice','Roast tray of veg','Boil 8–10 eggs','Portion sauces and dressings','Fill 4–5 lunch containers'];
+const STAPLES_DEF = 'Chicken thighs\nJasmine rice\nEggs (12 pack)\nSalmon fillets\nSweet potato\nBroccolini\nAvocado\nBanana\nRice cakes\nAlmond butter\nEdamame (frozen)\nTofu (firm)\nLentils\nSourdough bread\nCoconut yoghurt\nBerries (frozen)\nOlive oil\nSoy sauce\nSesame oil\nNutritional yeast\nTurmeric\nGarlic\nLemon';
+const DEF_FORMULAS = [
+  {name:'Present Value',eq:'PV = FV / (1 + r)^n',cat:'Time Value of Money',notes:'Discounting a future cash flow to today. r = period rate, n = periods.'},
+  {name:'Future Value',eq:'FV = PV × (1 + r)^n',cat:'Time Value of Money',notes:'Compounding a present amount forward.'},
+  {name:'Annuity PV',eq:'PVA = C × [1 − 1/(1+r)^n] / r',cat:'Time Value of Money',notes:'C = periodic payment. Equal payments over n periods.'},
+  {name:'Annuity FV',eq:'FVA = C × [(1+r)^n − 1] / r',cat:'Time Value of Money',notes:''},
+  {name:'Perpetuity',eq:'PV = C / r',cat:'Time Value of Money',notes:'Infinite equal cash flows.'},
+  {name:'Growing Perpetuity',eq:'PV = C / (r − g)',cat:'Time Value of Money',notes:'g = growth rate. Must have r > g.'},
+  {name:'EAR',eq:'EAR = (1 + APR/m)^m − 1',cat:'EAR / APR',notes:'m = compounding periods per year.'},
+  {name:'APR from EAR',eq:'APR = m × [(1 + EAR)^(1/m) − 1]',cat:'EAR / APR',notes:'Reverse of EAR formula.'},
+  {name:'Bond Price',eq:'P = C × [1−1/(1+r)^n]/r + FV/(1+r)^n',cat:'Bond Valuation',notes:'C = coupon, FV = face value, r = yield per period.'},
+  {name:'Current Yield',eq:'CY = Annual Coupon / Price',cat:'Bond Valuation',notes:'Approximate — ignores capital gains/losses.'},
+  {name:'DDM (Gordon Growth)',eq:'P = D1 / (r − g)',cat:'Share Valuation',notes:'D1 = next dividend, r = required return, g = constant growth.'},
+  {name:'Net Present Value',eq:'NPV = −C0 + Σ[Ct / (1+r)^t]',cat:'NPV / IRR',notes:'Accept if NPV > 0.'},
+  {name:'IRR',eq:'0 = −C0 + Σ[Ct / (1+IRR)^t]',cat:'NPV / IRR',notes:'Accept if IRR > hurdle rate.'},
+  {name:'Payback Period',eq:'PP = Year before recovery + Remaining / CF that year',cat:'NPV / IRR',notes:'Ignores time value of money.'},
+  {name:'Sustainable Growth Rate',eq:'g = ROE × Retention Ratio',cat:'Risk and Return',notes:'Retention ratio = 1 − dividend payout ratio.'},
+  {name:'ROE',eq:'ROE = Net Income / Shareholders Equity',cat:'Risk and Return',notes:''}
+];
+const PAL = ['#c0436a','#d9648a','#e8a0b4','#7a3d52','#b8933a','#e9c46a','#3a7a5a','#3a5a7a','#264653','#4a7c8c'];
+const MOOD_LABELS = ['','Rough','Meh','Okay','Good','Great'];
+const MOOD_COLORS = ['','#e07070','#e9c46a','#95c4b0','#4a7c6a','#c0436a'];
+const STATUS_TAG = {Applied:'tn','Interview 1':'tgold','Interview 2':'tgold','Interview 3':'twm','Offer received':'tgrn',Rejected:'tr',Withdrawn:'tn'};
+const ASGN_TAG = {'Not started':'tn','In progress':'tgold',Submitted:'tbl',Graded:'tgrn'};
+
+// DEF_GYM_MEALS already declared above
+// {time:'4:15am pre-gym',name:'Banana + rice cake with almond butter',desc:'~25g carbs · ~5g protein'},{time:'6:15am post-gym',name:'Scrambled eggs + sourdough + avocado',desc:'~35g protein'},{time:'Lunch',name:'Batch chicken rice bowl',desc:'Chicken · rice · roasted veg · soy-sesame · ~40g protein'},{time:'Arvo snack',name:'Boiled eggs or edamame',desc:'~12g protein'},{time:'Dinner',name:'Salmon + sweet potato + broccolini',desc:'~38g protein'},{time:'Evening (optional)',name:'Coconut yoghurt + berries',desc:'Dairy free'}];
+// DEF_REST_MEALS already declared above
+// {time:'Breakfast',name:'Tofu scramble + toast',desc:'Silken/firm tofu · turmeric · nutritional yeast · spinach'},{time:'Lunch',name:'Lentil soup or noodle bowl',desc:'Lighter carbs on rest days'},{time:'Dinner',name:'Stir-fry tofu or fish + rice',desc:'Simple, keep it lighter'}];
+
+let moodChart=null,weightChart=null,budgetChart=null;
+let timerBlocks=[{name:'Gym session',mins:75},{name:'Shower & dress',mins:10},{name:'Breakfast',mins:5}];
+let timerSec=0,timerRunning=false,curBlock=0,timerInt=null;
+let curMood=0,curEnergy=0,formulaFilter='';
+let currentGymDay='d1',currentSchDay='mon';
+
+window.addEventListener('load',()=>{
+  initDate();renderSchedule('mon');renderGym('d1');renderRoutines();
+  initHabits();renderTimerUI();renderMeals();loadData();renderFormulas();
+  renderTomorrow();renderPWList();
+});
+
+
+function initDate() {
+  const d=new Date();
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const el=document.getElementById('dash-date');if(el)el.textContent=days[d.getDay()]+', '+d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+  const h=d.getHours();
+  const ge=document.getElementById('dash-greet');if(ge)ge.textContent=h<12?'morning':h<17?'afternoon':'evening';
+  const dt=document.getElementById('dash-day-tag');if(dt)dt.textContent=days[d.getDay()];
+  const dg=document.getElementById('dash-gym');if(dg)dg.textContent=DGYM[d.getDay()]||'Rest day';
+  const md=document.getElementById('mood-date');if(md)md.value=new Date().toISOString().split('T')[0];
+  const med=document.getElementById('meas-date');if(med)med.value=new Date().toISOString().split('T')[0];
+  renderDashSchedule(DKEYS[d.getDay()]);
+  const affirmations = [
+    'You are doing better than you think. ',
+    'Progress over perfect. One step at a time.',
+    'You built a whole life and you\'re still building. ',
+    'Hard weeks are how growth happens.',
+    'Rest is productive. You\'re allowed to breathe.',
+    'You\'re exactly where you need to be. Keep going.',
+    "Today's effort is tomorrow's foundation. ",
+    'It\'s okay to not have it all figured out.',
+    'You show up. That\'s already enough.',
+    'Proud of you for being here.',
+  ];
+  const aff = document.getElementById('dash-affirmation');
+  const d2=getData();
+  if (aff) aff.textContent = d2.customQuote || affirmations[d.getDay() % affirmations.length];
+}
+
+
+function go(id, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  const pg=document.getElementById('page-'+id); if(pg)pg.classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(id==='dashboard'){refreshDashHabMini();refreshSnap();renderTomorrow();}
+  if(id==='uni'){renderCourseList();setTimeout(()=>renderFormulas(),50);}
+  if(id==='semester')renderSem();
+  if(id==='social'){renderCal();renderPWList();}
+  if(id==='dashboard'){renderTomorrow();}
+  if(id==='schedule'){renderSchedule(currentSchDay);}
+  if(id==='mood')renderMoodChart();
+  if(id==='progress')renderWeightChart();
+  if(id==='career'){calcCD();renderJournal();}
+  if(id==='meals')renderMeals();
+}
+
+
+function refreshSnap() {
+  const d=getData();
+  const pend=(d.assignments||[]).filter(a=>a.status!=='Graded'&&a.status!=='Submitted').length;
+  const soon=(d.assignments||[]).filter(a=>{if(!a.due||a.status==='Graded'||a.status==='Submitted')return false;const diff=(new Date(a.due)-new Date())/(1000*60*60*24);return diff<=7&&diff>=0;}).length;
+  const jcount=(d.journalEntries||[]).length;
+  const courses=(d.courses||[]).length;
+  const el=document.getElementById('dash-snap'); if(!el)return;
+  el.innerHTML='<div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bd2)"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:2px">Uni tasks</div><div style="font-size:13px">'+pend+' outstanding'+(soon?' · <strong style="color:var(--pk)">'+soon+' due this week</strong>':'')+'</div></div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--bd2)"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:2px">Career</div><div style="font-size:13px">'+jcount+' journal entr'+(jcount===1?'y':'ies')+'</div></div><div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:2px">Courses</div><div style="font-size:13px">'+courses+' enrolled</div></div>';
+  const ud=document.getElementById('dash-uni-due'); if(ud)ud.textContent=soon>0?soon+' this wk':pend+' open';
+}
+
+function getData() { try { return JSON.parse(localStorage.getItem(SK)) || {}; } catch { return {}; } }
+
+function setData(d) { localStorage.setItem(SK, JSON.stringify(d)); }
+
+function showToast(msg) { const t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+
+function renderDashSchedule(key) {
+  const d=getData();
+  const day=(d.customSch&&d.customSch[key])||SCHEDULE[key]||SCHEDULE.sun;
+  const el = document.getElementById('dash-sch-body');
+  if (!el) return;
+  el.innerHTML = day.rows.map(r =>
+    '<div class="sch-row">' +
+    '<div class="sch-time-col">'+r.t+'</div>' +
+    '<div class="sch-plan-col">' +
+    '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+    '<span class="sch-label">'+r.l+'</span>' +
+    '<span class="pill '+r.p+'">'+r.p.replace('p-','')+'</span>' +
+    '</div>' +
+    (r.s ? '<div class="sch-sub">'+r.s+'</div>' : '') +
+    '</div></div>'
+  ).join('');
+}
+
+function calcCD() {
+  const now = new Date(), end = new Date('2026-04-30');
+  let days = 0;
+  const cur = new Date(now);
+  cur.setHours(0,0,0,0);
+  while (cur <= end) { if (cur.getDay() > 0 && cur.getDay() < 6) days++; cur.setDate(cur.getDate()+1); }
+  ['cd-num','dash-cd'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = days; });
+}
+
+function refreshDashHabMini() {
+  const d = getData(), habits = d.habits || [];
+  const di = (new Date().getDay() + 6) % 7;
+  const el = document.getElementById('dash-hab-mini');
+  if (!el) return;
+  if (!habits.length) { el.innerHTML = '<div style="padding:0.75rem 1.25rem;font-size:13px;color:var(--tx2);">No habits set.</div>'; return; }
+  el.innerHTML = habits.map((h, hi) => {
+    const done = h.checks[di];
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);">
+      <span style="font-size:13px;">${h.name}</span>
+      <div class="hab-check${done?' done':''}" onclick="toggleHabit(${hi},${di},this)">${done?'✓':''}</div>
+    </div>`;
+  }).join('');
+  const dc = habits.filter(h => h.checks[di]).length;
+  const dh = document.getElementById('dash-hab');
+  if (dh) dh.textContent = dc + '/' + habits.length;
+}
+
+function quickMood(v, btn) {
+  document.querySelectorAll('#dash-mood-row .btn').forEach(b => b.style.background = '');
+  btn.style.background = 'var(--pkl)';
+  curMood = v;
+}
+
+function saveGymLog(k, v) { const d = getData(); if (!d.gymLogs) d.gymLogs = {}; d.gymLogs[k] = v; setData(d); }
+
+function addPR() {
+  const ex = document.getElementById('pr-ex').value.trim(); if (!ex) return;
+  const d = getData(); if (!d.prs) d.prs = [];
+  d.prs.push({ex, kg:document.getElementById('pr-kg').value, date:document.getElementById('pr-date').value, notes:document.getElementById('pr-notes').value});
+  setData(d); renderPRs(d.prs);
+  ['pr-ex','pr-kg','pr-date','pr-notes'].forEach(id => document.getElementById(id).value = '');
+  showToast('PR logged!');
+}
+
+function renderPRs(prs) {
+  const b = document.getElementById('pr-body'); if (!b) return;
+  if (!prs || !prs.length) { b.innerHTML = '<tr><td colspan="5" style="color:var(--tx3);padding:12px;">No PRs yet.</td></tr>'; return; }
+  b.innerHTML = prs.map((p,i) => `<tr><td>${p.ex}</td><td>${p.kg||'—'}</td><td>${p.date||'—'}</td><td>${p.notes||'—'}</td><td><button class="btn btn-sm btn-danger" onclick="delPR(${i})">✕</button></td></tr>`).join('');
+}
+
+function delPR(i) { const d = getData(); d.prs.splice(i,1); setData(d); renderPRs(d.prs); }
+
+function renderTimerUI() {
+  const e1 = document.getElementById('timer-blocks-ui');
+  if (e1) e1.innerHTML = timerBlocks.map((b,i) => `
+    <div class="timer-block${i===curBlock?' active':''}" onclick="selBlock(${i})">
+      <div><div style="font-size:13px;font-weight:500;">${b.name}</div><div style="font-size:12px;color:var(--tx2);">${b.mins} min</div></div>
+      <div style="font-size:11px;color:${i===curBlock?'var(--pk)':'var(--tx3)'};">${i===curBlock?'▶':''}</div>
+    </div>`).join('');
+  const e2 = document.getElementById('timer-edit');
+  if (e2) e2.innerHTML = timerBlocks.map((b,i) => `
+    <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd2);">
+      <span style="font-size:13px;flex:1;">${b.name}</span>
+      <span style="font-size:12px;color:var(--tx2);">${b.mins}min</span>
+      <button class="btn btn-sm btn-danger" onclick="delTimerBlock(${i})">✕</button>
+    </div>`).join('');
+}
+
+function selBlock(i) { curBlock = i; timerSec = timerBlocks[i].mins*60; timerRunning = false; clearInterval(timerInt); updateTimerDisp(); renderTimerUI(); const s = document.getElementById('timer-status'); if (s) s.textContent = timerBlocks[i].name + ' selected'; }
+
+function startTimer() { if (timerSec === 0 && timerBlocks[curBlock]) timerSec = timerBlocks[curBlock].mins*60; timerRunning = true; timerInt = setInterval(() => { if (timerSec > 0) { timerSec--; updateTimerDisp(); } else { clearInterval(timerInt); showToast('Block done!'); } }, 1000); }
+
+function pauseTimer() { clearInterval(timerInt); timerRunning = false; }
+
+function resetTimer() { clearInterval(timerInt); timerRunning = false; timerSec = timerBlocks[curBlock] ? timerBlocks[curBlock].mins*60 : 0; updateTimerDisp(); }
+
+function nextBlock() { if (curBlock < timerBlocks.length-1) selBlock(curBlock+1); else showToast('All blocks done!'); }
+
+function updateTimerDisp() { const m = Math.floor(timerSec/60), s = timerSec%60; const el = document.getElementById('timer-disp'); if (el) el.textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+
+function addTimerBlock() { const n = document.getElementById('tb-name').value.trim(), m = parseInt(document.getElementById('tb-mins').value); if (!n || !m) return; timerBlocks.push({name:n,mins:m}); renderTimerUI(); document.getElementById('tb-name').value = ''; document.getElementById('tb-mins').value = ''; }
+
+function delTimerBlock(i) { timerBlocks.splice(i,1); if (curBlock >= timerBlocks.length) curBlock = 0; renderTimerUI(); }
+
+function selMood(v) {
+  curMood = v;
+  document.querySelectorAll('.mood-sel').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  const b = document.querySelector('.mood-sel[data-v="'+v+'"]');
+  if (b) { b.style.background='var(--pk)'; b.style.color='#fff'; b.style.borderColor='var(--pk)'; }
+}
+
+function selEnergy(v) {
+  curEnergy = v;
+  document.querySelectorAll('.energy-sel').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  const b = document.querySelector('.energy-sel[data-v="'+v+'"]');
+  if (b) { b.style.background='var(--pk)'; b.style.color='#fff'; b.style.borderColor='var(--pk)'; }
+}
+
+function addMood() {
+  if (!curMood) { showToast('Select a mood first'); return; }
+  const d = getData(); if (!d.moods) d.moods = [];
+  d.moods.push({date:document.getElementById('mood-date').value, mood:curMood, energy:curEnergy, sleep:document.getElementById('mood-sleep').value, gym:document.getElementById('mood-gym').value, notes:document.getElementById('mood-note-inp').value});
+  setData(d); renderMoodLog(d.moods); renderMoodChart(d.moods);
+  document.getElementById('mood-note-inp').value = ''; document.getElementById('mood-sleep').value = '';
+  curMood = 0; curEnergy = 0;
+  document.querySelectorAll('.mood-sel,.energy-sel').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  showToast('Mood logged!');
+}
+
+function renderMoodLog(moods) {
+  const b = document.getElementById('mood-body'); if (!b) return;
+  if (!moods || !moods.length) { b.innerHTML = '<tr><td colspan="7" style="color:var(--tx3);padding:12px;">No entries yet.</td></tr>'; return; }
+  b.innerHTML = [...moods].reverse().map((m,i) => `<tr>
+    <td>${m.date||'—'}</td>
+    <td><span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:${MOOD_COLORS[m.mood]||'#ccc'};"></span>${MOOD_LABELS[m.mood]||m.mood}</span></td>
+    <td>${m.energy||'—'}</td><td>${m.sleep?m.sleep+'h':'—'}</td><td>${m.gym||'—'}</td>
+    <td style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.notes||'—'}</td>
+    <td><button class="btn btn-sm btn-danger" onclick="delMood(${moods.length-1-i})">✕</button></td>
+  </tr>`).join('');
+}
+
+function delMood(i) { const d = getData(); d.moods.splice(i,1); setData(d); renderMoodLog(d.moods); renderMoodChart(d.moods); }
+
+function renderMoodChart(moods) {
+  const ctx = document.getElementById('moodChart')?.getContext('2d'); if (!ctx) return;
+  const data = (getData().moods || moods || []).slice(-14);
+  if (moodChart) moodChart.destroy();
+  moodChart = new Chart(ctx, {type:'line',data:{labels:data.map(m=>m.date||''),datasets:[{label:'Mood',data:data.map(m=>m.mood),borderColor:'#c0436a',backgroundColor:'rgba(192,67,106,0.08)',tension:0.3,fill:true},{label:'Energy',data:data.map(m=>m.energy),borderColor:'#b8933a',backgroundColor:'transparent',tension:0.3,borderDash:[4,2]}]},options:{scales:{y:{min:0,max:5,ticks:{stepSize:1}}},plugins:{legend:{labels:{font:{size:11}}}}}});
+}
+
+function addMeas() {
+  const d = getData(); if (!d.measurements) d.measurements = [];
+  d.measurements.push({date:document.getElementById('meas-date').value, w:document.getElementById('meas-w').value, wa:document.getElementById('meas-wa').value, h:document.getElementById('meas-h').value, g:document.getElementById('meas-g').value, t:document.getElementById('meas-t').value, notes:document.getElementById('meas-notes').value});
+  setData(d); renderMeas(d.measurements); renderWeightChart(d.measurements);
+  ['meas-w','meas-wa','meas-h','meas-g','meas-t','meas-notes'].forEach(id => document.getElementById(id).value = '');
+  showToast('Logged!');
+}
+
+function renderMeas(meas) {
+  const b = document.getElementById('meas-body'); if (!b) return;
+  if (!meas || !meas.length) { b.innerHTML = '<tr><td colspan="8" style="color:var(--tx3);padding:12px;">No measurements yet.</td></tr>'; return; }
+  b.innerHTML = [...meas].reverse().map((m,i) => `<tr><td>${m.date||'—'}</td><td>${m.w||'—'}</td><td>${m.wa||'—'}</td><td>${m.h||'—'}</td><td>${m.g||'—'}</td><td>${m.t||'—'}</td><td>${m.notes||'—'}</td><td><button class="btn btn-sm btn-danger" onclick="delMeas(${meas.length-1-i})">✕</button></td></tr>`).join('');
+}
+
+function delMeas(i) { const d = getData(); d.measurements.splice(i,1); setData(d); renderMeas(d.measurements); }
+
+function renderWeightChart(meas) {
+  const ctx = document.getElementById('weightChart')?.getContext('2d'); if (!ctx) return;
+  const data = getData().measurements || meas || [];
+  if (weightChart) weightChart.destroy();
+  weightChart = new Chart(ctx, {type:'line',data:{labels:data.map(m=>m.date||''),datasets:[{label:'Weight (kg)',data:data.map(m=>parseFloat(m.w)||null),borderColor:'#c0436a',backgroundColor:'rgba(192,67,106,0.08)',tension:0.3,fill:true,spanGaps:true}]},options:{plugins:{legend:{labels:{font:{size:11}}}},scales:{y:{ticks:{callback:v=>v+'kg'}}}}});
+}
+
+function saveSkin(p, i, v) { const d = getData(); const k = 'skin'+p; if (!d[k]) d[k]=[]; d[k][i]=v; setData(d); }
+
+function addProduct() {
+  const n = document.getElementById('prod-name').value.trim(); if (!n) return;
+  const d = getData(); if (!d.products) d.products = [];
+  d.products.push({name:n, cat:document.getElementById('prod-cat').value, date:document.getElementById('prod-date').value, notes:document.getElementById('prod-notes').value});
+  setData(d); renderProducts(d.products);
+  ['prod-name','prod-cat','prod-date','prod-notes'].forEach(id => document.getElementById(id).value = '');
+  showToast('Added!');
+}
+
+function renderProducts(prods) {
+  const b = document.getElementById('prod-body'); if (!b) return;
+  if (!prods || !prods.length) { b.innerHTML = '<tr><td colspan="5" style="color:var(--tx3);padding:12px;">No products tracked yet.</td></tr>'; return; }
+  b.innerHTML = prods.map((p,i) => `<tr><td>${p.name}</td><td>${p.cat||'—'}</td><td>${p.date||'—'}</td><td>${p.notes||'—'}</td><td><button class="btn btn-sm btn-danger" onclick="delProduct(${i})">✕</button></td></tr>`).join('');
+}
+
+function delProduct(i) { const d = getData(); d.products.splice(i,1); setData(d); renderProducts(d.products); }
+
+function renderBatch(tasks) {
+  const el = document.getElementById('batch-list'); if (!el) return;
+  el.innerHTML = tasks.map((t,i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);"><div class="groc-check${t.done?' done':''}" onclick="togBatch(${i},this)">${t.done?'✓':''}</div><span style="font-size:13px;${t.done?'text-decoration:line-through;color:var(--tx3);':''}">${t.text}</span><button class="btn btn-sm btn-danger" style="margin-left:auto;" onclick="delBatch(${i})">✕</button></div>`).join('');
+}
+
+function addBatch() { const t = document.getElementById('batch-new').value.trim(); if (!t) return; const d = getData(); if (!d.batchTasks) d.batchTasks=[]; d.batchTasks.push({text:t,done:false}); setData(d); renderBatch(d.batchTasks); document.getElementById('batch-new').value=''; }
+
+function togBatch(i, el) { const d = getData(); d.batchTasks[i].done=!d.batchTasks[i].done; setData(d); el.classList.toggle('done'); el.textContent=el.classList.contains('done')?'✓':''; renderBatch(d.batchTasks); }
+
+function delBatch(i) { const d = getData(); d.batchTasks.splice(i,1); setData(d); renderBatch(d.batchTasks); }
+
+function renderGroc(items) {
+  const el = document.getElementById('groc-list'); if (!el) return;
+  if (!items || !items.length) { el.innerHTML = '<div style="font-size:13px;color:var(--tx2);">Your list is empty.</div>'; return; }
+  const cats = [...new Set(items.map(i => i.cat||'General'))].sort();
+  el.innerHTML = cats.map(cat => {
+    const ci = items.filter(i => (i.cat||'General') === cat);
+    return `<div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--tx3);margin-bottom:5px;">${cat}</div>${ci.map(item => {
+      const ri = items.indexOf(item);
+      return `<div class="groc-item"><div class="groc-check${item.done?' done':''}" onclick="togGroc(${ri},this)">${item.done?'✓':''}</div><span style="font-size:13px;flex:1;${item.done?'text-decoration:line-through;color:var(--tx3);':''}">${item.name}${item.qty?' — '+item.qty:''}</span><button class="btn btn-sm btn-danger" onclick="delGroc(${ri})">✕</button></div>`;
+    }).join('')}</div>`;
+  }).join('');
+}
+
+function addGroc(name, cat, qty) {
+  const n = name || document.getElementById('groc-name').value.trim(); if (!n) return;
+  const d = getData(); if (!d.grocery) d.grocery=[];
+  d.grocery.push({name:n, cat:cat||document.getElementById('groc-cat').value||'General', qty:qty||document.getElementById('groc-qty').value, done:false});
+  setData(d); renderGroc(d.grocery);
+  if (!name) { document.getElementById('groc-name').value=''; document.getElementById('groc-cat').value=''; document.getElementById('groc-qty').value=''; }
+}
+
+function togGroc(i, el) { const d = getData(); d.grocery[i].done=!d.grocery[i].done; setData(d); renderGroc(d.grocery); }
+
+function delGroc(i) { const d = getData(); d.grocery.splice(i,1); setData(d); renderGroc(d.grocery); }
+
+function clearDoneGroc() { const d = getData(); d.grocery=(d.grocery||[]).filter(i=>!i.done); setData(d); renderGroc(d.grocery); }
+
+function clearAllGroc() { const d = getData(); d.grocery=[]; setData(d); renderGroc([]); }
+
+function loadStaples() {
+  const txt = document.getElementById('staples-txt')?.value || STAPLES_DEF;
+  const lines = txt.split('\n').map(l=>l.trim()).filter(Boolean);
+  const d = getData(); if (!d.grocery) d.grocery=[];
+  lines.forEach(l => { if (!d.grocery.find(g=>g.name===l)) d.grocery.push({name:l,cat:'Staples',qty:'',done:false}); });
+  setData(d); renderGroc(d.grocery); showToast('Staples loaded!');
+}
+
+function initHabits() {
+  const d = getData();
+  renderHabitRows(d.habits || DEF_HABITS.map(n => ({name:n, checks:[false,false,false,false,false,false,false]})));
+}
+
+function renderHabitRows(habits) {
+  const c = document.getElementById('habits-rows'); if (!c) return;
+  c.innerHTML = habits.map((h,hi) => `
+    <div class="hab-row">
+      <input class="hab-name" type="text" value="${h.name}" oninput="saveHabit(${hi},'name',this.value)" placeholder="Habit name">
+      ${h.checks.map((chk,di) => `<div class="hab-check${chk?' done':''}" onclick="toggleHabit(${hi},${di},this)">${chk?'✓':''}</div>`).join('')}
+      <button class="btn btn-sm btn-danger" style="padding:2px 5px;" onclick="delHabit(${hi})">✕</button>
+    </div>`).join('');
+  renderHabitStreaks(habits);
+  refreshDashHabMini();
+}
+
+function toggleHabit(hi, di, el) {
+  const d = getData();
+  if (!d.habits) d.habits = DEF_HABITS.map(n => ({name:n,checks:[false,false,false,false,false,false,false]}));
+  d.habits[hi].checks[di] = !d.habits[hi].checks[di];
+  setData(d); el.classList.toggle('done'); el.textContent = el.classList.contains('done') ? '✓' : '';
+  renderHabitStreaks(d.habits); refreshDashHabMini();
+}
+
+function saveHabit(i, k, v) { const d = getData(); if (!d.habits) return; d.habits[i][k]=v; setData(d); }
+
+function addHabit() { const d = getData(); if (!d.habits) d.habits=[]; d.habits.push({name:'New habit',checks:[false,false,false,false,false,false,false]}); setData(d); renderHabitRows(d.habits); }
+
+function delHabit(i) { const d = getData(); d.habits.splice(i,1); setData(d); renderHabitRows(d.habits); }
+
+function renderHabitStreaks(habits) {
+  const el = document.getElementById('habit-streaks'); if (!el) return;
+  if (!habits || !habits.length) { el.innerHTML = '<div style="font-size:13px;color:var(--tx2);">No habits yet.</div>'; return; }
+  el.innerHTML = habits.map(h => { const done=h.checks.filter(Boolean).length, pct=Math.round((done/7)*100); return `<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;"><span>${h.name}</span><span style="color:var(--tx3);">${done}/7</span></div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:${pct>=70?'var(--pk)':pct>=40?'var(--gold)':'#a0243a'};"></div></div></div>`; }).join('');
+}
+
+function updatePeriod() {
+  const s = document.getElementById('period-start')?.value; if (!s) return;
+  const d = new Date(s); d.setDate(d.getDate()+13);
+  const el = document.getElementById('period-end-lbl');
+  if (el) el.textContent = '→ ' + d.toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'});
+  saveAll();
+}
+
+const fmt = n => '$' + Math.round(Math.abs(n)).toLocaleString('en-AU');
+const fv = el => parseFloat(el?.value) || 0;
+function recalcBudget() {
+  let income = 0; document.querySelectorAll('.inc-val').forEach(i => income += fv(i));
+  let budgeted = 0, spent = 0; const catData = [];
+  document.querySelectorAll('.exp-row').forEach(row => {
+    const b = fv(row.querySelector('.bud-val')), s = fv(row.querySelector('.spt-val'));
+    const lbl = row.querySelector('[contenteditable]')?.textContent || '';
+    budgeted += b; spent += s; if (b > 0) catData.push({label:lbl,val:b});
+    const bar = row.querySelector('.prog-bar');
+    if (bar) { const pct = b>0 ? Math.min((s/b)*100,100) : 0; bar.style.width=pct+'%'; bar.style.background=s>b?'#a0243a':s>b*0.85?'var(--gold)':'var(--pk)'; }
+  });
+  let savT = 0; document.querySelectorAll('.sav-c').forEach(i => savT += fv(i));
+  const left = income - budgeted - savT;
+  [['b-income',income],['b-budgeted',budgeted],['b-spent',spent],['b-savings',savT]].forEach(([id,v]) => { const el=document.getElementById(id); if(el) el.textContent=fmt(v); });
+  const lEl = document.getElementById('b-leftover');
+  if (lEl) { lEl.textContent=(left<0?'-':'')+fmt(left); lEl.style.color=left<0?'#a0243a':left===0?'var(--tx)':'var(--pk)'; }
+  const dl = document.getElementById('dash-left'); if (dl) dl.textContent=(left<0?'-':'')+fmt(left);
+  const labels=[...catData.map(c=>c.label),'Savings'], data=[...catData.map(c=>c.val),savT];
+  if (left > 0) { labels.push('Leftover'); data.push(left); }
+  const ctx = document.getElementById('budgetChart')?.getContext('2d');
+  if (ctx) { if (budgetChart) budgetChart.destroy(); budgetChart = new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:PAL.slice(0,data.length),borderWidth:0}]},options:{cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}}); }
+  const leg = document.getElementById('chart-legend');
+  if (leg) leg.innerHTML = labels.map((l,i) => `<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2);"><span style="width:8px;height:8px;border-radius:50%;background:${PAL[i]};display:inline-block;flex-shrink:0;"></span>${l}</div>`).join('');
+  // Update secondary stat display
+  const b2 = document.getElementById('b-budgeted-2'); if(b2) b2.textContent = fmt(budgeted);
+  const s2 = document.getElementById('b-spent-2'); if(s2) s2.textContent = fmt(spent);
+  renderSavingsChart();
+  renderNWChart();
+  renderNWBreakdown();
+  saveAll();
+}
+
+function addIncomeRow(label='', val='') {
+  const c = document.getElementById('income-rows'); if (!c) return;
+  const row = document.createElement('div'); row.className = 'inc-row';
+  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget();saveAll()">${label||'Income source'}</div><input class="b-inp inc-val" type="number" placeholder="0" value="${val}" oninput="recalcBudget();saveAll()">`;
+  c.appendChild(row);
+}
+
+function addExpenseRow(label='', budget='', spent='') {
+  const c = document.getElementById('expense-rows'); if (!c) return;
+  const row = document.createElement('div'); row.className = 'b-row exp-row';
+  row.innerHTML = `<div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget()">${label||'Category'}</div><div><input class="b-inp bud-val" type="number" placeholder="0" value="${budget}" oninput="recalcBudget();saveAll()"><div class="prog-wrap"><div class="prog-bar" style="width:0%"></div></div></div><input class="b-inp spt-val" type="number" placeholder="0" value="${spent}" oninput="recalcBudget()">`;
+  c.appendChild(row);
+}
+
+function addSavingsRow(name='', contrib='', saved='', target='') {
+  const c = document.getElementById('savings-rows'); if (!c) return;
+  const row = document.createElement('div'); row.className = 'sav-row';
+  const pct = saved && target ? Math.min(Math.round((parseFloat(saved)/parseFloat(target))*100),100) : 0;
+  row.innerHTML = `<div><div contenteditable="true" style="font-size:13px;outline:none;" onblur="recalcBudget()">${name||'Goal'}</div><div class="sav-pct" style="font-size:11px;color:var(--tx3);">${pct}% of target</div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:var(--pk2);"></div></div></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-c" type="number" placeholder="0" value="${contrib}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-s" type="number" placeholder="0" value="${saved}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div><div style="display:flex;align-items:center;gap:3px;"><span style="font-size:11px;color:var(--tx3);">$</span><input class="b-inp sav-t" type="number" placeholder="0" value="${target}" oninput="updSavProg(this);recalcBudget();saveAll()" style="width:72px;text-align:right;padding:4px 5px;"></div>`;
+  c.appendChild(row);
+}
+
+function updSavProg(inp) {
+  const row = inp.closest('.sav-row');
+  const s = parseFloat(row.querySelector('.sav-s').value)||0, t = parseFloat(row.querySelector('.sav-t').value)||0;
+  const pct = t > 0 ? Math.min(Math.round((s/t)*100),100) : 0;
+  const bar = row.querySelector('.prog-bar'); if (bar) bar.style.width = pct+'%';
+  const lbl = row.querySelector('.sav-pct'); if (lbl) lbl.textContent = pct+'% of target';
+}
+
+function exportCSV() {
+  let csv = 'Category,Type,Budgeted,Spent\n';
+  document.querySelectorAll('.exp-row').forEach(r => { csv += `"${r.querySelector('[contenteditable]').textContent}",Expense,${r.querySelector('.bud-val').value||0},${r.querySelector('.spt-val').value||0}\n`; });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download = 'budget.csv'; a.click();
+  showToast('Exported!');
+}
+
+function addFormula() {
+  const name = document.getElementById('f-name').value.trim(); if (!name) return;
+  const d = getData(); if (!d.formulas) d.formulas = JSON.parse(JSON.stringify(DEF_FORMULAS));
+  d.formulas.push({name, eq:document.getElementById('f-eq').value, cat:document.getElementById('f-cat').value, notes:document.getElementById('f-notes').value});
+  setData(d); renderFormulas();
+  ['f-name','f-eq','f-notes'].forEach(id=>document.getElementById(id).value='');
+  showToast('Formula added!');
+}
+
+function filterFormulas(cat, btn) {
+  formulaFilter = cat;
+  document.querySelectorAll('#f-filter-btns .btn-sm').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)';
+  renderFormulas();
+}
+
+function renderFormulas() {
+  const d = getData(), formulas = d.formulas || DEF_FORMULAS;
+  const filtered = formulaFilter ? formulas.filter(f => f.cat===formulaFilter) : formulas;
+  const el = document.getElementById('formula-list'); if (!el) return;
+  if (!filtered.length) { el.innerHTML = '<div class="note-box">No formulas in this category.</div>'; return; }
+  const cats = [...new Set(filtered.map(f => f.cat))];
+  el.innerHTML = cats.map(cat => {
+    const catFs = filtered.filter(f => f.cat===cat);
+    return `<div class="section-label">${cat}</div><div class="g2">${catFs.map(f => { const ri=(d.formulas||DEF_FORMULAS).indexOf(f); return `<div class="fcard"><div style="font-size:13px;font-weight:600;margin-bottom:4px;">${f.name}</div><div class="feq">${f.eq}</div>${f.notes?`<div style="font-size:12px;color:var(--tx2);">${f.notes}</div>`:''}<div style="margin-top:6px;"><button class="btn btn-sm btn-danger" onclick="delFormula(${ri})">Remove</button></div></div>`; }).join('')}</div>`;
+  }).join('');
+}
+
+function delFormula(i) { const d = getData(); if (!d.formulas) d.formulas=JSON.parse(JSON.stringify(DEF_FORMULAS)); d.formulas.splice(i,1); setData(d); renderFormulas(); }
+
+function renderWrapList(tasks) {
+  const el = document.getElementById('wrap-list'); if (!el) return;
+  el.innerHTML = tasks.map((t,i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);"><div class="groc-check${t.done?' done':''}" onclick="togWrap(${i},this)">${t.done?'✓':''}</div><span style="font-size:13px;${t.done?'text-decoration:line-through;color:var(--tx3);':''}">${t.text}</span><button class="btn btn-sm btn-danger" style="margin-left:auto;" onclick="delWrap(${i})">✕</button></div>`).join('');
+}
+
+function togWrap(i, el) { const d = getData(); d.wrapTasks[i].done=!d.wrapTasks[i].done; setData(d); el.classList.toggle('done'); el.textContent=el.classList.contains('done')?'✓':''; renderWrapList(d.wrapTasks); }
+
+function addWrap() { const t = document.getElementById('wrap-new').value.trim(); if (!t) return; const d = getData(); if (!d.wrapTasks) d.wrapTasks=[]; d.wrapTasks.push({text:t,done:false}); setData(d); renderWrapList(d.wrapTasks); document.getElementById('wrap-new').value=''; }
+
+function delWrap(i) { const d = getData(); d.wrapTasks.splice(i,1); setData(d); renderWrapList(d.wrapTasks); }
+
+function addSocial() {
+  const who = document.getElementById('soc-who').value.trim(); if (!who) return;
+  const d = getData(); if (!d.socialEvents) d.socialEvents=[];
+  d.socialEvents.push({who, what:document.getElementById('soc-what').value, date:document.getElementById('soc-date').value});
+  setData(d); renderSocial(d.socialEvents);
+  ['soc-who','soc-what','soc-date'].forEach(id=>document.getElementById(id).value='');
+  showToast('Added!');
+}
+
+function renderSocial(evs) {
+  const el = document.getElementById('social-list'); if (!el) return;
+  if (!evs || !evs.length) { el.innerHTML = '<div style="padding:1rem 1.25rem;font-size:13px;color:var(--tx2);">No events yet.</div>'; return; }
+  el.innerHTML = evs.map((e,i) => `<div style="display:grid;grid-template-columns:1fr 110px auto;gap:10px;align-items:center;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);"><div><div style="font-size:13px;font-weight:500;">${e.who}</div>${e.what?`<div style="font-size:12px;color:var(--tx2);">${e.what}</div>`:''}</div><div style="font-size:12px;color:var(--tx2);">${e.date||'—'}</div><button class="btn btn-sm btn-danger" onclick="delSocial(${i})">✕</button></div>`).join('');
+}
+
+function delSocial(i) { const d = getData(); d.socialEvents.splice(i,1); setData(d); renderSocial(d.socialEvents); }
+
+function addSemEv() {
+  const task = document.getElementById('sem-task').value.trim(), week = parseInt(document.getElementById('sem-week').value); if (!task || !week) return;
+  const d = getData(); if (!d.semEvents) d.semEvents=[];
+  d.semEvents.push({task, week, type:document.getElementById('sem-type').value});
+  setData(d); renderSem(); document.getElementById('sem-task').value=''; document.getElementById('sem-week').value='';
+}
+
+function renderSem() {
+  const d = getData(), start = document.getElementById('sem-start')?.value, end = document.getElementById('sem-end')?.value, events = d.semEvents||[];
+  const el = document.getElementById('sem-grid'); if (!el) return;
+  if (!start || !end) { el.innerHTML = '<div style="color:var(--tx2);font-size:13px;">Set a semester start and end date above.</div>'; return; }
+  const weeks = Math.max(1, Math.ceil((new Date(end)-new Date(start))/(7*24*60*60*1000))+1);
+  el.innerHTML = Array.from({length:weeks},(_,i)=>i+1).map(w => {
+    const wEvs = events.filter(e => e.week===w);
+    return `<div class="sem-row"><div class="sem-wk">Wk ${w}</div><div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;">${wEvs.map((e,ei) => { const ri=events.indexOf(e); return `<span class="tag ${e.type}" style="display:inline-flex;align-items:center;gap:4px;">${e.task} <span onclick="delSemEv(${ri})" style="cursor:pointer;opacity:0.6;font-size:10px;">✕</span></span>`; }).join('')||'<span style="font-size:12px;color:var(--tx3);">—</span>'}</div></div>`;
+  }).join('');
+}
+
+function delSemEv(i) { const d = getData(); d.semEvents.splice(i,1); setData(d); renderSem(); }
+
+function renderSchedule(key) {
+  const d=getData();
+  const day=(d.customSch&&d.customSch[key])||SCHEDULE[key];
+  const el=document.getElementById('sch-content'); if(!el)return;
+  const editing = d.schEditMode===key;
+  el.innerHTML='<div class="card">' +
+    '<div class="ch"><div class="ct">'+day.label+'</div>' +
+    '<div style="display:flex;gap:8px;align-items:center">' +
+    (editing?'<button class="btn btn-sm" onclick="endSchEdit(\''+key+'\')" style="color:var(--grn)">Done</button><button class="btn btn-sm btn-danger" onclick="resetSchDay(\''+key+'\')" style="font-size:11px">Reset</button>':'<button onclick="startSchEdit(\''+key+'\')" style="background:none;border:none;cursor:pointer;padding:4px;color:var(--tx3);font-size:15px;" title="Edit schedule">&#x270F;</button>') +
+    '</div></div>' +
+    '<div>' +
+    (editing ? renderSchEditRows(key,day) : day.rows.map(r=>'<div class="sch-row"><div class="sch-time-col">'+r.t+'</div><div class="sch-plan-col"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="sch-label">'+r.l+'</span><span class="pill '+r.p+'">'+r.p.replace('p-','')+'</span></div>'+(r.s?'<div class="sch-sub">'+r.s+'</div>':'')+'</div></div>').join('')) +
+    '</div>' +
+    (editing ? '<button class="add-btn" onclick="addSchRow(\''+key+'\')" style="border-top:1px solid var(--bd2);width:100%">+ add time slot</button>' : '') +
+    '</div>';
+}
+
+function renderSchEditRows(key,day){
+  const opts=['p-gym','p-work','p-study','p-social','p-free','p-prep'];
+  return day.rows.map((r,i)=>'<div class="sch-row" style="align-items:flex-start;flex-wrap:wrap;gap:6px;padding:8px 1.25rem">' +
+    '<input value="'+r.t+'" placeholder="e.g. 4:30am–6:00am" oninput="saveSchRow(\''+key+'\','+i+',\'t\',this.value)" style="width:130px;flex-shrink:0;font-size:12px;border:none;border-bottom:1px solid var(--bd);background:transparent;padding:2px 4px;outline:none;font-family:inherit;color:var(--tx3)">'+
+    '<select oninput="saveSchRow(\''+key+'\','+i+',\'p\',this.value)" style="width:90px;flex-shrink:0;font-size:11px;padding:4px 6px">'+opts.map(p=>'<option'+(r.p===p?' selected':'')+' value="'+p+'">'+p.replace('p-','')+'</option>').join('')+'</select>'+
+    '<input value="'+r.l+'" placeholder="Plan label" oninput="saveSchRow(\''+key+'\','+i+',\'l\',this.value)" style="flex:1;min-width:120px;font-size:13px;border:none;border-bottom:1px solid var(--bd);background:transparent;padding:2px 4px;outline:none;font-family:inherit">'+
+    '<input value="'+(r.s||'')+'\" placeholder="Sub-note (optional)" oninput="saveSchRow(\''+key+'\','+i+',\'s\',this.value)" style="flex:1;min-width:120px;font-size:12px;border:none;border-bottom:1px solid var(--bd);background:transparent;padding:2px 4px;outline:none;font-family:inherit;color:var(--tx3)">'+
+    '<button class="btn btn-sm btn-danger" onclick="delSchRow(\''+key+'\','+i+')">&#x2715;</button>' +
+    '</div>').join('');
+}
+
+function startSchEdit(key){const d=getData();d.schEditMode=key;setData(d);renderSchedule(key);}
+function endSchEdit(key){const d=getData();delete d.schEditMode;setData(d);renderSchedule(key);}
+
+
+function renderGym(key) {
+  const d=getData();
+  const g=(d.customGym&&d.customGym[key])||GYM[key];
+  const saved=d.gymLogs||{};
+  const editing=d.gymEditMode===key;
+  const el=document.getElementById('gym-content'); if(!el)return;
+  const focusEq='<div class="g2" style="margin-bottom:1rem"><div class="note-box" style="margin-bottom:0"><strong>'+g.focus+'</strong> · '+g.time+'</div><div class="note-box" style="margin-bottom:0;font-size:12px">'+g.eq+'</div></div>';
+  const hdrBtns=editing
+    ?'<div style="display:flex;gap:6px"><button class="btn btn-sm" style="color:var(--grn)" onclick="endGymEdit(\''+key+'\')" >Done</button><button class="btn btn-sm btn-danger" onclick="resetGymDay(\''+key+'\')" >Reset</button></div>'
+    :'<button onclick="startGymEdit(\''+key+'\')" style="background:none;border:none;cursor:pointer;padding:4px;color:var(--tx3);font-size:15px" title="Edit routine">&#x270F;</button>';
+  let body='';
+  if(editing){
+    body+='<div style="padding:1rem 1.25rem;border-bottom:1px solid var(--bd2)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    body+='<div class="field"><label>Focus</label><input value="'+g.focus+'" oninput="saveGymMeta(\''+key+'\',\'focus\',this.value)"></div>';
+    body+='<div class="field"><label>Duration</label><input value="'+g.time+'" oninput="saveGymMeta(\''+key+'\',\'time\',this.value)"></div>';
+    body+='<div class="field" style="grid-column:1/-1"><label>Equipment</label><input value="'+g.eq+'" oninput="saveGymMeta(\''+key+'\',\'eq\',this.value)"></div>';
+    body+='</div></div>';
+    body+=g.secs.map((sec,si)=>'<div style="padding:.5rem 1.25rem 0"><div class="gym-section">'+sec.t+'</div></div>'+
+      sec.items.map((item,ii)=>'<div class="editable-row" style="padding:6px 1.25rem"><input value="'+item.n+'" placeholder="Exercise" oninput="saveGymItem(\''+key+'\','+si+','+ii+',\'n\',this.value)" style="flex:1"><input value="'+(item.s||'')+'" placeholder="Sets / reps / weight" oninput="saveGymItem(\''+key+'\','+si+','+ii+',\'s\',this.value)" style="width:170px;flex-shrink:0"><button class="btn btn-sm btn-danger" onclick="delGymItem(\''+key+'\','+si+','+ii+')">&#x2715;</button></div>').join('')+
+      '<div style="display:flex;gap:8px;padding:6px 1.25rem 10px"><input id="gnx-'+key+'-'+si+'" placeholder="Add exercise..." style="flex:1"><input id="gns-'+key+'-'+si+'" placeholder="Sets/reps..." style="width:170px;flex-shrink:0"><button class="btn btn-sm btn-primary" onclick="addGymItem(\''+key+'\','+si+')">Add</button></div>'
+    ).join('');
+  } else {
+    body+='<div style="padding:.75rem 1.25rem">'+g.secs.map(sec=>'<div class="gym-section">'+sec.t+'</div>'+sec.items.map(item=>'<div class="gym-row"><div style="font-size:13px">'+item.n+'</div><div style="font-size:12px;color:var(--tx2);text-align:right">'+item.s+'</div><input class="gym-log" type="text" placeholder="kg" value="'+(saved[item.k]||'')+'" oninput="saveGymLog(\''+item.k+'\',this.value)"></div>').join('')).join('')+'</div>';
+  }
+  el.innerHTML=focusEq+'<div class="card" style="margin-bottom:1rem"><div class="ch">'+(editing?'<input value="'+g.title+'" oninput="saveGymMeta(\''+key+'\',\'title\',this.value)" style="font-family:\'Cormorant Garamond\',serif;font-size:1.1rem;color:var(--tx);border:none;background:transparent;outline:none;border-bottom:1px solid var(--pk2);flex:1;padding:2px 4px">':'<div class="ct">'+g.title+'</div>')+hdrBtns+'</div>'+body+'</div>';
+}
+function startGymEdit(key){const d=getData();d.gymEditMode=key;setData(d);renderGym(key);}
+function endGymEdit(key){const d=getData();delete d.gymEditMode;setData(d);renderGym(key);}
+
+
+// ── SCHEDULE EDITABLE ──
+function showDay(btn, key) {
+  document.querySelectorAll('#day-nav .btn').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
+  btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)';
+  currentSchDay = key;
+  renderSchedule(key);
+}
+function renderSchEditPanel(key) {
+  const d = getData();
+  const day = (d.customSch||{})[key] || SCHEDULE[key];
+  const el = document.getElementById('sch-edit-panel'); if (!el) return;
+  const opts = ['p-gym','p-work','p-study','p-social','p-free','p-prep'];
+  el.innerHTML = '<div class="card"><div class="ch"><div class="ct">Edit ' + day.label + '</div><button class="btn btn-sm btn-danger" onclick="resetSchDay(\''+key+'\')">Reset to default</button></div><div style="padding:1.25rem"><div class="field"><label>Day label</label><input value="'+day.label+'" oninput="saveSchLabel(\''+key+'\',this.value)"></div>' +
+    day.rows.map((r,i)=>'<div class="editable-row"><div style="display:flex;gap:6px;flex:1;flex-wrap:wrap"><input value="'+r.t+'" placeholder="Time" oninput="saveSchRow(\''+key+'\','+i+',\'t\',this.value)" style="width:90px;flex-shrink:0"><input value="'+r.l+'" placeholder="Label" oninput="saveSchRow(\''+key+'\','+i+',\'l\',this.value)" style="flex:1"><select oninput="saveSchRow(\''+key+'\','+i+',\'p\',this.value)" style="width:100px;flex-shrink:0">'+opts.map(p=>'<option'+(r.p===p?' selected':'')+'>'+p+'</option>').join('')+'</select><input value="'+(r.s||'')+'" placeholder="Sub-label" oninput="saveSchRow(\''+key+'\','+i+',\'s\',this.value)"></div><button class="btn btn-sm btn-danger" onclick="delSchRow(\''+key+'\','+i+')">&#x2715;</button></div>').join('') +
+    '<div class="field-row" style="margin-top:10px"><div class="field"><input id="sch-t" placeholder="Time"></div><div class="field"><input id="sch-l" placeholder="Label"></div><div class="field" style="max-width:100px"><select id="sch-p">'+opts.map(p=>'<option value="'+p+'">'+p+'</option>').join('')+'</select></div><button class="btn btn-primary" onclick="addSchRow(\''+key+'\')">Add row</button></div></div></div>';
+}
+function getOrInitSch(key) { const d=getData(); if(!d.customSch)d.customSch={}; if(!d.customSch[key])d.customSch[key]=JSON.parse(JSON.stringify(SCHEDULE[key])); return d; }
+function saveSchLabel(key,val){ const d=getOrInitSch(key); d.customSch[key].label=val; setData(d); }
+function saveSchRow(key,i,field,val){ const d=getOrInitSch(key); d.customSch[key].rows[i][field]=val; setData(d); }
+function delSchRow(key,i){ const d=getOrInitSch(key); d.customSch[key].rows.splice(i,1); setData(d); renderSchedule(key); }
+function addSchRow(key){ const d=getOrInitSch(key); d.customSch[key].rows.push({t:'9:00am',l:'New slot',p:'p-free',s:''}); setData(d); renderSchedule(key); }
+function resetSchDay(key){ if(!confirm('Reset to default?'))return; const d=getData(); if(d.customSch)delete d.customSch[key]; delete d.schEditMode; setData(d); renderSchedule(key); }
+
+// ── GYM EDITABLE ──
+function showGym(btn, key) {
+  document.querySelectorAll('#gym-nav .btn').forEach(b=>{b.style.background='';b.style.color='';b.style.borderColor='';});
+  btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)';
+  currentGymDay=key; renderGym(key);
+}
+function renderGymEditPanel(key) {
+  const el=document.getElementById('gym-edit-panel'); if(!el)return;
+  const d=getData(); const g=(d.customGym&&d.customGym[key])||JSON.parse(JSON.stringify(GYM[key]));
+  el.innerHTML='<div class="card" style="margin-bottom:1rem"><div class="ch"><div class="ct">Edit this day</div><button class="btn btn-sm btn-danger" onclick="resetGymDay(\''+key+'\')">Reset to default</button></div><div style="padding:1.25rem"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem">'+
+    '<div class="field"><label>Title</label><input value="'+g.title+'" oninput="saveGymMeta(\''+key+'\',\'title\',this.value)"></div>'+
+    '<div class="field"><label>Focus</label><input value="'+g.focus+'" oninput="saveGymMeta(\''+key+'\',\'focus\',this.value)"></div>'+
+    '<div class="field"><label>Duration</label><input value="'+g.time+'" oninput="saveGymMeta(\''+key+'\',\'time\',this.value)"></div>'+
+    '<div class="field"><label>Equipment</label><input value="'+g.eq+'" oninput="saveGymMeta(\''+key+'\',\'eq\',this.value)"></div></div>'+
+    g.secs.map((sec,si)=>'<div class="gym-section">'+sec.t+'</div>'+
+      sec.items.map((item,ii)=>'<div class="editable-row"><input value="'+item.n+'" placeholder="Exercise" oninput="saveGymItem(\''+key+'\','+si+','+ii+',\'n\',this.value)" style="flex:1"><input value="'+(item.s||'')+'" placeholder="Sets/reps/weight" oninput="saveGymItem(\''+key+'\','+si+','+ii+',\'s\',this.value)" style="width:180px;flex-shrink:0"><button class="btn btn-sm btn-danger" onclick="delGymItem(\''+key+'\','+si+','+ii+')">&#x2715;</button></div>').join('')+
+      '<div class="field-row" style="margin-top:6px"><div class="field"><input id="gnx-'+key+'-'+si+'" placeholder="Add exercise..."></div><div class="field" style="max-width:180px"><input id="gns-'+key+'-'+si+'" placeholder="Sets/reps..."></div><button class="btn btn-sm btn-primary" onclick="addGymItem(\''+key+'\','+si+')">Add</button></div>'
+    ).join('')+'</div></div>';
+}
+function getOrInitGym(key){ const d=getData(); if(!d.customGym)d.customGym={}; if(!d.customGym[key])d.customGym[key]=JSON.parse(JSON.stringify(GYM[key])); return d; }
+function saveGymMeta(key,field,val){ const d=getOrInitGym(key); d.customGym[key][field]=val; setData(d); renderGym(key); }
+function saveGymItem(key,si,ii,field,val){ const d=getOrInitGym(key); d.customGym[key].secs[si].items[ii][field]=val; setData(d); renderGym(key); }
+function delGymItem(key,si,ii){ const d=getOrInitGym(key); d.customGym[key].secs[si].items.splice(ii,1); setData(d); renderGym(key); renderGymEditPanel(key); }
+function addGymItem(key,si){ const n=document.getElementById('gnx-'+key+'-'+si)?.value.trim(); if(!n)return; const d=getOrInitGym(key); d.customGym[key].secs[si].items.push({n,s:document.getElementById('gns-'+key+'-'+si)?.value||'',k:key+'c'+Date.now()}); setData(d); renderGym(key); renderGymEditPanel(key); document.getElementById('gnx-'+key+'-'+si).value=''; document.getElementById('gns-'+key+'-'+si).value=''; }
+function resetGymDay(key){ if(!confirm('Reset this day to the default routine?'))return; const d=getData(); if(d.customGym)delete d.customGym[key]; setData(d); renderGym(key); renderGymEditPanel(key); }
+
+// ── SKINCARE EDITABLE ──
+function toggleSkinEdit(period){ const panel=document.getElementById(period+'-edit-panel'), btn=document.getElementById(period+'-edit-btn'); const open=panel.style.display!=='none'; panel.style.display=open?'none':'block'; btn.classList.toggle('on',!open); if(!open)renderSkinEditPanel(period); }
+function renderSkinEditPanel(period){ const d=getData(); const steps=period==='am'?(d.skinSteps_am||AM_STEPS):(d.skinSteps_pm||PM_STEPS); const el=document.getElementById(period+'-step-list'); if(!el)return; el.innerHTML=steps.map((s,i)=>'<div class="editable-row"><input value="'+s+'" oninput="saveSkinStep(\''+period+'\','+i+',this.value)" style="flex:1"><button class="btn btn-sm btn-danger" onclick="delSkinStep(\''+period+'\','+i+')">&#x2715;</button></div>').join(''); }
+function saveSkinStep(period,i,val){ const d=getData(),key='skinSteps_'+period; if(!d[key])d[key]=period==='am'?[...AM_STEPS]:[...PM_STEPS]; d[key][i]=val; setData(d); renderRoutines(); }
+function delSkinStep(period,i){ const d=getData(),key='skinSteps_'+period; if(!d[key])d[key]=period==='am'?[...AM_STEPS]:[...PM_STEPS]; d[key].splice(i,1); setData(d); renderRoutines(); renderSkinEditPanel(period); }
+function addSkinStep(period){ const inp=document.getElementById(period+'-new-step'); if(!inp||!inp.value.trim())return; const d=getData(),key='skinSteps_'+period; if(!d[key])d[key]=period==='am'?[...AM_STEPS]:[...PM_STEPS]; d[key].push(inp.value.trim()); setData(d); renderRoutines(); renderSkinEditPanel(period); inp.value=''; }
+
+// ── SKINCARE renderRoutines override ──
+function renderRoutines() {
+  const d=getData();
+  const amSteps=d.skinSteps_am||AM_STEPS;
+  const pmSteps=d.skinSteps_pm||PM_STEPS;
+  const amEl=document.getElementById('am-routine'); if(amEl) amEl.innerHTML=amSteps.map((s,i)=>'<div class="sk-row"><div class="sk-num">'+(i+1)+'</div><div class="sk-name">'+s+'</div><input class="sk-prod" type="text" placeholder="product" value="'+((d.skinAM&&d.skinAM[i])||'')+'" oninput="saveSkin(\'AM\','+i+',this.value)"></div>').join('');
+  const pmEl=document.getElementById('pm-routine'); if(pmEl) pmEl.innerHTML=pmSteps.map((s,i)=>'<div class="sk-row"><div class="sk-num">'+(i+1)+'</div><div class="sk-name">'+s+'</div><input class="sk-prod" type="text" placeholder="product" value="'+((d.skinPM&&d.skinPM[i])||'')+'" oninput="saveSkin(\'PM\','+i+',this.value)"></div>').join('');
+}
+
+// ── MEALS EDITABLE ──
+const DEF_GYM_MEALS=[{time:'4:15am pre-gym',name:'Banana + rice cake with almond butter',desc:'~25g carbs · ~5g protein'},{time:'6:15am post-gym',name:'Scrambled eggs + sourdough + avocado',desc:'~35g protein'},{time:'Lunch',name:'Batch chicken rice bowl',desc:'Chicken · rice · roasted veg · soy-sesame · ~40g protein'},{time:'Arvo snack',name:'Boiled eggs or edamame',desc:'~12g protein'},{time:'Dinner',name:'Salmon + sweet potato + broccolini',desc:'~38g protein'},{time:'Evening (optional)',name:'Coconut yoghurt + berries',desc:'Dairy free'}];
+const DEF_REST_MEALS=[{time:'Breakfast',name:'Tofu scramble + toast',desc:'Silken/firm tofu · turmeric · nutritional yeast · spinach'},{time:'Lunch',name:'Lentil soup or noodle bowl',desc:'Lighter carbs on rest days'},{time:'Dinner',name:'Stir-fry tofu or fish + rice',desc:'Simple, keep it lighter'}];
+function renderMeals(){
+  const d=getData();
+  const gm=d.gymMeals||DEF_GYM_MEALS, rm=d.restMeals||DEF_REST_MEALS;
+  const gv=document.getElementById('gym-meals-view'); if(gv) gv.innerHTML=gm.map(m=>'<div style="padding:10px 1.25rem;border-bottom:1px solid var(--bd2)"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--pk);margin-bottom:2px">'+m.time+'</div><div style="font-size:13px;font-weight:500">'+m.name+'</div>'+(m.desc?'<div style="font-size:12px;color:var(--tx2)">'+m.desc+'</div>':'')+'</div>').join('');
+  const rv=document.getElementById('rest-meals-view'); if(rv) rv.innerHTML=rm.map(m=>'<div style="padding:10px 1.25rem;border-bottom:1px solid var(--bd2)"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:2px">'+m.time+'</div><div style="font-size:13px;font-weight:500">'+m.name+'</div>'+(m.desc?'<div style="font-size:12px;color:var(--tx2)">'+m.desc+'</div>':'')+'</div>').join('');
+}
+function toggleMealEdit(type){ const ed=document.getElementById(type+'-meals-edit'), btn=document.getElementById(type+'-meal-btn'); const open=ed.style.display!=='none'; ed.style.display=open?'none':'block'; btn.classList.toggle('on',!open); if(!open)renderMealEditList(type); }
+function renderMealEditList(type){ const d=getData(); const meals=type==='gym'?(d.gymMeals||DEF_GYM_MEALS):(d.restMeals||DEF_REST_MEALS); const el=document.getElementById(type+'-meal-list'); if(!el)return; el.innerHTML=meals.map((m,i)=>'<div class="editable-row"><div style="flex:1"><div style="font-size:11px;color:var(--tx3)">'+m.time+'</div><input value="'+m.name+'" oninput="saveMealItem(\''+type+'\','+i+',\'name\',this.value)" style="font-weight:500"></div><button class="btn btn-sm btn-danger" onclick="delMealItem(\''+type+'\','+i+')">&#x2715;</button></div>').join(''); }
+function saveMealItem(type,i,field,val){ const d=getData(),key=type+'Meals'; if(!d[key])d[key]=JSON.parse(JSON.stringify(type==='gym'?DEF_GYM_MEALS:DEF_REST_MEALS)); d[key][i][field]=val; setData(d); renderMeals(); }
+function delMealItem(type,i){ const d=getData(),key=type+'Meals'; if(!d[key])d[key]=JSON.parse(JSON.stringify(type==='gym'?DEF_GYM_MEALS:DEF_REST_MEALS)); d[key].splice(i,1); setData(d); renderMeals(); renderMealEditList(type); }
+function addMealItem(type){ const tEl=document.getElementById(type+'-meal-time'), nEl=document.getElementById(type+'-meal-name'), dEl=document.getElementById(type+'-meal-desc'); if(!nEl||!nEl.value.trim())return; const d=getData(),key=type+'Meals'; if(!d[key])d[key]=JSON.parse(JSON.stringify(type==='gym'?DEF_GYM_MEALS:DEF_REST_MEALS)); d[key].push({time:tEl?tEl.value:'',name:nEl.value.trim(),desc:dEl?dEl.value:''}); setData(d); renderMeals(); renderMealEditList(type); if(tEl)tEl.value=''; nEl.value=''; if(dEl)dEl.value=''; }
+
+// ── CAREER JOURNAL ──
+function toggleNotice(){ const p=document.getElementById('notice-panel'), a=document.getElementById('notice-arrow'), t=document.getElementById('notice-tag'); const open=p.style.display!=='none'; p.style.display=open?'none':'block'; if(a)a.textContent=open?'▸':'▾'; if(t)t.textContent=open?'hidden':'visible'; if(!open)calcCD(); }
+function addJournalEntry(){ const txt=document.getElementById('journal-new').value.trim(); if(!txt)return; const d=getData(); if(!d.journalEntries)d.journalEntries=[]; d.journalEntries.unshift({date:new Date().toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'}),text:txt}); setData(d); document.getElementById('journal-new').value=''; renderJournal(); showToast('Entry saved!'); }
+function renderJournal(){ const d=getData(), entries=d.journalEntries||[]; const el=document.getElementById('journal-list'); if(!el)return; if(!entries.length){el.innerHTML='<div class="note-box">No entries yet. Write your first one above.</div>';return;} el.innerHTML=entries.map((e,i)=>'<div class="journal-entry"><div class="journal-date">'+e.date+'</div><div class="journal-body">'+e.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div><button class="btn btn-sm btn-danger" style="margin-top:8px" onclick="delJournal('+i+')">Delete</button></div>').join(''); }
+function delJournal(i){ const d=getData(); d.journalEntries.splice(i,1); setData(d); renderJournal(); }
+
+// ── UNI COURSES ──
+const ASGN_TAG2={'Not started':'tn','In progress':'tgold','Submitted':'tbl','Graded':'tgrn'};
+function addCourse(){ const code=document.getElementById('course-code')?.value.trim(); if(!code)return; const d=getData(); if(!d.courses)d.courses=[]; d.courses.push({code,name:document.getElementById('course-name')?.value||'',start:document.getElementById('course-start')?.value||'',end:document.getElementById('course-end')?.value||'',notes:document.getElementById('course-notes')?.value||'',open:true,isFinance:/fin|fnce|acc/i.test(code)}); setData(d); renderCourseList(); ['course-code','course-name','course-start','course-end','course-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';}); showToast('Course added!'); }
+function renderCourseList(){
+  const d=getData(), courses=d.courses||[];
+  const el=document.getElementById('course-list'); if(!el)return;
+  if(!courses.length){el.innerHTML='<div class="note-box">No courses yet. Add one above.</div>';return;}
+  el.innerHTML=courses.map((c,ci)=>{
+    const asgns=(d.assignments||[]).filter(a=>a.course===c.code);
+    const graded=asgns.filter(a=>a.status==='Graded'&&a.weight&&a.grade);
+    let tw=0,ws=0; graded.forEach(a=>{const w=parseFloat(a.weight)||0,g=parseFloat(a.grade)||0;tw+=w;ws+=w*g/100;});
+    const avg=tw>0?((ws/tw)*100).toFixed(1)+'%':'—';
+    const pending=asgns.filter(a=>a.status!=='Graded'&&a.status!=='Submitted').length;
+    const isFinance=c.isFinance||/fin|fnce|acc/i.test(c.code);
+    const formulas=d.formulas||DEF_FORMULAS;
+    const formulaSection=isFinance?renderFormulaSection(formulas):'';
+    return '<div class="course-card"><div class="course-hdr" onclick="toggleCourse('+ci+')"><div><div class="course-code">'+c.code+'</div><div class="course-name">'+(c.name?c.name+' · ':'')+pending+' pending · avg '+avg+(c.start?' · '+c.start+' → '+(c.end||'?'):'')+'</div></div><div style="display:flex;gap:8px;align-items:center"><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delCourse('+ci+')">Remove</button><span style="font-size:14px;color:var(--tx3)">'+(c.open?'▾':'▸')+'</span></div></div>'+
+    '<div class="course-body'+(c.open?' open':'')+'">'+
+    (c.notes?'<div class="note-box">'+c.notes+'</div>':'')+
+    '<div class="g2" style="margin-bottom:1rem"><div><div class="section-label">Add task for '+c.code+'</div>'+
+    '<div class="field"><label>Task</label><input type="text" id="ct-'+ci+'" placeholder="Essay, exam, quiz..."></div>'+
+    '<div class="field-row"><div class="field"><label>Due date</label><input type="date" id="cd-'+ci+'"></div><div class="field" style="max-width:90px"><label>Weight %</label><input type="number" id="cw-'+ci+'" placeholder="%"></div></div>'+
+    '<div class="field-row"><div class="field"><label>Status</label><select id="cs-'+ci+'"><option>Not started</option><option>In progress</option><option>Submitted</option><option>Graded</option></select></div><div class="field" style="max-width:100px"><label>Grade %</label><input type="number" id="cg-'+ci+'" placeholder="—"></div></div>'+
+    '<button class="btn btn-primary" onclick="addCourseTask('+ci+',\''+c.code+'\')">Add task</button></div>'+
+    '<div><div class="section-label">Grade tracker</div>'+
+    '<table class="dt"><thead><tr><th>Task</th><th>Weight</th><th>Grade</th><th>Weighted</th></tr></thead><tbody>'+
+    (graded.length?graded.map(a=>'<tr><td>'+a.task+'</td><td>'+a.weight+'%</td><td>'+a.grade+'%</td><td>'+(parseFloat(a.weight)*parseFloat(a.grade)/100).toFixed(1)+'</td></tr>').join(''):'<tr><td colspan="4" style="color:var(--tx3);padding:10px">No graded tasks yet.</td></tr>')+
+    '</tbody><tfoot><tr><td colspan="3" style="padding:8px 12px;font-size:12px;color:var(--tx2)">Running average</td><td style="padding:8px 12px;font-weight:600">'+avg+'</td></tr></tfoot></table></div></div>'+
+    '<div class="section-label">Tasks</div><div style="border:1px solid var(--bd);border-radius:var(--r);overflow:hidden">'+
+    (asgns.length?asgns.map((a)=>{const ri=(d.assignments||[]).indexOf(a);return '<div class="asgn-row"><div><div style="font-size:13px;font-weight:500">'+a.task+'</div><div style="font-size:12px;color:var(--tx3)">'+(a.weight?a.weight+'%':'')+' '+(a.grade?'· '+a.grade+'%':'')+'</div></div><div style="font-size:12px;color:var(--tx2)">'+(a.due||'—')+'</div><span class="tag '+(ASGN_TAG2[a.status]||'tn')+'">'+a.status+'</span><button class="btn btn-sm btn-danger" onclick="delCourseTask('+ri+')">&#x2715;</button></div>';}).join(''):'<div style="padding:1rem 1.25rem;font-size:13px;color:var(--tx2)">No tasks yet.</div>')+
+    '</div>'+formulaSection+'</div></div>';
+  }).join('');
+}
+function renderFormulaSection(formulas){
+  const cats=[...new Set(formulas.map(f=>f.cat))];
+  let html='<div style="border-top:2px solid var(--bd);margin-top:1.5rem;padding-top:1.5rem"><div class="ph" style="font-size:1.4rem">Finance <em>Formula Bank</em></div><div class="ps-sub" style="margin-bottom:1rem;font-size:12px">Your FNCE2000 quick reference — all in one place.</div>';
+  html+='<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem" id="f-filter-btns"><button class="btn btn-sm btn-primary" onclick="filterFormulas(\'\',this)">All</button><button class="btn btn-sm" onclick="filterFormulas(\'Time Value of Money\',this)">TVM</button><button class="btn btn-sm" onclick="filterFormulas(\'Bond Valuation\',this)">Bonds</button><button class="btn btn-sm" onclick="filterFormulas(\'Share Valuation\',this)">Shares</button><button class="btn btn-sm" onclick="filterFormulas(\'NPV / IRR\',this)">NPV/IRR</button><button class="btn btn-sm" onclick="filterFormulas(\'EAR / APR\',this)">EAR/APR</button><button class="btn btn-sm" onclick="filterFormulas(\'Risk and Return\',this)">Risk</button></div>';
+  html+='<div class="g2" style="margin-bottom:1rem"><div><div class="section-label">Add formula</div><div class="card"><div style="padding:1.25rem"><div class="field"><label>Name</label><input type="text" id="f-name" placeholder="e.g. Present Value"></div><div class="field"><label>Equation</label><input type="text" id="f-eq" placeholder="e.g. PV = FV / (1 + r)^n"></div><div class="field"><label>Category</label><select id="f-cat"><option>Time Value of Money</option><option>Bond Valuation</option><option>Share Valuation</option><option>NPV / IRR</option><option>EAR / APR</option><option>Risk and Return</option><option>Other</option></select></div><div class="field"><label>Notes</label><textarea id="f-notes" placeholder="When to apply, key variables..."></textarea></div><button class="btn btn-primary" style="width:100%" onclick="addFormula()">Add formula</button></div></div></div><div><div class="section-label">Exam notes</div><div class="card"><textarea id="formula-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:\'Inter\',sans-serif;font-size:13px" placeholder="Exam tips, tricky concepts..." oninput="saveAll()"></textarea></div></div></div>';
+  html+='<div id="formula-list"></div></div>';
+  return html;
+}
+function toggleCourse(i){ const d=getData(); if(!d.courses)return; d.courses[i].open=!d.courses[i].open; setData(d); renderCourseList(); }
+function delCourse(i){ const d=getData(); d.courses.splice(i,1); setData(d); renderCourseList(); }
+function addCourseTask(ci,code){ const t=document.getElementById('ct-'+ci)?.value.trim(); if(!t)return; const d=getData(); if(!d.assignments)d.assignments=[]; d.assignments.push({course:code,task:t,due:document.getElementById('cd-'+ci)?.value||'',weight:document.getElementById('cw-'+ci)?.value||'',status:document.getElementById('cs-'+ci)?.value||'Not started',grade:document.getElementById('cg-'+ci)?.value||''}); setData(d); renderCourseList(); showToast('Task added!'); ['ct-','cd-','cw-','cg-'].forEach(p=>{const el=document.getElementById(p+ci);if(el)el.value='';}); const st=document.getElementById('cs-'+ci);if(st)st.value='Not started'; }
+function delCourseTask(i){ const d=getData(); d.assignments.splice(i,1); setData(d); renderCourseList(); }
+
+
+
+function startEditQuote(){
+  const el=document.getElementById('dash-affirmation');
+  if(!el)return;
+  const isEditing=el.contentEditable==='true';
+  if(isEditing){
+    el.contentEditable='false';
+    el.style.cursor='pointer';
+    const d=getData();d.customQuote=el.textContent.trim();setData(d);
+    showToast('Quote saved!');
+  } else {
+    el.contentEditable='true';
+    el.style.cursor='text';
+    el.focus();
+    const range=document.createRange();range.selectNodeContents(el);
+    const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+  }
+}
+
+// ── DASHBOARD QUICK MOOD LOG ──
+function logDashMood(){
+  if(!curMood){showToast('Tap a number first');return;}
+  const d=getData();if(!d.moods)d.moods=[];
+  const note=document.getElementById('dash-mood-note')?.value||'';
+  d.moods.push({date:new Date().toISOString().split('T')[0],mood:curMood,energy:0,sleep:'',gym:'',notes:note});
+  setData(d);
+  showToast('Mood logged!');
+  document.getElementById('dash-mood-note').value='';
+  curMood=0;
+  document.querySelectorAll('#dash-mood-row .btn').forEach(b=>b.style.background='');
+}
+
+// ── TOMORROW PREVIEW ──
+function renderTomorrow(){
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);
+  const key=['sun','mon','tue','wed','thu','fri','sat'][tomorrow.getDay()];
+  const d=getData();
+  const day=(d.customSch&&d.customSch[key])||SCHEDULE[key];
+  const tag=document.getElementById('dash-tomorrow-tag');
+  const body=document.getElementById('dash-tomorrow-body');
+  if(tag)tag.textContent=days[tomorrow.getDay()];
+  if(!body)return;
+  if(!day||!day.rows||!day.rows.length){body.innerHTML='<div style="color:var(--tx3);font-size:13px;">Rest day</div>';return;}
+  body.innerHTML=day.rows.slice(0,4).map(r=>
+    '<div class="sch-row"><div class="sch-time-col">'+r.t+'</div><div class="sch-plan-col"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="sch-label">'+r.l+'</span><span class="pill '+r.p+'">'+r.p.replace('p-','')+'</span></div></div></div>'
+  ).join('')+(day.rows.length>4?'<div style="padding:6px 1.25rem;font-size:11px;color:var(--tx3)">+'+( day.rows.length-4)+' more slots</div>':'');
+}
+
+// ── PROTECTED WINDOWS ──
+const DEF_PW=['Tuesday 4:00–6:30pm','Wednesday evening — study only','Friday night','Saturday afternoon','All day Sunday'];
+function renderPWList(){
+  const d=getData(),pws=d.protectedWindows||DEF_PW;
+  const el=document.getElementById('pw-list');if(!el)return;
+  el.innerHTML=pws.map((w,i)=>'<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 1.25rem;border-bottom:1px solid var(--bd2)"><span style="font-size:13px;">'+w+'</span><button class="btn btn-sm btn-danger" id="pw-del-'+i+'" style="display:none" onclick="delPW('+i+')">&#x2715;</button></div>').join('');
+  const editing=document.getElementById('pw-edit-panel')?.style.display!=='none';
+  if(editing)el.querySelectorAll('[id^=pw-del-]').forEach(b=>b.style.display='');
+}
+function togglePWEdit(){
+  const panel=document.getElementById('pw-edit-panel'),btn=document.getElementById('pw-edit-btn');
+  const open=panel.style.display!=='none';
+  panel.style.display=open?'none':'block';
+  btn.classList.toggle('on',!open);
+  renderPWList();
+}
+function addPW(){
+  const inp=document.getElementById('pw-new');if(!inp||!inp.value.trim())return;
+  const d=getData();if(!d.protectedWindows)d.protectedWindows=[...DEF_PW];
+  d.protectedWindows.push(inp.value.trim());setData(d);renderPWList();inp.value='';
+}
+function delPW(i){
+  const d=getData();if(!d.protectedWindows)d.protectedWindows=[...DEF_PW];
+  d.protectedWindows.splice(i,1);setData(d);renderPWList();
+}
+
+// ── CALENDAR ──
+
+function calGoMonth(m){calDate=new Date(calDate.getFullYear(),m,1);calView='month';document.querySelectorAll('.btn[onclick^=setCalView]').forEach((b,i)=>{b.style.background=i===0?'var(--pk)':'';b.style.color=i===0?'#fff':'';});renderCal();}
+function setCalView(v,btn){
+  calView=v;calDate=new Date();
+  document.querySelectorAll('.btn[onclick^=setCalView]').forEach(b=>{b.style.background='';b.style.color='';b.style.borderColor='';});
+  btn.style.background='var(--pk)';btn.style.color='#fff';btn.style.borderColor='var(--pk)';
+  renderCal();
+}
+function calPrev(){
+  if(calView==='month')calDate.setMonth(calDate.getMonth()-1);
+  else if(calView==='week')calDate.setDate(calDate.getDate()-7);
+  else if(calView==='day')calDate.setDate(calDate.getDate()-1);
+  else calDate.setFullYear(calDate.getFullYear()-1);
+  renderCal();
+}
+function calNext(){
+  if(calView==='month')calDate.setMonth(calDate.getMonth()+1);
+  else if(calView==='week')calDate.setDate(calDate.getDate()+7);
+  else if(calView==='day')calDate.setDate(calDate.getDate()+1);
+  else calDate.setFullYear(calDate.getFullYear()+1);
+  renderCal();
+}
+function renderCal(){
+  const el=document.getElementById('cal-grid');const lbl=document.getElementById('cal-label');
+  if(!el)return;
+  const d=getData(),events=d.socialEvents||[];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today=new Date();today.setHours(0,0,0,0);
+
+  function eventsOn(dateStr){return events.filter(e=>e.date===dateStr);}
+  function fmtDate(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
+  function dayCell(dt,mini){
+    const ds=fmtDate(dt);const evs=eventsOn(ds);
+    const isToday=dt.getTime()===today.getTime();
+    const dot=evs.length?'<div style="display:flex;gap:3px;flex-wrap:wrap;margin-top:3px">'+evs.map(e=>'<div style="font-size:10px;background:var(--pkl);color:var(--pk);padding:1px 5px;border-radius:99px;white-space:nowrap">'+e.who+(e.what?' · '+e.what:'')+'</div>').join('')+'</div>':'';
+    return '<div style="border:1px solid var(--bd2);border-radius:var(--rsm);padding:'+(mini?'4px 6px':'8px 10px')+';min-height:'+(mini?'60px':'80px')+';background:'+(isToday?'var(--pkl)':'var(--sf)')+'">'+'<div style="font-size:'+(mini?'11':'13')+'px;font-weight:'+(isToday?'600':'400')+';color:'+(isToday?'var(--pk)':'var(--tx)')+'">'+dt.getDate()+'</div>'+dot+'</div>';
+  }
+
+  if(calView==='month'){
+    if(lbl)lbl.textContent=months[calDate.getMonth()]+' '+calDate.getFullYear();
+    const first=new Date(calDate.getFullYear(),calDate.getMonth(),1);
+    const last=new Date(calDate.getFullYear(),calDate.getMonth()+1,0);
+    let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:1rem">';
+    dayNames.forEach(d=>html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);text-align:center;padding:4px">'+d+'</div>');
+    for(let i=0;i<first.getDay();i++)html+='<div></div>';
+    for(let i=1;i<=last.getDate();i++){const dt=new Date(calDate.getFullYear(),calDate.getMonth(),i);html+=dayCell(dt,true);}
+    html+='</div>';
+    el.innerHTML=html;
+  } else if(calView==='week'){
+    const weekStart=new Date(calDate);weekStart.setDate(calDate.getDate()-calDate.getDay());
+    if(lbl)lbl.textContent='Week of '+weekStart.getDate()+' '+months[weekStart.getMonth()]+' '+weekStart.getFullYear();
+    let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:1rem">';
+    for(let i=0;i<7;i++){
+      const dt=new Date(weekStart);dt.setDate(weekStart.getDate()+i);
+      html+='<div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);text-align:center;margin-bottom:4px">'+dayNames[i]+'</div>'+dayCell(dt,false)+'</div>';
+    }
+    html+='</div>';
+    el.innerHTML=html;
+  } else if(calView==='day'){
+    if(lbl)lbl.textContent=calDate.getDate()+' '+months[calDate.getMonth()]+' '+calDate.getFullYear();
+    const ds=fmtDate(calDate);
+    const evs=eventsOn(ds);
+    const key=['sun','mon','tue','wed','thu','fri','sat'][calDate.getDay()];
+    const dd=getData();const dayRows=(dd.customSch&&dd.customSch[key])||SCHEDULE[key];
+    let html='<div style="padding:1rem"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px">Schedule</div>';
+    html+=dayRows.rows.map(r=>'<div class="sch-row"><div class="sch-time-col">'+r.t+'</div><div class="sch-plan-col"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span class="sch-label">'+r.l+'</span><span class="pill '+r.p+'">'+r.p.replace('p-','')+'</span></div></div></div>').join('');
+    if(evs.length){html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin:12px 0 8px">Plans</div>';html+=evs.map(e=>'<div class="note-box">'+e.who+(e.what?' — '+e.what:'')+'</div>').join('');}
+    html+='</div>';
+    el.innerHTML=html;
+  } else {
+    if(lbl)lbl.textContent=calDate.getFullYear().toString();
+    let html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:1rem">';
+    for(let m=0;m<12;m++){
+      const evCount=events.filter(e=>e.date&&e.date.startsWith(calDate.getFullYear()+'-'+String(m+1).padStart(2,'0'))).length;
+      html+='<div style="border:1px solid var(--bd2);border-radius:var(--rsm);padding:12px;cursor:pointer;background:var(--sf)" data-month="'+m+'" onclick="calGoMonth(parseInt(this.dataset.month))">'+
+        '<div style="font-size:13px;font-weight:500;color:var(--tx);margin-bottom:4px">'+months[m]+'</div>'+
+        (evCount?'<div style="font-size:11px;color:var(--pk)">'+evCount+' event'+(evCount>1?'s':'')+'</div>':'<div style="font-size:11px;color:var(--tx3)">No events</div>')+
+        '</div>';
+    }
+    html+='</div>';
+    el.innerHTML=html;
+  }
+}
+
+
+let savingsChart = null, nwChart = null;
+
+function renderSavingsChart() {
+  const ctx = document.getElementById('savingsChart')?.getContext('2d');
+  if (!ctx) return;
+  const rows = Array.from(document.querySelectorAll('.sav-row'));
+  if (!rows.length) { ctx.canvas.style.display='none'; return; }
+  ctx.canvas.style.display='';
+  const labels = rows.map(r => r.querySelector('[contenteditable]')?.textContent || 'Goal');
+  const saved   = rows.map(r => parseFloat(r.querySelector('.sav-s')?.value) || 0);
+  const targets = rows.map(r => parseFloat(r.querySelector('.sav-t')?.value) || 0);
+  if (savingsChart) savingsChart.destroy();
+  savingsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Target',
+          data: targets,
+          backgroundColor: 'rgba(232,160,180,0.35)',
+          borderColor: 'rgba(232,160,180,0.8)',
+          borderWidth: 1,
+          borderRadius: 4,
+          borderSkipped: false,
+          barPercentage: 0.7,
+          categoryPercentage: 0.85
+        },
+        {
+          label: 'Saved',
+          data: saved,
+          backgroundColor: 'var(--pk)',
+          borderRadius: 4,
+          borderSkipped: false,
+          barPercentage: 0.45,
+          categoryPercentage: 0.85
+        }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 10 }, boxWidth: 10, padding: 8 } },
+        tooltip: { callbacks: { label: c => ' ' + fmt(c.raw) } }
+      },
+      scales: {
+        x: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k', font: { size: 10 } }, grid: { color: 'rgba(0,0,0,0.04)' } },
+        y: { ticks: { font: { size: 10 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function getNWData() {
+  const d = getData();
+  return { assets: d.nwAssets || [], liabilities: d.nwLiabilities || [] };
+}
+
+function renderNWChart() {
+  const ctx = document.getElementById('nwChart')?.getContext('2d');
+  const legEl = document.getElementById('nw-legend');
+  const totalEl = document.getElementById('nw-total');
+  if (!ctx) return;
+  const { assets, liabilities } = getNWData();
+  const totalAssets = assets.reduce((s, a) => s + (parseFloat(a.value) || 0), 0);
+  const totalLiab   = liabilities.reduce((s, l) => s + (parseFloat(l.value) || 0), 0);
+  const nw = totalAssets - totalLiab;
+  if (totalEl) { totalEl.textContent = (nw < 0 ? '-' : '') + fmt(nw); totalEl.style.color = nw < 0 ? '#a0243a' : 'var(--tx)'; }
+  const labels = [...assets.map(a => a.name || 'Asset'), ...liabilities.map(l => l.name || 'Liability')];
+  const data   = [...assets.map(a => parseFloat(a.value) || 0), ...liabilities.map(l => parseFloat(l.value) || 0)];
+  const colours = [...assets.map((_,i) => PAL[i % PAL.length]), ...liabilities.map(() => '#e8a0b4')];
+  if (!data.length) { ctx.canvas.style.display = 'none'; if (legEl) legEl.innerHTML = '<div style="font-size:12px;color:var(--tx3)">Add assets and liabilities above.</div>'; return; }
+  ctx.canvas.style.display = '';
+  if (nwChart) nwChart.destroy();
+  nwChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colours, borderWidth: 0 }] },
+    options: { cutout: '60%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + fmt(c.raw) } } } }
+  });
+  if (legEl) legEl.innerHTML = labels.map((l, i) => '<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)"><span style="width:8px;height:8px;border-radius:50%;background:' + colours[i] + ';display:inline-block;flex-shrink:0"></span>' + l + '</div>').join('');
+}
+
+function toggleNWEdit() {
+  const panel = document.getElementById('nw-edit-panel');
+  const btn = document.getElementById('nw-edit-btn');
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  btn.classList.toggle('on', !open);
+  if (!open) renderNWEditRows();
+}
+
+function renderNWEditRows() {
+  const { assets, liabilities } = getNWData();
+  const renderRows = (items, type, containerId) => {
+    const el = document.getElementById(containerId); if (!el) return;
+    el.innerHTML = items.map((item, i) => {
+      const n = (item.name||'').replace(/"/g,'&quot;');
+      const v = item.value||'';
+      return '<div class="editable-row">' +
+        '<input value="' + n + '" placeholder="Name e.g. Savings account" oninput="saveNWItem(\'' + type + '\',' + i + ',\'name\',this.value)" style="flex:1">' +
+        '<div style="display:flex;align-items:center;gap:3px;flex-shrink:0"><span style="font-size:11px;color:var(--tx3)">$</span>' +
+        '<input type="number" value="' + v + '" placeholder="0" oninput="saveNWItem(\'' + type + '\',' + i + ',\'value\',this.value)" style="width:100px;text-align:right"></div>' +
+        '<button class="btn btn-sm btn-danger" onclick="delNWItem(\'' + type + '\',' + i + ')">&#x2715;</button>' +
+        '</div>';
+    }).join('');
+  };
+  renderRows(assets, 'asset', 'nw-assets');
+  renderRows(liabilities, 'liability', 'nw-liabilities');
+}
+function addNWRow(type) {
+  const d = getData();
+  if (type === 'asset') { if (!d.nwAssets) d.nwAssets = []; d.nwAssets.push({ name: '', value: '' }); }
+  else { if (!d.nwLiabilities) d.nwLiabilities = []; d.nwLiabilities.push({ name: '', value: '' }); }
+  setData(d); renderNWEditRows(); renderNWChart();
+}
+
+function saveNWItem(type, i, field, val) {
+  const d = getData();
+  const key = type === 'asset' ? 'nwAssets' : 'nwLiabilities';
+  if (!d[key]) d[key] = [];
+  if (d[key][i]) d[key][i][field] = val;
+  setData(d); renderNWChart();
+}
+
+function delNWItem(type, i) {
+  const d = getData();
+  const key = type === 'asset' ? 'nwAssets' : 'nwLiabilities';
+  if (d[key]) d[key].splice(i, 1);
+  setData(d); renderNWEditRows(); renderNWChart();
+}
+
+
+function toggleExpenses() {
+  const panel = document.getElementById('expense-panel');
+  const arrow = document.getElementById('exp-toggle-arrow');
+  const open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  if (arrow) arrow.innerHTML = open ? '&#9658;' : '&#9660;';
+}
+
+function renderNWBreakdown() {
+  const el = document.getElementById('nw-breakdown-list'); if (!el) return;
+  const { assets, liabilities } = getNWData();
+  if (!assets.length && !liabilities.length) {
+    el.innerHTML = '<div style="font-size:13px;color:var(--tx3)">Add assets and liabilities using the Edit button.</div>';
+    return;
+  }
+  const totalA = assets.reduce((s,a) => s+(parseFloat(a.value)||0), 0);
+  const totalL = liabilities.reduce((s,l) => s+(parseFloat(l.value)||0), 0);
+  let html = '';
+  if (assets.length) {
+    html += '<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Assets</div>';
+    assets.forEach((a,i) => {
+      const v = parseFloat(a.value)||0;
+      const pct = totalA > 0 ? Math.round((v/totalA)*100) : 0;
+      html += '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+(a.name||'Asset')+'</span><span style="color:var(--tx3)">'+fmt(v)+' <span style="font-size:11px">('+pct+'%)</span></span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:'+PAL[i%PAL.length]+'"></div></div></div>';
+    });
+    html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);font-weight:500;border-top:1px solid var(--bd2);padding-top:6px;margin-bottom:14px"><span>Total assets</span><span>'+fmt(totalA)+'</span></div>';
+  }
+  if (liabilities.length) {
+    html += '<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Liabilities</div>';
+    liabilities.forEach((l,i) => {
+      const v = parseFloat(l.value)||0;
+      const pct = totalL > 0 ? Math.round((v/totalL)*100) : 0;
+      html += '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+(l.name||'Liability')+'</span><span style="color:#a0243a">'+fmt(v)+'</span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:#e8a0b4"></div></div></div>';
+    });
+    html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);font-weight:500;border-top:1px solid var(--bd2);padding-top:6px"><span>Total liabilities</span><span style="color:#a0243a">'+fmt(totalL)+'</span></div>';
+  }
+  el.innerHTML = html;
+}
+
+function saveAll() {
+  const d=getData();
+  const tfs={
+    'quick-notes':'quickNotes','skin-notes':'skinNotes','study-notes':'studyNotes',
+    'habit-notes':'habitNotes','handover-notes':'handoverNotes','social-notes':'socialNotes',
+    'meal-notes':'mealNotes','staples-txt':'staples','formula-notes':'formulaNotes',
+    'sem-notes':'semNotes','dash-mood-note':'dashMoodNote',
+    'career-role':'careerRole','career-company':'careerCompany',
+    'career-actual':'careerActual','career-good':'careerGood',
+    'career-next-role':'careerNextRole','career-longterm':'careerLongterm',
+    'career-skills':'careerSkills','career-challenges':'careerChallenges',
+    'career-priorities':'careerPriorities',
+  };
+  Object.entries(tfs).forEach(([id,key])=>{const el=document.getElementById(id);if(el)d[key]=el.value;});
+  const ss=document.getElementById('sem-start')?.value,se=document.getElementById('sem-end')?.value;
+  if(ss)d.semStart=ss;if(se)d.semEnd=se;
+  d.budgetPeriod=document.getElementById('period-start')?.value||'';
+  d.incomeRows=Array.from(document.querySelectorAll('.inc-row')).map(r=>({label:r.querySelector('[contenteditable]')?.textContent||'',value:r.querySelector('.inc-val')?.value||''}));
+  d.expenses=Array.from(document.querySelectorAll('.exp-row')).map(r=>({label:r.querySelector('[contenteditable]')?.textContent||'',budget:r.querySelector('.bud-val')?.value||'',spent:r.querySelector('.spt-val')?.value||''}));
+  d.savings=Array.from(document.querySelectorAll('.sav-row')).map(r=>({name:r.querySelector('[contenteditable]')?.textContent||'',contrib:r.querySelector('.sav-c')?.value||'',saved:r.querySelector('.sav-s')?.value||'',target:r.querySelector('.sav-t')?.value||''}));
+  setData(d);
+  if (driveReady) syncToDrive();
+}
+
+
+function loadData() {
+  const d=getData();
+  const tfs={
+    'quick-notes':'quickNotes','skin-notes':'skinNotes','study-notes':'studyNotes',
+    'habit-notes':'habitNotes','handover-notes':'handoverNotes','social-notes':'socialNotes',
+    'meal-notes':'mealNotes','staples-txt':'staples','formula-notes':'formulaNotes',
+    'sem-notes':'semNotes','dash-mood-note':'dashMoodNote',
+    'career-role':'careerRole','career-company':'careerCompany',
+    'career-actual':'careerActual','career-good':'careerGood',
+    'career-next-role':'careerNextRole','career-longterm':'careerLongterm',
+    'career-skills':'careerSkills','career-challenges':'careerChallenges',
+    'career-priorities':'careerPriorities',
+  };
+  Object.entries(tfs).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key])el.value=d[key];});
+  if(!d.staples){const st=document.getElementById('staples-txt');if(st)st.value=STAPLES_DEF;}
+  if(d.semStart){const el=document.getElementById('sem-start');if(el)el.value=d.semStart;}
+  if(d.semEnd){const el=document.getElementById('sem-end');if(el)el.value=d.semEnd;}
+  if(d.budgetPeriod){const el=document.getElementById('period-start');if(el)el.value=d.budgetPeriod;updatePeriod();}
+  else{const el=document.getElementById('period-start');if(el)el.value=new Date().toISOString().split('T')[0];updatePeriod();}
+  const ic=document.getElementById('income-rows');
+  if(ic){ic.innerHTML='';if(d.incomeRows&&d.incomeRows.length)d.incomeRows.forEach(r=>addIncomeRow(r.label,r.value));else{addIncomeRow('Primary salary (after tax)','');addIncomeRow('Other income','');}}
+  if(d.expenses&&d.expenses.length)d.expenses.forEach(e=>addExpenseRow(e.label,e.budget,e.spent));else DEF_EXP.forEach(e=>addExpenseRow(e));
+  if(d.savings&&d.savings.length)d.savings.forEach(s=>addSavingsRow(s.name,s.contrib,s.saved,s.target));else DEF_SAV.forEach(s=>addSavingsRow(s.n,'','',s.t));
+  if(d.prs)renderPRs(d.prs);
+  if(d.products)renderProducts(d.products);
+  if(d.habits)renderHabitRows(d.habits);else initHabits();
+  if(d.moods)renderMoodLog(d.moods);
+  if(d.measurements)renderMeas(d.measurements);
+  if(d.socialEvents)renderSocial(d.socialEvents);
+  if(d.wrapTasks)renderWrapList(d.wrapTasks);else{const dd=getData();dd.wrapTasks=WRAP_DEF.map(t=>({text:t,done:false}));setData(dd);renderWrapList(dd.wrapTasks);}
+  if(d.batchTasks)renderBatch(d.batchTasks);else{const dd=getData();dd.batchTasks=BATCH_DEF.map(t=>({text:t,done:false}));setData(dd);renderBatch(dd.batchTasks);}
+  if(d.grocery)renderGroc(d.grocery);else renderGroc([]);
+  renderRoutines();renderMeals();renderCourseList();
+  setTimeout(()=>renderFormulas(),100);
+  recalcBudget();refreshDashHabMini();refreshSnap();setTimeout(()=>{renderSavingsChart();renderNWChart();renderNWBreakdown();},50);
+  if(d.journalEntries)renderJournal();
+}
+
+window.addEventListener('beforeunload',saveAll);
+
+
+</script>
+</body>
+</html>
