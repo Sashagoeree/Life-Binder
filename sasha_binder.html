@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sasha — Life Binder</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"><style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#fff8f9;--sf:#ffffff;--sf2:#fdf0f3;--sf3:#f5dce4;
@@ -28,8 +32,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 .ni{display:flex;align-items:center;gap:8px;padding:6px 1.1rem;font-size:12.5px;color:rgba(255,255,255,0.55);cursor:pointer;transition:all .13s;border:none;background:none;width:100%;text-align:left;font-family:'Inter',sans-serif;}
 .ni:hover{color:#fff;background:rgba(255,255,255,0.07);}
 .ni.active{color:#fff;background:rgba(192,67,106,0.3);font-weight:500;}
-.ni-ic{font-size:12px;width:14px;text-align:center;flex-shrink:0;}
-.sb-foot{margin-top:auto;padding:1rem 1.1rem;border-top:1px solid rgba(255,255,255,0.08);}
+.ni-ic{font-size:13px;width:18px;min-width:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sb-foot{margin-top:auto;padding:.5rem 0;border-top:1px solid rgba(255,255,255,0.08);}
 .sv-btn{width:100%;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:8px;overflow:hidden;white-space:nowrap;border-radius:var(--rsm);border:1px solid rgba(192,67,106,0.4);background:rgba(192,67,106,0.2);color:#fff;cursor:pointer;}
 .sv-btn:hover{background:rgba(192,67,106,0.4);}
 .main-wrap{margin-left:var(--sb);flex:1;min-width:0;overflow-x:hidden;}
@@ -48,7 +52,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 .ss{font-size:11px;color:var(--tx3);margin-top:3px;}
 .ph{font-family:'DM Serif Display',serif;font-size:2.1rem;margin-bottom:3px;letter-spacing:-0.01em;}
 .ph em{font-style:italic;color:var(--pk);}
-.ps-sub{font-size:13px;color:var(--tx2);margin-bottom:1.5rem;}
+.ps-sub{font-size:13px;color:var(--tx2);margin-bottom:1.5rem;outline:none;cursor:text;border-radius:4px;padding:2px 4px;}
+.ps-sub:hover{background:var(--sf2);}
+.ps-sub:focus{background:var(--sf2);box-shadow:0 0 0 2px var(--rose);}
 .section-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--tx3);margin:1.5rem 0 .6rem;}
 .tag{display:inline-block;font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;}
 .tpk{background:var(--pkl);color:var(--pk);}
@@ -78,6 +84,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--rsm);border:1px solid var(--bd);background:var(--sf);color:var(--tx2);cursor:pointer;transition:all .15s;white-space:nowrap;}
 .btn:hover{background:var(--sf2);color:var(--tx);}
 .btn-primary{background:var(--pk);border-color:var(--pk);color:#fff;}
+.btn-today{background:var(--pkl);border-color:var(--rose);color:var(--pk);font-weight:500;}
 .btn-primary:hover{background:var(--pkd);}
 .btn-sm{padding:4px 9px;font-size:11px;}
 .btn-danger{color:#a0243a;border-color:transparent;background:transparent;}
@@ -120,6 +127,8 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .b-lbl:first-child{text-align:left;}
 .b-inp{width:100%;text-align:right;padding:5px 7px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);}
 .b-inp:focus{outline:none;border-color:var(--pk2);background:#fff;}
+.sav-pct{font-size:11px;color:var(--tx3);margin-top:1px;}
+.sub-freq{font-size:12px;padding:4px 6px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;}
 .sav-hdr{display:grid;grid-template-columns:1fr 80px 80px 80px 28px;gap:6px;padding:5px 1.25rem;background:var(--sf2);}
 .sav-row{display:grid;grid-template-columns:1fr 80px 80px 80px 28px;gap:6px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
 .sav-row:hover{background:var(--sf2);}
@@ -127,9 +136,9 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .inc-row:hover{background:var(--sf2);}
 /* HABITS */
 .hab-hdr{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;padding:6px 1.25rem;background:var(--sf2);}
-.hab-row{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
+.hab-row{display:grid;grid-template-columns:155px repeat(7,1fr) 28px;gap:4px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
 .hab-row:hover{background:var(--sf2);}
-.hab-check{width:24px;height:24px;border-radius:5px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;margin:auto;display:flex;align-items:center;justify-content:center;transition:all .1s;font-size:11px;user-select:none;}
+.hab-check{width:22px;height:22px;border-radius:5px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s;font-size:11px;user-select:none;}
 .hab-check.done{background:var(--pk);border-color:var(--pk);color:#fff;}
 .hab-name{font-family:'Inter',sans-serif;font-size:13px;border:none;background:transparent;color:var(--tx);width:100%;padding:0;outline:none;}
 .hab-col{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);font-weight:500;text-align:center;}
@@ -141,7 +150,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .sk-prod{font-size:12px;background:transparent;border:none;font-family:'Inter',sans-serif;border-bottom:1px solid var(--bd);padding:2px 4px;width:160px;text-align:right;color:var(--tx3);outline:none;}
 .sk-prod:focus{border-color:var(--pk2);}
 /* GROCERY */
-.groc-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd2);}
+.groc-item{display:flex;align-items:center;gap:10px;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);}
 .groc-item:last-child{border-bottom:none;}
 .groc-check{width:18px;height:18px;border-radius:4px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .1s;}
 .groc-check.done{background:var(--pk);border-color:var(--pk);color:#fff;}
@@ -149,6 +158,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .timer-block{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:.85rem 1.25rem;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s;}
 .timer-block:hover{background:var(--sf2);}
 .timer-block.active{border-color:var(--pk);background:var(--pkl);}
+.timer-grid{display:grid;grid-template-columns:1fr 280px;gap:1.5rem;align-items:start;}
 .timer-disp{font-family:'Cormorant Garamond',serif;font-size:4.5rem;text-align:center;color:var(--pk);line-height:1;margin:1rem 0;}
 /* FORMULA */
 .fcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:10px;}
@@ -179,9 +189,13 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
   .ni span:not(.ni-ic),.ngl,.sb-title,.sb-sub{display:none;}
   .sb-brand{padding:.75rem 0;display:flex;justify-content:center;}
   .g2,.g4{grid-template-columns:1fr;}
+  .timer-grid{grid-template-columns:1fr;}
   .page{padding:1rem;}
 }
+
 </style>
+</head>
+<body>
 
 <div class="sidebar">
   <div class="sb-brand">
@@ -191,12 +205,12 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <div class="ngl">Overview</div>
     <button class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">⌂</span><span>Home</span></button>
     <button class="ni" onclick="go('social',this)"><span class="ni-ic">◈</span><span>Social Calendar</span></button>
-    <button class="ni" onclick="go('mood',this)"><span class="ni-ic">◉</span><span>Mood Log</span></button>
+    <button class="ni" onclick="go('mood',this)"><span class="ni-ic">◌</span><span>Mood Log</span></button>
   </div>
   <div class="ng">
     <div class="ngl">Health</div>
     <button class="ni" onclick="go('schedule',this)"><span class="ni-ic">◷</span><span>Schedule</span></button>
-    <button class="ni" onclick="go('gym',this)"><span class="ni-ic">◈</span><span>Gym</span></button>
+    <button class="ni" onclick="go('gym',this)"><span class="ni-ic">◉</span><span>Gym</span></button>
     <button class="ni" onclick="go('timer',this)"><span class="ni-ic">◔</span><span>AM Timer</span></button>
     <button class="ni" onclick="go('progress',this)"><span class="ni-ic">↑</span><span>Progress</span></button>
     <button class="ni" onclick="go('skincare',this)"><span class="ni-ic">✦</span><span>Skincare</span></button>
@@ -237,11 +251,11 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <button onclick="startEditQuote()" style="background:none;border:none;cursor:pointer;padding:4px 6px;color:var(--tx3);font-size:14px;flex-shrink:0;" title="Edit quote">&#x270F;</button>
   </div>
   <div class="g4" style="margin-bottom:1.25rem;">
- <div class="stat soft"><div class="sl2">Today's gym</div><div class="sv" id="dash-gym" style="font-size:.95rem;padding-top:6px;">—</div></div>
- <div class="stat soft"><div class="sl2">Budget leftover</div><div class="sv" id="dash-left">$—</div></div>
- <div class="stat soft"><div class="sl2">Habits today</div><div class="sv" id="dash-hab">—</div></div>
- <div class="stat soft"><div class="sl2">Uni tasks due</div><div class="sv" id="dash-uni-due">—</div></div>
-</div>
+    <div class="stat soft"><div class="sl2">Today's gym</div><div class="sv" id="dash-gym" style="font-size:.95rem;padding-top:6px;">—</div></div>
+    <div class="stat soft"><div class="sl2">Budget leftover</div><div class="sv" id="dash-left">$—</div></div>
+    <div class="stat soft"><div class="sl2">Habits today</div><div class="sv" id="dash-hab">—</div></div>
+    <div class="stat soft"><div class="sl2">Uni tasks due</div><div class="sv" id="dash-uni-due">—</div></div>
+  </div>
   <div class="g2" style="margin-bottom:1.25rem;">
     <div class="card"><div class="ch"><div class="ct">Today's schedule</div><span class="tag tn" id="dash-day-tag"></span></div><div id="dash-sch-body"></div></div>
     <div style="display:flex;flex-direction:column;gap:1rem;">
@@ -265,12 +279,14 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <div class="card"><div class="ch"><div class="ct">Tomorrow</div><span class="tag tn" id="dash-tomorrow-tag"></span></div><div id="dash-tomorrow-body" style="font-size:13px;color:var(--tx2);padding:.75rem 1.25rem;">Loading...</div></div>
     <div class="card"><div class="ch"><div class="ct">Quick notes</div></div><textarea id="quick-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:'Inter',sans-serif;font-size:13px;resize:vertical;" placeholder="Anything on your mind..." oninput="saveAll()"></textarea></div>
   </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Snapshot</div></div><div style="padding:.75rem 1.25rem;" id="dash-snap"></div></div>
+  </div>
 </div>
 
 <!-- SOCIAL -->
 <div id="page-social" class="page">
   <div class="ph">Social <em>Calendar</em></div>
-
   <div style="margin-bottom:1.25rem;">
     <div style="display:flex;gap:8px;margin-bottom:1rem;">
       <button class="btn btn-primary" onclick="setCalView('day',this)">Day</button>
@@ -283,7 +299,6 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     </div>
     <div class="card" id="cal-grid" style="overflow:auto;"></div>
   </div>
-
   <div class="g2">
     <div class="card"><div class="ch"><div class="ct">Upcoming plans</div></div>
       <div id="social-list"></div>
@@ -319,62 +334,59 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 <!-- MOOD -->
 <div id="page-mood" class="page">
   <div class="ph">Mood &amp; <em>Energy Log</em></div>
-  <div class="ps-sub">Daily check-in. Spot patterns over time.</div>
+  <div class="ps-sub" id="ps-sub-0" contenteditable="true" onblur="savePsSub(0,this.innerHTML)" title="Click to edit">Daily check-in. Spot patterns over time.</div>
   <div class="g2" style="margin-bottom:1.5rem;">
     <div class="card"><div class="ch"><div class="ct">Log today</div></div><div style="padding:1.25rem;">
       <div class="field"><label>Date</label><input type="date" id="mood-date"></div>
-      <div class="field"><label>Mood (1–5)</label>
-        <div style="display:flex;gap:5px;">
-          <button class="btn btn-sm mood-sel" data-v="1" onclick="selMood(1)">1 Rough</button>
-          <button class="btn btn-sm mood-sel" data-v="2" onclick="selMood(2)">2 Meh</button>
-          <button class="btn btn-sm mood-sel" data-v="3" onclick="selMood(3)">3 Okay</button>
-          <button class="btn btn-sm mood-sel" data-v="4" onclick="selMood(4)">4 Good</button>
-          <button class="btn btn-sm mood-sel" data-v="5" onclick="selMood(5)">5 Great</button>
-        </div>
-      </div>
-      <div class="field"><label>Energy (1–5)</label>
-        <div style="display:flex;gap:5px;">
-          <button class="btn btn-sm energy-sel" data-v="1" onclick="selEnergy(1)">1</button>
-          <button class="btn btn-sm energy-sel" data-v="2" onclick="selEnergy(2)">2</button>
-          <button class="btn btn-sm energy-sel" data-v="3" onclick="selEnergy(3)">3</button>
-          <button class="btn btn-sm energy-sel" data-v="4" onclick="selEnergy(4)">4</button>
-          <button class="btn btn-sm energy-sel" data-v="5" onclick="selEnergy(5)">5</button>
-        </div>
-      </div>
+      <div class="field"><label>Mood (1–5)</label><div style="display:flex;gap:6px;" id="mood-sel-row">
+        <button class="btn btn-sm mood-sel" style="flex:1;" onclick="selMood(1,this)">1 Rough</button>
+        <button class="btn btn-sm mood-sel" style="flex:1;" onclick="selMood(2,this)">2 Meh</button>
+        <button class="btn btn-sm mood-sel" style="flex:1;" onclick="selMood(3,this)">3 Okay</button>
+        <button class="btn btn-sm mood-sel" style="flex:1;" onclick="selMood(4,this)">4 Good</button>
+        <button class="btn btn-sm mood-sel" style="flex:1;" onclick="selMood(5,this)">5 Great</button>
+      </div></div>
+      <div class="field"><label>Energy (1–5)</label><div style="display:flex;gap:6px;" id="energy-sel-row">
+        <button class="btn btn-sm energy-sel" style="flex:1;" onclick="selEnergy(1,this)">1</button>
+        <button class="btn btn-sm energy-sel" style="flex:1;" onclick="selEnergy(2,this)">2</button>
+        <button class="btn btn-sm energy-sel" style="flex:1;" onclick="selEnergy(3,this)">3</button>
+        <button class="btn btn-sm energy-sel" style="flex:1;" onclick="selEnergy(4,this)">4</button>
+        <button class="btn btn-sm energy-sel" style="flex:1;" onclick="selEnergy(5,this)">5</button>
+      </div></div>
       <div class="field-row">
-        <div class="field"><label>Sleep hrs</label><input type="number" id="mood-sleep" placeholder="7" min="0" max="14" step="0.5"></div>
+        <div class="field"><label>Sleep (hrs)</label><input type="number" id="mood-sleep" min="0" max="14" step="0.5" placeholder="7.5"></div>
         <div class="field"><label>Gym?</label><select id="mood-gym"><option value="">—</option><option>Yes</option><option>No</option><option>Rest day</option></select></div>
       </div>
-      <div class="field"><label>Notes</label><textarea id="mood-note-inp" placeholder="What\'s affecting mood or energy..."></textarea></div>
-      <button class="btn btn-primary" style="width:100%;" onclick="addMood()">Log entry</button>
+      <div class="field"><label>Notes</label><textarea id="mood-note-inp" placeholder="Anything behind the mood..."></textarea></div>
+      <button class="btn btn-primary" onclick="addMood()">Log entry</button>
     </div></div>
-    <div class="card"><div class="ch"><div class="ct">Last 14 days</div></div><div style="padding:1rem;"><canvas id="moodChart" height="240"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">14-day trend</div></div><div style="padding:1rem;"><canvas id="moodChart" height="200"></canvas></div></div>
   </div>
   <div class="card"><div class="ch"><div class="ct">History</div></div>
-    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:14%;">Date</th><th style="width:12%;">Mood</th><th style="width:12%;">Energy</th><th style="width:10%;">Sleep</th><th style="width:10%;">Gym</th><th>Notes</th><th style="width:6%;"></th></tr></thead><tbody id="mood-body"></tbody></table></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th>Date</th><th>Mood</th><th>Energy</th><th>Sleep</th><th>Gym</th><th>Notes</th><th></th></tr></thead><tbody id="mood-body"></tbody></table></div>
   </div>
 </div>
 
 <!-- SCHEDULE -->
 <div id="page-schedule" class="page">
   <div class="ph">Weekly <em>Schedule</em></div>
-  <div class="ps-sub">Click a day to view. Edit any day's rows inline — reset to default anytime.</div>
+  <div class="ps-sub" id="ps-sub-1" contenteditable="true" onblur="savePsSub(1,this.innerHTML)" title="Click to edit">Click a day to view. Edit any day's rows inline — reset to default anytime.</div>
   <div style="display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap;" id="day-nav">
-    <button class="btn btn-primary" onclick="showDay(this,'mon')">Monday</button>
-    <button class="btn" onclick="showDay(this,'tue')">Tuesday</button>
-    <button class="btn" onclick="showDay(this,'wed')">Wednesday</button>
-    <button class="btn" onclick="showDay(this,'thu')">Thursday</button>
-    <button class="btn" onclick="showDay(this,'fri')">Friday</button>
-    <button class="btn" onclick="showDay(this,'sat')">Saturday</button>
-    <button class="btn" onclick="showDay(this,'sun')">Sunday</button>
+    <button class="btn btn-primary" onclick="showDay(this,'mon')" data-key="mon">Monday</button>
+    <button class="btn" onclick="showDay(this,'tue')" data-key="tue">Tuesday</button>
+    <button class="btn" onclick="showDay(this,'wed')" data-key="wed">Wednesday</button>
+    <button class="btn" onclick="showDay(this,'thu')" data-key="thu">Thursday</button>
+    <button class="btn" onclick="showDay(this,'fri')" data-key="fri">Friday</button>
+    <button class="btn" onclick="showDay(this,'sat')" data-key="sat">Saturday</button>
+    <button class="btn" onclick="showDay(this,'sun')" data-key="sun">Sunday</button>
   </div>
   <div id="sch-content"></div>
+  <div id="sch-edit-panel"></div>
 </div>
 
 <!-- GYM -->
 <div id="page-gym" class="page">
   <div class="ph">Gym <em>Routine</em></div>
-  <div class="ps-sub">5-day glutes-focused program. Log weights inline. Edit exercises anytime — reset to default if needed.</div>
+  <div class="ps-sub" id="ps-sub-2" contenteditable="true" onblur="savePsSub(2,this.innerHTML)" title="Click to edit">5-day glutes-focused program. Log weights inline. Edit exercises anytime.</div>
   <div style="display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap;" id="gym-nav">
     <button class="btn btn-primary" onclick="showGym(this,'d1')">Day 1 — Glutes Heavy</button>
     <button class="btn" onclick="showGym(this,'d2')">Day 2 — Core + Cardio</button>
@@ -384,6 +396,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <button class="btn" onclick="showGym(this,'d6')">Day 6 — Cardio</button>
   </div>
   <div id="gym-content"></div>
+  <div id="gym-edit-panel"></div>
   <div class="section-label">Personal records</div>
   <div class="card">
     <div class="ch"><div class="ct">PRs &amp; milestones</div></div>
@@ -397,8 +410,8 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 <!-- AM TIMER -->
 <div id="page-timer" class="page">
   <div class="ph">Morning <em>Timer</em></div>
-  <div class="ps-sub">4:30–6:00am window. Customise your blocks — add, remove, reorder.</div>
-  <div style="display:grid;grid-template-columns:1fr 280px;gap:1.5rem;align-items:start;">
+  <div class="ps-sub" id="ps-sub-3" contenteditable="true" onblur="savePsSub(3,this.innerHTML)" title="Click to edit">4:30–6:00am window. Customise your blocks — add, remove, reorder.</div>
+  <div class="timer-grid">
     <div>
       <div class="timer-disp" id="timer-disp" style="margin:0 0 1.5rem;">00:00</div>
       <div style="display:flex;gap:8px;justify-content:center;margin-bottom:1.25rem;">
@@ -413,12 +426,12 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     </div>
     <div>
       <div class="section-label">Edit blocks</div>
-      <div class="card"><div style="padding:.75rem 1.25rem;">
+      <div class="card" style="overflow:hidden;"><div style="padding:.75rem 1.25rem;">
         <div id="timer-edit"></div>
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <input type="text" id="tb-name" placeholder="Block name" style="flex:1;">
-          <input type="number" id="tb-mins" placeholder="min" min="1" style="width:64px;">
-          <button class="btn btn-primary" onclick="addTimerBlock()">Add</button>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+          <input type="text" id="tb-name" placeholder="Block name" style="flex:1;min-width:80px;">
+          <input type="number" id="tb-mins" placeholder="min" min="1" style="width:56px;flex-shrink:0;">
+          <button class="btn btn-primary" onclick="addTimerBlock()" style="flex-shrink:0;">Add</button>
         </div>
       </div></div>
     </div>
@@ -428,151 +441,97 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 <!-- PROGRESS -->
 <div id="page-progress" class="page">
   <div class="ph">Progress <em>Tracker</em></div>
-  <div class="ps-sub">Body measurements and weight trend over time.</div>
+  <div class="ps-sub" id="ps-sub-4" contenteditable="true" onblur="savePsSub(4,this.innerHTML)" title="Click to edit">Body measurements and weight trend over time.</div>
   <div class="g2" style="margin-bottom:1.5rem;">
     <div class="card"><div class="ch"><div class="ct">Log measurements</div></div><div style="padding:1.25rem;">
       <div class="field"><label>Date</label><input type="date" id="meas-date"></div>
       <div class="g2" style="gap:8px;">
-        <div class="field"><label>Weight (kg)</label><input type="number" id="meas-w" placeholder="0.0" step="0.1"></div>
-        <div class="field"><label>Waist (cm)</label><input type="number" id="meas-wa" placeholder="0" step="0.5"></div>
-        <div class="field"><label>Hips (cm)</label><input type="number" id="meas-h" placeholder="0" step="0.5"></div>
-        <div class="field"><label>Glutes (cm)</label><input type="number" id="meas-g" placeholder="0" step="0.5"></div>
-        <div class="field"><label>Thighs (cm)</label><input type="number" id="meas-t" placeholder="0" step="0.5"></div>
+        <div class="field"><label>Weight (kg)</label><input type="number" id="meas-w" step="0.1" placeholder="65.0"></div>
+        <div class="field"><label>Waist (cm)</label><input type="number" id="meas-wa" step="0.5"></div>
+        <div class="field"><label>Hips (cm)</label><input type="number" id="meas-h" step="0.5"></div>
+        <div class="field"><label>Glutes (cm)</label><input type="number" id="meas-g" step="0.5"></div>
+        <div class="field"><label>Thighs (cm)</label><input type="number" id="meas-t" step="0.5"></div>
+        <div class="field"><label>Notes</label><input type="text" id="meas-notes" placeholder="Notes..."></div>
       </div>
-      <div class="field"><label>Notes</label><textarea id="meas-notes" placeholder="How you feel, photo taken?"></textarea></div>
-      <button class="btn btn-primary" style="width:100%;" onclick="addMeas()">Log</button>
+      <button class="btn btn-primary" style="margin-top:8px;" onclick="addMeas()">Save</button>
     </div></div>
-    <div class="card"><div class="ch"><div class="ct">Weight trend</div></div><div style="padding:1rem;"><canvas id="weightChart" height="230"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">Weight trend</div></div><div style="padding:1rem;"><canvas id="weightChart" height="200"></canvas></div></div>
   </div>
-  <div class="card"><div class="ch"><div class="ct">History</div></div>
-    <div style="overflow-x:auto;"><table class="dt" style="min-width:600px;"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Hips</th><th>Glutes</th><th>Thighs</th><th>Notes</th><th></th></tr></thead><tbody id="meas-body"></tbody></table></div>
+  <div class="card"><div class="ch"><div class="ct">Measurement history</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Hips</th><th>Glutes</th><th>Thighs</th><th>Notes</th><th></th></tr></thead><tbody id="meas-body"></tbody></table></div>
   </div>
 </div>
 
 <!-- SKINCARE -->
 <div id="page-skincare" class="page">
   <div class="ph">Skincare <em>Routine</em></div>
-  <div class="ps-sub">Edit your steps, fill in your products. All saves automatically.</div>
+  <div class="ps-sub" id="ps-sub-5" contenteditable="true" onblur="savePsSub(5,this.innerHTML)" title="Click to edit">Edit your steps, fill in your products. All saves automatically.</div>
   <div class="g2" style="margin-bottom:1.5rem;">
-    <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
-        <div class="section-label" style="margin:0;">Morning (AM)</div>
-        <button class="edit-toggle" id="am-edit-btn" onclick="toggleSkinEdit('am')">Edit steps</button>
-      </div>
-      <div class="card" id="am-routine"></div>
-      <div id="am-edit-panel" style="display:none;margin-top:8px;">
-        <div class="card"><div style="padding:.75rem 1.25rem;">
-          <div id="am-step-list"></div>
-          <div class="field-row" style="margin-top:8px;">
-            <div class="field"><input type="text" id="am-new-step" placeholder="New AM step..."></div>
-            <button class="btn btn-primary" onclick="addSkinStep('am')">Add</button>
-          </div>
-        </div></div>
-      </div>
-    </div>
-    <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
-        <div class="section-label" style="margin:0;">Evening (PM)</div>
-        <button class="edit-toggle" id="pm-edit-btn" onclick="toggleSkinEdit('pm')">Edit steps</button>
-      </div>
-      <div class="card" id="pm-routine"></div>
-      <div id="pm-edit-panel" style="display:none;margin-top:8px;">
-        <div class="card"><div style="padding:.75rem 1.25rem;">
-          <div id="pm-step-list"></div>
-          <div class="field-row" style="margin-top:8px;">
-            <div class="field"><input type="text" id="pm-new-step" placeholder="New PM step..."></div>
-            <button class="btn btn-primary" onclick="addSkinStep('pm')">Add</button>
-          </div>
-        </div></div>
-      </div>
-    </div>
+    <div class="card"><div class="ch"><div class="ct">AM routine</div><button class="edit-toggle" id="am-edit-btn" onclick="toggleSkEdit('am')">Edit steps</button></div><div id="am-routine"></div></div>
+    <div class="card"><div class="ch"><div class="ct">PM routine</div><button class="edit-toggle" id="pm-edit-btn" onclick="toggleSkEdit('pm')">Edit steps</button></div><div id="pm-routine"></div></div>
   </div>
-  <div class="section-label">Product inventory</div>
-  <div class="card" style="margin-bottom:1.25rem;">
-    <div class="ch"><div class="ct">Products &amp; replenishment</div></div>
-    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:28%;">Product</th><th style="width:18%;">Category</th><th style="width:18%;">Replenish by</th><th>Notes</th><th style="width:7%;"></th></tr></thead><tbody id="prod-body"></tbody></table></div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Product inventory</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th>Product</th><th>Category</th><th>Started</th><th>Notes</th><th></th></tr></thead><tbody id="prod-body"></tbody></table></div>
     <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
-      <div class="field-row"><div class="field"><input type="text" id="prod-name" placeholder="Product name"></div><div class="field" style="max-width:110px;"><input type="text" id="prod-cat" placeholder="Category"></div><div class="field" style="max-width:140px;"><input type="date" id="prod-date"></div><div class="field"><input type="text" id="prod-notes" placeholder="Notes"></div><button class="btn btn-primary" onclick="addProduct()">Add</button></div>
+      <div class="field-row">
+        <div class="field"><input type="text" id="prod-name" placeholder="Product name"></div>
+        <div class="field" style="max-width:120px;"><input type="text" id="prod-cat" placeholder="Category"></div>
+        <div class="field" style="max-width:140px;"><input type="date" id="prod-date"></div>
+        <div class="field"><input type="text" id="prod-notes" placeholder="Notes"></div>
+        <button class="btn btn-primary" onclick="addProduct()">Add</button>
+      </div>
     </div>
   </div>
-  <div class="section-label">Skin notes</div>
-  <div class="card"><textarea id="skin-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:90px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Breakouts, reactions, what\'s working..." oninput="saveAll()"></textarea></div>
+  <div class="card"><div class="ch"><div class="ct">Skincare notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="skin-notes" style="min-height:80px;" placeholder="Products you're trialling, reactions, routines..." oninput="saveAll()"></textarea></div></div>
 </div>
 
 <!-- MEALS -->
 <div id="page-meals" class="page">
   <div class="ph">Meal <em>Plan</em></div>
-  <div class="ps-sub">Dairy-free · high protein · batch-cook friendly. Edit your templates anytime.</div>
-  <div class="g2" style="margin-bottom:1.25rem;">
-    <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
-        <div class="section-label" style="margin:0;">Gym day meals</div>
-        <button class="edit-toggle" id="gym-meal-btn" onclick="toggleMealEdit('gym')">Edit</button>
-      </div>
-      <div class="card" id="gym-meals-view"></div>
-      <div id="gym-meals-edit" style="display:none;margin-top:8px;">
-        <div class="card"><div style="padding:.75rem 1.25rem;">
-          <div id="gym-meal-list"></div>
-          <div class="field-row" style="margin-top:8px;">
-            <div class="field"><input type="text" id="gym-meal-time" placeholder="Time (e.g. 4:15am)"></div>
-            <div class="field"><input type="text" id="gym-meal-name" placeholder="Meal name"></div>
-            <div class="field"><input type="text" id="gym-meal-desc" placeholder="Notes (optional)"></div>
-            <button class="btn btn-primary" onclick="addMealItem('gym')">Add</button>
-          </div>
-        </div></div>
-      </div>
-    </div>
-    <div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;">
-        <div class="section-label" style="margin:0;">Rest day swaps</div>
-        <button class="edit-toggle" id="rest-meal-btn" onclick="toggleMealEdit('rest')">Edit</button>
-      </div>
-      <div class="card" id="rest-meals-view"></div>
-      <div id="rest-meals-edit" style="display:none;margin-top:8px;">
-        <div class="card"><div style="padding:.75rem 1.25rem;">
-          <div id="rest-meal-list"></div>
-          <div class="field-row" style="margin-top:8px;">
-            <div class="field"><input type="text" id="rest-meal-time" placeholder="Time (e.g. Breakfast)"></div>
-            <div class="field"><input type="text" id="rest-meal-name" placeholder="Meal name"></div>
-            <div class="field"><input type="text" id="rest-meal-desc" placeholder="Notes (optional)"></div>
-            <button class="btn btn-primary" onclick="addMealItem('rest')">Add</button>
-          </div>
-        </div></div>
-      </div>
-      <div class="section-label" style="margin-top:1rem;">Saturday batch cook</div>
-      <div class="card"><div id="batch-list"></div>
-        <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);display:flex;gap:8px;">
-          <input type="text" id="batch-new" placeholder="Add task..." style="flex:1;">
-          <button class="btn btn-primary" onclick="addBatch()">Add</button>
-        </div>
+  <div class="ps-sub" id="ps-sub-6" contenteditable="true" onblur="savePsSub(6,this.innerHTML)" title="Click to edit">Dairy-free · high protein · batch-cook friendly. Edit your templates anytime.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div class="ch"><div class="ct">Gym day meals</div></div><div id="gym-meals-view"></div></div>
+    <div class="card"><div class="ch"><div class="ct">Rest day meals</div></div><div id="rest-meals-view"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Saturday batch cook</div></div>
+    <div id="batch-list"></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row">
+        <div class="field"><input type="text" id="batch-new" placeholder="Add item..."></div>
+        <button class="btn btn-primary" onclick="addBatch()">Add</button>
       </div>
     </div>
   </div>
-  <div class="section-label">Meal notes</div>
-  <div class="card"><textarea id="meal-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:80px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Recipe ideas, adjustments..." oninput="saveAll()"></textarea></div>
+  <div class="card" style="margin-top:1rem;"><div class="ch"><div class="ct">Meal notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="meal-notes" style="min-height:80px;" placeholder="Meal ideas, macros, grocery notes..." oninput="saveAll()"></textarea></div></div>
 </div>
 
 <!-- GROCERY -->
 <div id="page-grocery" class="page">
   <div class="ph">Grocery <em>List</em></div>
-  <div class="ps-sub">Tied to your meal plan. Check off as you shop.</div>
+  <div class="ps-sub" id="ps-sub-7" contenteditable="true" onblur="savePsSub(7,this.innerHTML)" title="Click to edit">Tied to your meal plan. Check off as you shop.</div>
   <div class="g2">
     <div>
-      <div style="display:flex;gap:8px;margin-bottom:1rem;">
-        <button class="btn btn-primary" onclick="loadStaples()">Load staples</button>
-        <button class="btn" onclick="clearDoneGroc()">Clear checked</button>
-        <button class="btn" onclick="clearAllGroc()">Clear all</button>
-      </div>
-      <div class="card"><div id="groc-list" style="padding:.75rem 1.25rem;min-height:80px;"></div>
-        <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
-          <div class="field-row"><div class="field"><input type="text" id="groc-name" placeholder="Item"></div><div class="field" style="max-width:120px;"><input type="text" id="groc-cat" placeholder="Category"></div><div class="field" style="max-width:80px;"><input type="text" id="groc-qty" placeholder="Qty"></div><button class="btn btn-primary" onclick="addGroc()">Add</button></div>
+      <div class="section-label">This week's list</div>
+      <div class="card" style="margin-bottom:1rem;"><div id="groc-list" style="padding:.5rem 0;"></div></div>
+      <div class="card" style="margin-bottom:.75rem;"><div style="padding:.75rem 1.25rem;">
+        <div class="field-row">
+          <div class="field"><input type="text" id="groc-name" placeholder="Item name"></div>
+          <div class="field" style="max-width:120px;"><input type="text" id="groc-cat" placeholder="Category"></div>
+          <div class="field" style="max-width:80px;"><input type="text" id="groc-qty" placeholder="Qty"></div>
+          <button class="btn btn-primary" onclick="addGrocItem()">Add</button>
         </div>
+      </div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="loadStaples()">Load staples</button>
+        <button class="btn" onclick="clearChecked()">Clear checked</button>
+        <button class="btn btn-danger" onclick="clearAll()">Clear all</button>
       </div>
     </div>
     <div>
-      <div class="section-label">Your staples (one per line)</div>
-      <div class="note-box">Edit below then click "Load staples" to add all at once.</div>
-      <div class="card"><textarea id="staples-txt" style="border:none;background:transparent;padding:1rem;width:100%;min-height:200px;font-family:'Inter',sans-serif;font-size:13px;" oninput="saveAll()"></textarea></div>
+      <div class="section-label">Staples list</div>
+      <div class="card"><div style="padding:.75rem 1.25rem;"><textarea id="staples-txt" style="min-height:200px;font-size:12px;" placeholder="One item per line..." oninput="saveAll()"></textarea></div></div>
     </div>
   </div>
 </div>
@@ -580,17 +539,22 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 <!-- HABITS -->
 <div id="page-habits" class="page">
   <div class="ph">Habit <em>Tracker</em></div>
-  <div class="ps-sub">7-day view. Click to check off. Rename or add habits anytime.</div>
+  <div class="ps-sub" id="ps-sub-8" contenteditable="true" onblur="savePsSub(8,this.innerHTML)" title="Click to edit">7-day view. Click to check off. Rename or add habits anytime.</div>
   <div class="card" style="margin-bottom:1.5rem;">
-    <div class="ch"><div class="ct">This week</div></div>
-    <div class="hab-hdr"><div class="hab-col" style="text-align:left;">Habit</div><div class="hab-col">Mon</div><div class="hab-col">Tue</div><div class="hab-col">Wed</div><div class="hab-col">Thu</div><div class="hab-col">Fri</div><div class="hab-col">Sat</div><div class="hab-col">Sun</div><div></div></div>
+    <div class="hab-hdr">
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);">Habit</div>
+      <div class="hab-col">Mon</div><div class="hab-col">Tue</div><div class="hab-col">Wed</div>
+      <div class="hab-col">Thu</div><div class="hab-col">Fri</div><div class="hab-col">Sat</div><div class="hab-col">Sun</div>
+      <div></div>
+    </div>
     <div id="habits-rows"></div>
-    <button class="add-btn" onclick="addHabit()">+ add habit</button>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <button class="btn btn-primary" onclick="addHabit()">+ Add habit</button>
+    </div>
   </div>
-  <div class="g2">
-    <div class="card"><div class="ch"><div class="ct">Weekly streaks</div></div><div style="padding:1.25rem;" id="habit-streaks"></div></div>
-    <div class="card"><div class="ch"><div class="ct">Notes</div></div><textarea id="habit-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="What\'s working, what to adjust..." oninput="saveAll()"></textarea></div>
-  </div>
+  <div class="section-label">Streaks</div>
+  <div class="card" style="margin-bottom:1rem;"><div style="padding:.75rem 1.25rem;" id="habit-streaks"></div></div>
+  <div class="card"><div class="ch"><div class="ct">Notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="habit-notes" style="min-height:80px;" placeholder="Habit reflections..." oninput="saveAll()"></textarea></div></div>
 </div>
 
 <!-- BUDGET -->
@@ -601,54 +565,39 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <input type="date" id="period-start" style="width:160px;" onchange="updatePeriod()">
     <span style="font-size:13px;color:var(--tx3);" id="period-end-lbl"></span>
   </div>
-
-  <!-- Stat cards -->
   <div class="g4" style="margin-bottom:1rem;">
     <div class="stat pk"><div class="sl2">Income</div><div class="sv" id="b-income">$0</div></div>
     <div class="stat"><div class="sl2">Expenses budgeted</div><div class="sv" id="b-budgeted">$0</div></div>
     <div class="stat"><div class="sl2">Savings this period</div><div class="sv" id="b-savings">$0</div></div>
     <div class="stat"><div class="sl2">Total spent</div><div class="sv" id="b-spent">$0</div></div>
   </div>
-
-  <!-- Total expenses summary card -->
   <div class="card" style="margin-bottom:1rem;">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
       <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
-        <div class="sl2">Total expenses budgeted</div>
-        <div class="sv" id="b-budgeted-2" style="font-size:1.5rem;">$0</div>
+        <div class="sl2">Total expenses budgeted</div><div class="sv" id="b-budgeted-2" style="font-size:1.5rem;">$0</div>
       </div>
       <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
-        <div class="sl2">Total spent</div>
-        <div class="sv" id="b-spent-2" style="font-size:1.5rem;">$0</div>
+        <div class="sl2">Total spent</div><div class="sv" id="b-spent-2" style="font-size:1.5rem;">$0</div>
       </div>
       <div style="padding:.85rem 1.25rem;">
-        <div class="sl2">Leftover</div>
-        <div class="sv" id="b-leftover" style="font-size:1.5rem;">$0</div>
+        <div class="sl2">Leftover</div><div class="sv" id="b-leftover" style="font-size:1.5rem;">$0</div>
       </div>
     </div>
   </div>
-
-  <!-- Charts row: spending + savings (no net worth here) -->
   <div class="g2" style="margin-bottom:1.25rem;">
     <div class="card"><div class="ch"><div class="ct">Spending breakdown</div></div>
       <div style="padding:.75rem .75rem 0;"><canvas id="budgetChart" height="200"></canvas></div>
       <div id="chart-legend" style="padding:.5rem 1rem .75rem;display:flex;flex-wrap:wrap;gap:5px;"></div>
     </div>
     <div class="card"><div class="ch"><div class="ct">Savings — goal vs actual</div></div>
-      <div style="padding:1rem 1.25rem;">
-        <canvas id="savingsChart" height="200"></canvas>
-      </div>
+      <div style="padding:1rem 1.25rem;"><canvas id="savingsChart" height="200"></canvas></div>
     </div>
   </div>
-
-  <!-- Income -->
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch"><div class="ct">Income</div></div>
     <div id="income-rows"></div>
     <button class="add-btn" onclick="addIncomeRow()">+ add income source</button>
   </div>
-
-  <!-- Expenses — collapsible, condensed -->
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch" style="cursor:pointer;" onclick="toggleExpenses()">
       <div class="ct">Expenses <span class="tag tn" style="margin-left:6px;">fortnightly</span></div>
@@ -660,8 +609,6 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       <button class="add-btn" onclick="addExpenseRow()">+ add category</button>
     </div>
   </div>
-
-  <!-- Subscription tracker -->
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch" style="cursor:pointer;" onclick="toggleSubs()">
       <div class="ct">Subscriptions <span class="tag tn" style="margin-left:6px;">auto-calculates</span></div>
@@ -682,22 +629,16 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       </div>
     </div>
   </div>
-
-  <!-- Savings goals -->
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch"><div class="ct">Savings goals</div></div>
     <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div><div></div></div>
     <div id="savings-rows"></div>
     <button class="add-btn" onclick="addSavingsRow()">+ add goal</button>
   </div>
-
-  <!-- Save -->
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:2rem;">
     <button class="btn" onclick="exportCSV()">Export CSV</button>
     <button class="btn btn-primary" onclick="recalcBudget();saveAll();showToast('Budget saved!')">Save</button>
   </div>
-
-  <!-- Net worth — full width at bottom -->
   <div style="border-top:2px solid var(--bd);padding-top:1.5rem;margin-bottom:1.5rem;">
     <div class="ph" style="font-size:1.6rem;margin-bottom:.25rem;">Net <em>Worth</em></div>
     <div class="ps-sub" style="margin-bottom:1rem;">Your total assets minus liabilities.</div>
@@ -721,49 +662,16 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       </div>
       <div class="card">
         <div class="ch"><div class="ct">Asset &amp; liability breakdown</div></div>
-        <div style="padding:1.25rem;">
-          <div id="nw-breakdown-list" style="font-size:13px;color:var(--tx2);">Add assets and liabilities to see breakdown.</div>
-        </div>
+        <div style="padding:1.25rem;"><div id="nw-breakdown-list" style="font-size:13px;color:var(--tx2);">Add assets and liabilities to see breakdown.</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CAREER JOURNAL -->
+<!-- CAREER -->
 <div id="page-career" class="page">
   <div class="ph">Career <em>Journal</em></div>
-  <div class="ps-sub">Your space — role, challenges, priorities, and where you\'re headed.</div>
-
-  <div class="card" style="margin-bottom:1.5rem;">
-    <div style="padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="toggleNotice()">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--tx);">Notice Period</span>
-        <span class="tag tn" id="notice-tag">hidden</span>
-      </div>
-      <span style="font-size:13px;color:var(--tx3);" id="notice-arrow">▸</span>
-    </div>
-    <div id="notice-panel" style="display:none;border-top:1px solid var(--bd2);">
-      <div style="text-align:center;padding:1.5rem 1.25rem .5rem;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:4.5rem;color:var(--pk);line-height:1;" id="cd-num">—</div>
-        <div style="font-size:13px;color:var(--tx2);margin-top:4px;">working days remaining · Final day 30 April 2026</div>
-      </div>
-      <div class="g2" style="padding:1.25rem;">
-        <div>
-          <div class="section-label">Wrap-up checklist</div>
-          <div id="wrap-list"></div>
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <input type="text" id="wrap-new" placeholder="Add task..." style="flex:1;">
-            <button class="btn btn-primary" onclick="addWrap()">Add</button>
-          </div>
-        </div>
-        <div>
-          <div class="section-label">Handover notes</div>
-          <textarea id="handover-notes" style="min-height:120px;" placeholder="Projects, contacts, system access..." oninput="saveAll()"></textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <div class="ps-sub" id="ps-sub-9" contenteditable="true" onblur="savePsSub(9,this.innerHTML)" title="Click to edit">Your space — role, challenges, priorities, and where you're headed.</div>
   <div class="section-label">Current role</div>
   <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
     <div class="g2" style="gap:1rem;margin-bottom:10px;">
@@ -771,42 +679,37 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       <div class="field" style="margin-bottom:0;"><label>Company</label><input type="text" id="career-company" placeholder="e.g. Saltire Infrastructure" oninput="saveAll()"></div>
     </div>
     <div class="field"><label>What I actually do</label><textarea id="career-actual" placeholder="The real scope of your role day to day..." oninput="saveAll()"></textarea></div>
-    <div class="field"><label>What\'s going well</label><textarea id="career-good" placeholder="Wins, things clicking, growth you\'re seeing..." oninput="saveAll()"></textarea></div>
+    <div class="field"><label>What's going well</label><textarea id="career-good" placeholder="Wins, things clicking, growth you're seeing..." oninput="saveAll()"></textarea></div>
   </div></div>
-
-  <div class="section-label">Where I\'m heading</div>
+  <div class="section-label">Where I'm heading</div>
   <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
     <div class="field"><label>Next role target</label><input type="text" id="career-next-role" placeholder="e.g. Resource Planner" oninput="saveAll()"></div>
     <div class="g2" style="gap:1rem;">
-      <div class="field" style="margin-bottom:0;"><label>Long-term vision</label><textarea id="career-longterm" style="min-height:90px;" placeholder="BBA then MBA then governance, compliance, senior leadership..." oninput="saveAll()"></textarea></div>
-      <div class="field" style="margin-bottom:0;"><label>Skills I\'m building</label><textarea id="career-skills" style="min-height:90px;" placeholder="What you\'re actively working on right now..." oninput="saveAll()"></textarea></div>
+      <div class="field" style="margin-bottom:0;"><label>Long-term vision</label><textarea id="career-longterm" style="min-height:90px;" placeholder="BBA then MBA then governance..." oninput="saveAll()"></textarea></div>
+      <div class="field" style="margin-bottom:0;"><label>Skills I'm building</label><textarea id="career-skills" style="min-height:90px;" placeholder="What you're actively working on..." oninput="saveAll()"></textarea></div>
     </div>
   </div></div>
-
   <div class="card" style="margin-bottom:1.5rem;">
     <div class="ch"><div class="ct">This week</div></div>
     <div style="padding:1.25rem;">
       <div class="g2" style="gap:1rem;">
-        <div class="field" style="margin-bottom:0;"><label>Challenges</label><textarea id="career-challenges" style="min-height:90px;" placeholder="What\'s hard, what\'s draining you..." oninput="saveAll()"></textarea></div>
+        <div class="field" style="margin-bottom:0;"><label>Challenges</label><textarea id="career-challenges" style="min-height:90px;" placeholder="What's hard, what's draining you..." oninput="saveAll()"></textarea></div>
         <div class="field" style="margin-bottom:0;"><label>Priorities</label><textarea id="career-priorities" style="min-height:90px;" placeholder="Top 3–5 things to move forward this week..." oninput="saveAll()"></textarea></div>
       </div>
     </div>
   </div>
-
   <div class="section-label">Journal entries</div>
-  <div class="card" style="margin-bottom:1rem;">
-    <div style="padding:1.25rem;">
-      <div class="field"><label>New entry</label><textarea id="journal-new" style="min-height:100px;" placeholder="Reflect, vent, plan, note. No rules. Date-stamped automatically..."></textarea></div>
-      <button class="btn btn-primary" onclick="addJournalEntry()">Save entry</button>
-    </div>
-  </div>
+  <div class="card" style="margin-bottom:1rem;"><div style="padding:1.25rem;">
+    <div class="field"><label>New entry</label><textarea id="journal-new" style="min-height:100px;" placeholder="Reflect, vent, plan, note. No rules. Date-stamped automatically..."></textarea></div>
+    <button class="btn btn-primary" onclick="addJournalEntry()">Save entry</button>
+  </div></div>
   <div id="journal-list"></div>
 </div>
 
 <!-- UNI -->
 <div id="page-uni" class="page">
   <div class="ph">Uni <em>Tracker</em></div>
-  <div class="ps-sub">Add your courses. Each one gets its own section with tasks, grades, and due dates. FNCE2000 includes your formula bank.</div>
+  <div class="ps-sub" id="ps-sub-10" contenteditable="true" onblur="savePsSub(10,this.innerHTML)" title="Click to edit">Add your courses. Each one gets tasks, grades, and due dates. FNCE2000 includes your formula bank.</div>
   <div class="g2" style="margin-bottom:1.5rem;">
     <div class="card"><div class="ch"><div class="ct">Add a course</div></div>
       <div style="padding:1.25rem;">
@@ -814,50 +717,53 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
         <div class="field"><label>Course name</label><input type="text" id="course-name" placeholder="e.g. Corporate Finance"></div>
         <div class="field-row">
           <div class="field"><label>Study period start</label><input type="date" id="course-start"></div>
-          <div class="field"><label>Study period end</label><input type="date" id="course-end"></div>
+          <div class="field"><label>End</label><input type="date" id="course-end"></div>
         </div>
-        <div class="field"><label>Notes / overview</label><textarea id="course-notes" placeholder="Textbook, contact hours, assessment breakdown..."></textarea></div>
-        <button class="btn btn-primary" style="width:100%;" onclick="addCourse()">Add course</button>
+        <div class="field"><label>Notes</label><textarea id="course-notes" placeholder="Lecturer, textbook, key info..." style="min-height:60px;"></textarea></div>
+        <button class="btn btn-primary" onclick="addCourse()">Add course</button>
       </div>
     </div>
-    <div>
-      <div class="section-label">Study session notes</div>
-      <div class="card"><textarea id="study-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:170px;font-family:'Inter',sans-serif;font-size:13px;" placeholder="Today's topics, concepts covered, questions to follow up..." oninput="saveAll()"></textarea></div>
-    </div>
+    <div class="card"><div class="ch"><div class="ct">Study notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="study-notes" style="min-height:140px;" placeholder="General study notes, links, reminders..." oninput="saveAll()"></textarea></div></div>
   </div>
-  <div class="section-label">My courses</div>
   <div id="course-list"></div>
+  <div class="section-label">Formula bank</div>
+  <div style="margin-bottom:8px;display:flex;gap:8px;align-items:center;">
+    <input type="text" id="formula-search" placeholder="Search formulas..." style="max-width:260px;" oninput="filterFormulas(this.value)">
+  </div>
+  <div id="formula-list"></div>
+  <div class="card" style="margin-top:1rem;"><div class="ch"><div class="ct">Formula notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="formula-notes" style="min-height:80px;" placeholder="Your own formula notes..." oninput="saveAll()"></textarea></div></div>
 </div>
 
-<!-- SEMESTER -->
+<!-- SEMESTER PLAN -->
 <div id="page-semester" class="page">
   <div class="ph">Semester <em>Planner</em></div>
-  <div class="ps-sub">Visual week-by-week map. Add tasks and see your whole semester at once.</div>
+  <div class="ps-sub" id="ps-sub-11" contenteditable="true" onblur="savePsSub(11,this.innerHTML)" title="Click to edit">Visual week-by-week map. Add tasks and see your whole semester at once.</div>
   <div class="g2" style="margin-bottom:1.5rem;">
-    <div class="card"><div style="padding:1.25rem;">
-      <div class="field-row"><div class="field"><label>Semester start</label><input type="date" id="sem-start" onchange="renderSem()"></div><div class="field"><label>Semester end</label><input type="date" id="sem-end" onchange="renderSem()"></div></div>
-      <div class="field-row" style="margin-top:8px;">
-        <div class="field"><input type="text" id="sem-task" placeholder="Task / exam / deadline"></div>
-        <div class="field" style="max-width:80px;"><input type="number" id="sem-week" placeholder="Week #" min="1"></div>
-        <div class="field" style="max-width:130px;"><select id="sem-type"><option value="tgold">Assignment</option><option value="tr">Exam</option><option value="tbl">Quiz</option><option value="tn">Other</option></select></div>
-        <button class="btn btn-primary" onclick="addSemEv()">Add</button>
+    <div class="card"><div class="ch"><div class="ct">Semester dates</div></div><div style="padding:1.25rem;">
+      <div class="field-row">
+        <div class="field"><label>Start</label><input type="date" id="sem-start" onchange="renderSem()"></div>
+        <div class="field"><label>End</label><input type="date" id="sem-end" onchange="renderSem()"></div>
       </div>
     </div></div>
-    <div class="card"><div style="padding:1.25rem;">
-      <div class="section-label" style="margin-top:0;">Semester notes</div>
-      <textarea id="sem-notes" style="min-height:120px;" placeholder="Course load, exam block, expectations..." oninput="saveAll()"></textarea>
+    <div class="card"><div class="ch"><div class="ct">Add event</div></div><div style="padding:1.25rem;">
+      <div class="field-row">
+        <div class="field"><label>Week #</label><input type="number" id="sem-week" min="1" max="16" style="width:70px;"></div>
+        <div class="field"><label>Type</label><select id="sem-type"><option>Assignment</option><option>Exam</option><option>Tutorial</option><option>Other</option></select></div>
+        <div class="field"><label>Label</label><input type="text" id="sem-task" placeholder="Description"></div>
+        <button class="btn btn-primary" onclick="addSemEvent()" style="align-self:flex-end;">Add</button>
+      </div>
     </div></div>
   </div>
-  <div class="card"><div class="ch"><div class="ct">Semester map</div></div><div id="sem-grid" style="padding:1.25rem;"></div></div>
+  <div id="sem-grid"></div>
+  <div class="card" style="margin-top:1rem;"><div class="ch"><div class="ct">Notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="sem-notes" style="min-height:80px;" placeholder="Semester notes..." oninput="saveAll()"></textarea></div></div>
 </div>
 
 </div><!-- end main-wrap -->
+
 <div class="toast" id="toast"></div>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="https://apis.google.com/js/api.js" async defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 <script>
+
 // ══════════════════════════════════════════
 // GOOGLE DRIVE SYNC
 // ══════════════════════════════════════════
@@ -1055,6 +961,7 @@ const ASGN_TAG = {'Not started':'tn','In progress':'tgold',Submitted:'tbl',Grade
 // {time:'Breakfast',name:'Tofu scramble + toast',desc:'Silken/firm tofu · turmeric · nutritional yeast · spinach'},{time:'Lunch',name:'Lentil soup or noodle bowl',desc:'Lighter carbs on rest days'},{time:'Dinner',name:'Stir-fry tofu or fish + rice',desc:'Simple, keep it lighter'}];
 
 let moodChart=null,weightChart=null,budgetChart=null;
+let calView='day',calDate=new Date();
 let timerBlocks=[{name:'Gym session',mins:75},{name:'Shower & dress',mins:10},{name:'Breakfast',mins:5}];
 let timerSec=0,timerRunning=false,curBlock=0,timerInt=null;
 let curMood=0,curEnergy=0,formulaFilter='';
@@ -1079,6 +986,19 @@ function initDate() {
   const md=document.getElementById('mood-date');if(md)md.value=new Date().toISOString().split('T')[0];
   const med=document.getElementById('meas-date');if(med)med.value=new Date().toISOString().split('T')[0];
   renderDashSchedule(DKEYS[d.getDay()]);
+  // Mark today's schedule button
+  const todayKey = DKEYS[d.getDay()];
+  setTimeout(() => {
+    document.querySelectorAll('#day-nav .btn').forEach(btn => {
+      const key = btn.dataset.key;
+      if (key === todayKey) {
+        btn.dataset.today = '1';
+        btn.style.background = 'var(--pkl)';
+        btn.style.color = 'var(--pk)';
+        btn.style.borderColor = 'var(--rose)';
+      }
+    });
+  }, 50);
   const affirmations = [
     'You are doing better than you think. ',
     'Progress over perfect. One step at a time.',
@@ -1106,11 +1026,10 @@ function go(id, btn) {
   if(id==='uni'){renderCourseList();setTimeout(()=>renderFormulas(),50);}
   if(id==='semester')renderSem();
   if(id==='social'){renderCal();renderPWList();}
-  if(id==='dashboard'){renderTomorrow();}
   if(id==='schedule'){renderSchedule(currentSchDay);}
   if(id==='mood')renderMoodChart();
   if(id==='progress')renderWeightChart();
-  if(id==='career'){calcCD();renderJournal();}
+  if(id==='career'){renderJournal();}
   if(id==='meals')renderMeals();
 }
 
@@ -1150,14 +1069,6 @@ function renderDashSchedule(key) {
   ).join('');
 }
 
-function calcCD() {
-  const now = new Date(), end = new Date('2026-04-30');
-  let days = 0;
-  const cur = new Date(now);
-  cur.setHours(0,0,0,0);
-  while (cur <= end) { if (cur.getDay() > 0 && cur.getDay() < 6) days++; cur.setDate(cur.getDate()+1); }
-  ['cd-num','dash-cd'].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = days; });
-}
 
 function refreshDashHabMini() {
   const d = getData(), habits = d.habits || [];
@@ -1167,16 +1078,15 @@ function refreshDashHabMini() {
   if (!habits.length) { el.innerHTML = '<div style="padding:0.75rem 1.25rem;font-size:13px;color:var(--tx2);">No habits set.</div>'; return; }
   el.innerHTML = habits.map((h, hi) => {
     const done = h.checks[di];
-    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);">
-      <span style="font-size:13px;">${h.name}</span>
-      <div class="hab-check${done?' done':''}" onclick="toggleHabit(${hi},${di},this)">${done?'✓':''}</div>
-    </div>`;
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 1.25rem;border-bottom:1px solid var(--bd2);gap:12px;">' +
+      '<span style="font-size:13px;flex:1;">' + h.name + '</span>' +
+      '<div class="hab-check' + (done?' done':'') + '" onclick="toggleHabit(' + hi + ',' + di + ',this)" style="flex-shrink:0;">' + (done?'✓':'') + '</div>' +
+      '</div>';
   }).join('');
   const dc = habits.filter(h => h.checks[di]).length;
   const dh = document.getElementById('dash-hab');
   if (dh) dh.textContent = dc + '/' + habits.length;
 }
-
 function quickMood(v, btn) {
   document.querySelectorAll('#dash-mood-row .btn').forEach(b => b.style.background = '');
   btn.style.background = 'var(--pkl)';
@@ -1204,20 +1114,10 @@ function delPR(i) { const d = getData(); d.prs.splice(i,1); setData(d); renderPR
 
 function renderTimerUI() {
   const e1 = document.getElementById('timer-blocks-ui');
-  if (e1) e1.innerHTML = timerBlocks.map((b,i) => `
-    <div class="timer-block${i===curBlock?' active':''}" onclick="selBlock(${i})">
-      <div><div style="font-size:13px;font-weight:500;">${b.name}</div><div style="font-size:12px;color:var(--tx2);">${b.mins} min</div></div>
-      <div style="font-size:11px;color:${i===curBlock?'var(--pk)':'var(--tx3)'};">${i===curBlock?'▶':''}</div>
-    </div>`).join('');
+  if (e1) e1.innerHTML = timerBlocks.map((b,i) => '<div class="timer-block' + (i===curBlock?' active':'') + '" onclick="selBlock(' + i + ')"><div><div style="font-size:13px;font-weight:500;">' + b.name + '</div><div style="font-size:12px;color:var(--tx2);">' + b.mins + ' min</div></div><div style="font-size:11px;color:' + (i===curBlock?'var(--pk)':'var(--tx3)') + '">' + (i===curBlock?'▶':'') + '</div></div>').join('');
   const e2 = document.getElementById('timer-edit');
-  if (e2) e2.innerHTML = timerBlocks.map((b,i) => `
-    <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd2);">
-      <span style="font-size:13px;flex:1;">${b.name}</span>
-      <span style="font-size:12px;color:var(--tx2);">${b.mins}min</span>
-      <button class="btn btn-sm btn-danger" onclick="delTimerBlock(${i})">✕</button>
-    </div>`).join('');
+  if (e2) e2.innerHTML = timerBlocks.map((b,i) => '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd2);"><span style="font-size:13px;flex:1;">' + b.name + '</span><span style="font-size:12px;color:var(--tx2);">' + b.mins + 'min</span><button class="btn btn-sm btn-danger" onclick="delTimerBlock(' + i + ')">✕</button></div>').join('');
 }
-
 function selBlock(i) { curBlock = i; timerSec = timerBlocks[i].mins*60; timerRunning = false; clearInterval(timerInt); updateTimerDisp(); renderTimerUI(); const s = document.getElementById('timer-status'); if (s) s.textContent = timerBlocks[i].name + ' selected'; }
 
 function startTimer() { if (timerSec === 0 && timerBlocks[curBlock]) timerSec = timerBlocks[curBlock].mins*60; timerRunning = true; timerInt = setInterval(() => { if (timerSec > 0) { timerSec--; updateTimerDisp(); } else { clearInterval(timerInt); showToast('Block done!'); } }, 1000); }
@@ -1339,7 +1239,7 @@ function renderGroc(items) {
   const cats = [...new Set(items.map(i => i.cat||'General'))].sort();
   el.innerHTML = cats.map(cat => {
     const ci = items.filter(i => (i.cat||'General') === cat);
-    return `<div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--tx3);margin-bottom:5px;">${cat}</div>${ci.map(item => {
+    return `<div style="margin-bottom:6px;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--tx3);margin-bottom:5px;padding:0 1.25rem;">${cat}</div>${ci.map(item => {
       const ri = items.indexOf(item);
       return `<div class="groc-item"><div class="groc-check${item.done?' done':''}" onclick="togGroc(${ri},this)">${item.done?'✓':''}</div><span style="font-size:13px;flex:1;${item.done?'text-decoration:line-through;color:var(--tx3);':''}">${item.name}${item.qty?' — '+item.qty:''}</span><button class="btn btn-sm btn-danger" onclick="delGroc(${ri})">✕</button></div>`;
     }).join('')}</div>`;
@@ -1377,8 +1277,7 @@ function initHabits() {
 
 function renderHabitRows(habits) {
   const c = document.getElementById('habits-rows'); if (!c) return;
-  c.innerHTML = habits.map((h,hi) => `
-    <div class="hab-row">
+  c.innerHTML = habits.map((h,hi) => `<div class="hab-row">
       <input class="hab-name" type="text" value="${h.name}" oninput="saveHabit(${hi},'name',this.value)" placeholder="Habit name">
       ${h.checks.map((chk,di) => `<div class="hab-check${chk?' done':''}" onclick="toggleHabit(${hi},${di},this)">${chk?'✓':''}</div>`).join('')}
       <button class="btn btn-sm btn-danger" style="padding:2px 5px;" onclick="delHabit(${hi})">✕</button>
@@ -1404,7 +1303,7 @@ function delHabit(i) { const d = getData(); d.habits.splice(i,1); setData(d); re
 function renderHabitStreaks(habits) {
   const el = document.getElementById('habit-streaks'); if (!el) return;
   if (!habits || !habits.length) { el.innerHTML = '<div style="font-size:13px;color:var(--tx2);">No habits yet.</div>'; return; }
-  el.innerHTML = habits.map(h => { const done=h.checks.filter(Boolean).length, pct=Math.round((done/7)*100); return `<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;"><span>${h.name}</span><span style="color:var(--tx3);">${done}/7</span></div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:${pct>=70?'var(--pk)':pct>=40?'var(--gold)':'#a0243a'};"></div></div></div>`; }).join('');
+  el.innerHTML = habits.map(h => { const done=h.checks.filter(Boolean).length, pct=Math.round((done/7)*100); return `<div style="margin-bottom:6px;"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;"><span>${h.name}</span><span style="color:var(--tx3);">${done}/7</span></div><div class="prog-wrap"><div class="prog-bar" style="width:${pct}%;background:${pct>=70?'var(--pk)':pct>=40?'var(--gold)':'#a0243a'};"></div></div></div>`; }).join('');
 }
 
 function updatePeriod() {
@@ -1516,16 +1415,10 @@ function renderFormulas() {
 
 function delFormula(i) { const d = getData(); if (!d.formulas) d.formulas=JSON.parse(JSON.stringify(DEF_FORMULAS)); d.formulas.splice(i,1); setData(d); renderFormulas(); }
 
-function renderWrapList(tasks) {
-  const el = document.getElementById('wrap-list'); if (!el) return;
-  el.innerHTML = tasks.map((t,i) => `<div style="display:flex;align-items:center;gap:10px;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);"><div class="groc-check${t.done?' done':''}" onclick="togWrap(${i},this)">${t.done?'✓':''}</div><span style="font-size:13px;${t.done?'text-decoration:line-through;color:var(--tx3);':''}">${t.text}</span><button class="btn btn-sm btn-danger" style="margin-left:auto;" onclick="delWrap(${i})">✕</button></div>`).join('');
-}
 
 function togWrap(i, el) { const d = getData(); d.wrapTasks[i].done=!d.wrapTasks[i].done; setData(d); el.classList.toggle('done'); el.textContent=el.classList.contains('done')?'✓':''; renderWrapList(d.wrapTasks); }
 
-function addWrap() { const t = document.getElementById('wrap-new').value.trim(); if (!t) return; const d = getData(); if (!d.wrapTasks) d.wrapTasks=[]; d.wrapTasks.push({text:t,done:false}); setData(d); renderWrapList(d.wrapTasks); document.getElementById('wrap-new').value=''; }
 
-function delWrap(i) { const d = getData(); d.wrapTasks.splice(i,1); setData(d); renderWrapList(d.wrapTasks); }
 
 function addSocial() {
   const who = document.getElementById('soc-who').value.trim(); if (!who) return;
@@ -1628,10 +1521,15 @@ function endGymEdit(key){const d=getData();delete d.gymEditMode;setData(d);rende
 
 // ── SCHEDULE EDITABLE ──
 function showDay(btn, key) {
-  document.querySelectorAll('#day-nav .btn').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; });
-  btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)';
-  currentSchDay = key;
-  renderSchedule(key);
+  document.querySelectorAll('#day-nav .btn').forEach(b => {
+    if (b.dataset.today === '1') {
+      b.style.background='var(--pkl)'; b.style.color='var(--pk)'; b.style.borderColor='var(--rose)'; b.style.fontWeight='500';
+    } else {
+      b.style.background=''; b.style.color=''; b.style.borderColor=''; b.style.fontWeight='';
+    }
+  });
+  btn.style.background='var(--pk)'; btn.style.color='#fff'; btn.style.borderColor='var(--pk)'; btn.style.fontWeight='600';
+  currentSchDay=key; renderSchedule(key);
 }
 function renderSchEditPanel(key) {
   const d = getData();
@@ -1706,8 +1604,7 @@ function saveMealItem(type,i,field,val){ const d=getData(),key=type+'Meals'; if(
 function delMealItem(type,i){ const d=getData(),key=type+'Meals'; if(!d[key])d[key]=JSON.parse(JSON.stringify(type==='gym'?DEF_GYM_MEALS:DEF_REST_MEALS)); d[key].splice(i,1); setData(d); renderMeals(); renderMealEditList(type); }
 function addMealItem(type){ const tEl=document.getElementById(type+'-meal-time'), nEl=document.getElementById(type+'-meal-name'), dEl=document.getElementById(type+'-meal-desc'); if(!nEl||!nEl.value.trim())return; const d=getData(),key=type+'Meals'; if(!d[key])d[key]=JSON.parse(JSON.stringify(type==='gym'?DEF_GYM_MEALS:DEF_REST_MEALS)); d[key].push({time:tEl?tEl.value:'',name:nEl.value.trim(),desc:dEl?dEl.value:''}); setData(d); renderMeals(); renderMealEditList(type); if(tEl)tEl.value=''; nEl.value=''; if(dEl)dEl.value=''; }
 
-// ── CAREER JOURNAL ──
-function toggleNotice(){ const p=document.getElementById('notice-panel'), a=document.getElementById('notice-arrow'), t=document.getElementById('notice-tag'); const open=p.style.display!=='none'; p.style.display=open?'none':'block'; if(a)a.textContent=open?'▸':'▾'; if(t)t.textContent=open?'hidden':'visible'; if(!open)calcCD(); }
+
 function addJournalEntry(){ const txt=document.getElementById('journal-new').value.trim(); if(!txt)return; const d=getData(); if(!d.journalEntries)d.journalEntries=[]; d.journalEntries.unshift({date:new Date().toLocaleDateString('en-AU',{day:'numeric',month:'short',year:'numeric'}),text:txt}); setData(d); document.getElementById('journal-new').value=''; renderJournal(); showToast('Entry saved!'); }
 function renderJournal(){ const d=getData(), entries=d.journalEntries||[]; const el=document.getElementById('journal-list'); if(!el)return; if(!entries.length){el.innerHTML='<div class="note-box">No entries yet. Write your first one above.</div>';return;} el.innerHTML=entries.map((e,i)=>'<div class="journal-entry"><div class="journal-date">'+e.date+'</div><div class="journal-body">'+e.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div><button class="btn btn-sm btn-danger" style="margin-top:8px" onclick="delJournal('+i+')">Delete</button></div>').join(''); }
 function delJournal(i){ const d=getData(); d.journalEntries.splice(i,1); setData(d); renderJournal(); }
@@ -2156,11 +2053,77 @@ function getSubData() {
   }));
 }
 
+
+function toggleSkEdit(side) {
+  const btn = document.getElementById(side+'-edit-btn');
+  const el = document.getElementById(side+'-routine');
+  if (!el) return;
+  const editing = el.dataset.editing === '1';
+  el.dataset.editing = editing ? '0' : '1';
+  if (btn) { btn.textContent = editing ? 'Edit steps' : 'Done'; btn.classList.toggle('on', !editing); }
+  renderRoutines();
+}
+
+
+function addGrocItem() {
+  const name = document.getElementById('groc-name')?.value?.trim();
+  if (!name) return;
+  const cat = document.getElementById('groc-cat')?.value?.trim() || 'General';
+  const qty = document.getElementById('groc-qty')?.value?.trim() || '';
+  const d = getData();
+  if (!d.grocery) d.grocery = [];
+  d.grocery.push({name, cat, qty, done: false});
+  setData(d);
+  renderGroc(d.grocery);
+  document.getElementById('groc-name').value = '';
+  document.getElementById('groc-qty').value = '';
+}
+
+
+function clearChecked() {
+  const d = getData();
+  if (d.grocery) { d.grocery = d.grocery.filter(i => !i.done); setData(d); renderGroc(d.grocery); }
+}
+
+function clearAll() {
+  const d = getData();
+  d.grocery = []; setData(d); renderGroc([]);
+}
+
+function addSemEvent() {
+  const wk = document.getElementById('sem-week')?.value;
+  const task = document.getElementById('sem-task')?.value?.trim();
+  const type = document.getElementById('sem-type')?.value;
+  if (!wk || !task) { showToast('Enter week and label'); return; }
+  const d = getData();
+  if (!d.semEvents) d.semEvents = [];
+  d.semEvents.push({week: parseInt(wk), task, type});
+  setData(d);
+  renderSem();
+  document.getElementById('sem-task').value = '';
+}
+
+
+function savePsSub(i, val) {
+  const d = getData();
+  if (!d.psSubs) d.psSubs = {};
+  d.psSubs[i] = val;
+  setData(d);
+}
+function loadPsSubs() {
+  const d = getData();
+  if (!d.psSubs) return;
+  Object.entries(d.psSubs).forEach(([i, val]) => {
+    const el = document.getElementById('ps-sub-' + i);
+    if (el) el.innerHTML = val;
+  });
+}
+
 function saveAll() {
   const d=getData();
   const tfs={
     'quick-notes':'quickNotes','skin-notes':'skinNotes','study-notes':'studyNotes',
-    'habit-notes':'habitNotes','handover-notes':'handoverNotes','social-notes':'socialNotes',
+    'habit-notes':'habitNotes','social-notes':'socialNotes',
     'meal-notes':'mealNotes','staples-txt':'staples','formula-notes':'formulaNotes',
     'sem-notes':'semNotes','dash-mood-note':'dashMoodNote',
     'career-role':'careerRole','career-company':'careerCompany',
@@ -2186,7 +2149,7 @@ function loadData() {
   const d=getData();
   const tfs={
     'quick-notes':'quickNotes','skin-notes':'skinNotes','study-notes':'studyNotes',
-    'habit-notes':'habitNotes','handover-notes':'handoverNotes','social-notes':'socialNotes',
+    'habit-notes':'habitNotes','social-notes':'socialNotes',
     'meal-notes':'mealNotes','staples-txt':'staples','formula-notes':'formulaNotes',
     'sem-notes':'semNotes','dash-mood-note':'dashMoodNote',
     'career-role':'careerRole','career-company':'careerCompany',
@@ -2215,16 +2178,17 @@ function loadData() {
   if(d.moods)renderMoodLog(d.moods);
   if(d.measurements)renderMeas(d.measurements);
   if(d.socialEvents)renderSocial(d.socialEvents);
-  if(d.wrapTasks)renderWrapList(d.wrapTasks);else{const dd=getData();dd.wrapTasks=WRAP_DEF.map(t=>({text:t,done:false}));setData(dd);renderWrapList(dd.wrapTasks);}
   if(d.batchTasks)renderBatch(d.batchTasks);else{const dd=getData();dd.batchTasks=BATCH_DEF.map(t=>({text:t,done:false}));setData(dd);renderBatch(dd.batchTasks);}
   if(d.grocery)renderGroc(d.grocery);else renderGroc([]);
   renderRoutines();renderMeals();renderCourseList();
   setTimeout(()=>renderFormulas(),100);
   recalcBudget();refreshDashHabMini();refreshSnap();setTimeout(()=>{renderSavingsChart();renderNWChart();renderNWBreakdown();},50);
   if(d.journalEntries)renderJournal();
+  loadPsSubs();
 }
 
 window.addEventListener('beforeunload',saveAll);
+
 
 
 </script>
