@@ -42,14 +42,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 .page.active{display:block;}
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;}
 .ch{padding:.85rem 1.25rem;border-bottom:1px solid var(--bd2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
-.ct{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--tx);}
+.ct{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:var(--tx);}
 .stat{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:1rem 1.25rem;display:flex;flex-direction:column;}
 .stat.pk{background:linear-gradient(135deg,var(--pk),var(--pkd));border-color:var(--pkd);}
 .stat.pk .sl2,.stat.pk .ss{color:rgba(255,255,255,0.65);}
 .stat.pk .sv{color:#fff;}
 .stat.soft{background:linear-gradient(135deg,#fdf0f3,#fce8ee);border-color:var(--rose);}
 .sl2{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:5px;}
-.sv{font-family:'DM Serif Display',serif;font-size:1.9rem;line-height:1;color:var(--tx);}
+.sv{font-family:'Cormorant Garamond',serif;font-size:1.9rem;line-height:1;color:var(--tx);}
 .ss{font-size:11px;color:var(--tx3);margin-top:3px;}
 .ph{font-family:'DM Serif Display',serif;font-size:2.1rem;margin-bottom:3px;letter-spacing:-0.01em;}
 .ph em{font-style:italic;color:var(--pk);}
@@ -75,7 +75,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-hei
 .prog-bar{height:100%;border-radius:99px;background:var(--pk);transition:width .3s;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
-input[type=text],input[type=number],input[type=date],select,textarea{font-family:'Inter',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);transition:border-color .15s;width:100%;}
+input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]),select,textarea{font-family:'Inter',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);color:var(--tx);transition:border-color .15s;width:100%;}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pk2);background:#fff;}
 textarea{resize:vertical;min-height:70px;}
 label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-bottom:3px;}
@@ -111,12 +111,12 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .gym-row{display:grid;grid-template-columns:1fr 90px 68px;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--bd2);}
 .gym-row:last-child{border-bottom:none;}
 .gym-section{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);padding:8px 0 3px;border-bottom:1px solid var(--bd2);margin-top:4px;}
-.gym-log{font-size:12px;padding:4px 6px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--bg);text-align:center;font-family:'Inter',sans-serif;width:100%;}
+.gym-log{font-size:12px;padding:6px 8px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--sf);text-align:center;font-family:'Inter',sans-serif;width:100%;}
 .gym-log:focus{outline:none;border-color:var(--pk2);background:#fff;}
 /* EDIT MODE */
 .editable-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd2);}
 .editable-row:last-child{border-bottom:none;}
-.editable-row input{font-family:'Inter',sans-serif;font-size:13px;border:none;background:transparent;color:var(--tx);padding:2px 4px;outline:none;border-bottom:1px solid transparent;}
+
 .editable-row input:focus{border-bottom-color:var(--pk2);}
 .edit-toggle{font-size:11px;font-weight:500;padding:4px 10px;border-radius:var(--rsm);border:1px solid var(--bd);background:transparent;color:var(--tx3);cursor:pointer;transition:all .12s;}
 .edit-toggle:hover,.edit-toggle.on{background:var(--pkl);color:var(--pk);border-color:var(--rose);}
@@ -136,19 +136,20 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 .inc-row{display:grid;grid-template-columns:1fr 110px 28px;gap:6px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
 .inc-row:hover{background:var(--sf2);}
 /* HABITS */
-.hab-hdr{display:grid;grid-template-columns:155px repeat(7,1fr) 30px;gap:4px;padding:6px 1.25rem;background:var(--sf2);}
-.hab-row{display:grid;grid-template-columns:155px repeat(7,1fr) 28px;gap:4px;align-items:center;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);}
+.hab-hdr{display:grid;grid-template-columns:minmax(120px,180px) repeat(7,1fr) 32px;gap:6px;padding:8px 1.25rem;background:var(--sf2);align-items:center;}
+.hab-row{display:grid;grid-template-columns:minmax(120px,180px) repeat(7,1fr) 32px;gap:6px;align-items:center;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);}
 .hab-row:hover{background:var(--sf2);}
-.hab-check{width:22px;height:22px;border-radius:5px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s;font-size:11px;user-select:none;}
+.hab-check{width:22px;height:22px;border-radius:5px;border:1px solid var(--bd);background:var(--bg);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .1s;font-size:11px;user-select:none;justify-self:center;cursor:pointer;}
 .hab-check.done{background:var(--pk);border-color:var(--pk);color:#fff;}
-.hab-name{font-family:'Inter',sans-serif;font-size:13px;border:none;background:transparent;color:var(--tx);width:100%;padding:0;outline:none;}
-.hab-col{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);font-weight:500;text-align:center;}
+.hab-name{font-family:'Inter',sans-serif;font-size:13px;border:1px solid var(--bd);border-radius:var(--rsm);background:var(--sf);color:var(--tx);width:100%;padding:5px 8px;outline:none;}
+.hab-col{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--tx3);font-weight:500;text-align:center;justify-self:center;}
 /* SKINCARE */
 .sk-row{display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);}
 .sk-row:last-child{border-bottom:none;}
 .sk-num{width:22px;height:22px;border-radius:50%;background:var(--pkl);border:1px solid var(--rose);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--pk);flex-shrink:0;}
 .sk-name{font-size:13px;flex:1;color:var(--tx);}
-.sk-prod{font-size:12px;background:transparent;border:none;font-family:'Inter',sans-serif;border-bottom:1px solid var(--bd);padding:2px 4px;width:160px;text-align:right;color:var(--tx3);outline:none;}
+input.sk-name{border:1px solid var(--bd);border-radius:var(--rsm);padding:7px 10px;background:var(--sf);}
+.sk-prod{font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rsm);font-family:'Inter',sans-serif;padding:6px 10px;width:160px;text-align:right;color:var(--tx);outline:none;}
 .sk-prod:focus{border-color:var(--pk2);}
 /* GROCERY */
 .groc-item{display:flex;align-items:center;gap:10px;padding:5px 1.25rem;border-bottom:1px solid var(--bd2);}
@@ -208,7 +209,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 [data-theme="dark"] .sidebar{background:#0f0a09;}
 [data-theme="dark"] .card{box-shadow:0 1px 3px rgba(0,0,0,0.4);}
 [data-theme="dark"] .btn{background:#2c1f1c;border-color:rgba(240,180,160,0.15);color:var(--tx);}
-[data-theme="dark"] .btn:hover{background:#3a2825;}
+[data-theme="dark"] .btn:hover{background:var(--sf3);}
 [data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:#2c1f1c;border-color:rgba(240,180,160,0.15);color:var(--tx);}
 [data-theme="dark"] .dash-hero{background:linear-gradient(135deg,#2c1f1c 0%,#1a1210 70%);}
 [data-theme="dark"] .stat{background:#231815;}
@@ -221,24 +222,24 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 [data-theme="dark"] .dt tr:hover td{background:#2c1f1c;}
 
 [data-theme="dark"]{
-  --bg:#1a1210;--sf:#231815;--sf2:#2c1f1c;--sf3:#3a2825;
-  --tx:#f0e6e2;--tx2:#c4a89e;--tx3:#8a6a62;
-  --bd:rgba(240,180,160,0.12);--bd2:rgba(240,180,160,0.07);
-  --pk:#e06b8a;--pk2:#e8849e;--pkl:#3a1f28;--pkd:#f090a8;
-  --rose:#8a4a5a;--mauve:#c4909a;
-  --gold:#c8a84a;--gdl:#2a2010;
-  --grn:#5a9a7a;--gnl:#142a1f;
-  --bl:#5a7a9a;--bll:#141e2a;
+  --bg:#120a0d;--sf:#1c1015;--sf2:#251519;--sf3:#301c21;
+  --tx:#f5eeef;--tx2:#d4b8be;--tx3:#a07880;
+  --bd:rgba(232,160,180,0.15);--bd2:rgba(232,160,180,0.08);
+  --pk:#e8a0b4;--pk2:#f0b8c8;--pkl:#2a0d16;--pkd:#f5c0cc;
+  --rose:#8c2a47;--mauve:#c05070;
+  --gold:#c8a84a;--gdl:#22180a;
+  --grn:#5a9a7a;--gnl:#0e2018;
+  --bl:#6090b0;--bll:#0e1c28;
 }
 [data-theme="dark"] .sidebar{background:#0f0a09;}
 [data-theme="dark"] .card{box-shadow:0 1px 3px rgba(0,0,0,.4);}
-[data-theme="dark"] .btn{background:#2c1f1c;border-color:rgba(240,180,160,.15);color:var(--tx);}
-[data-theme="dark"] .btn:hover{background:#3a2825;}
-[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:#2c1f1c;border-color:rgba(240,180,160,.15);color:var(--tx);}
+[data-theme="dark"] .btn{background:var(--sf2);border-color:var(--bd);color:var(--tx);}
+[data-theme="dark"] .btn:hover{background:var(--sf3);}
+[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:var(--sf2);border-color:var(--bd2);color:var(--tx);}
 [data-theme="dark"] .dash-hero{background:linear-gradient(135deg,#2c1f1c 0%,#1a1210 70%);}
 [data-theme="dark"] .stat{background:#231815;}
 [data-theme="dark"] .stat.soft{background:linear-gradient(135deg,#2c1f1c,#3a2825);}
-[data-theme="dark"] .hab-check{background:#2c1f1c;border-color:rgba(240,180,160,.2);}
+[data-theme="dark"] .hab-check{background:var(--sf2);border-color:var(--bd);}
 [data-theme="dark"] .timer-block{background:#231815;}
 [data-theme="dark"] .timer-block.active{background:#3a1f28;border-color:var(--pk);}
 [data-theme="dark"] .note-box{background:#2c1f1c;}
@@ -248,7 +249,30 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 [data-theme="dark"] .course-card{background:#231815;}
 [data-theme="dark"] .course-hdr{background:#2c1f1c;}
 
-</style>
+
+/* Journal modal */
+#jnl-modal{align-items:center;justify-content:center;}
+#jnl-modal[style*="flex"]{display:flex!important;}
+
+/* Curate tabs */
+.curate-tab{transition:color .15s,border-color .15s;}
+
+/* Course card open state */
+.course-body{display:none;}
+.course-body.open{display:block;}
+
+/* Section label spacing */
+.section-label{margin-top:.25rem;}
+
+.active-btn{background:var(--pk)!important;color:#fff!important;border-color:var(--pk)!important;}
+.career-card{background:var(--sf);border:1px solid var(--bd2);border-radius:var(--r);margin-bottom:1rem;overflow:hidden;}
+
+[data-theme="dark"] .btn-primary{background:var(--pk);color:#1a0d10;border-color:var(--pk);}
+[data-theme="dark"] .btn-primary:hover{background:var(--pk2);border-color:var(--pk2);}
+[data-theme="dark"] .ni.active{background:rgba(232,160,180,0.18);color:var(--pk);}
+[data-theme="dark"] .active-btn{background:var(--pk)!important;color:#1a0d10!important;}
+[data-theme="dark"] .tag.tpk{background:var(--pkl);color:var(--pk);}
+[data-theme="dark"] .stat.pk{background:var(--pkl);}</style>
 </head>
 <body>
 <div class="sidebar">
@@ -259,45 +283,43 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <div class="ngl">Overview</div>
     <button class="ni active" onclick="go('dashboard',this)"><span class="ni-ic">⌂</span><span>Home</span></button>
     <button class="ni" onclick="go('tasks',this)"><span class="ni-ic">✎</span><span>Tasks</span></button>
-    <button class="ni" onclick="go('tasks',this)"><span class="ni-ic">✎</span><span>Tasks</span></button>
     <button class="ni" onclick="go('social',this)"><span class="ni-ic">◈</span><span>Social Calendar</span></button>
     <button class="ni" onclick="go('mood',this)"><span class="ni-ic">◌</span><span>Mood Log</span></button>
   </div>
   <div class="ng">
     <div class="ngl">Health</div>
+    <button class="ni" onclick="go('gym',this)"><span class="ni-ic">◉</span><span>Gym &amp; Progress</span></button>
     <button class="ni" onclick="go('schedule',this)"><span class="ni-ic">◷</span><span>Schedule</span></button>
-    <button class="ni" onclick="go('gym',this)"><span class="ni-ic">◉</span><span>Gym</span></button>
     <button class="ni" onclick="go('timer',this)"><span class="ni-ic">◔</span><span>AM Timer</span></button>
-    <button class="ni" onclick="go('progress',this)"><span class="ni-ic">↑</span><span>Progress</span></button>
     <button class="ni" onclick="go('skincare',this)"><span class="ni-ic">✦</span><span>Skincare</span></button>
-    <button class="ni" onclick="go('meals',this)"><span class="ni-ic">◍</span><span>Meals</span></button>
-    <button class="ni" onclick="go('grocery',this)"><span class="ni-ic">☰</span><span>Grocery</span></button>
-    <button class="ni" onclick="go('habits',this)"><span class="ni-ic">✓</span><span>Habits</span></button>
   </div>
   <div class="ng">
-    <div class="ngl">Money</div>
+    <div class="ngl">Food</div>
+    <button class="ni" onclick="go('meals',this)"><span class="ni-ic">◍</span><span>Meals</span></button>
+  </div>
+  <div class="ng">
+    <div class="ngl">Finance</div>
+    <button class="ni" onclick="go('savings',this)"><span class="ni-ic">◎</span><span>Goals &amp; Savings</span></button>
     <button class="ni" onclick="go('budget',this)"><span class="ni-ic">$</span><span>Budget</span></button>
+    <button class="ni" onclick="go('networth',this)"><span class="ni-ic">↑</span><span>Net Worth</span></button>
   </div>
   <div class="ng">
     <div class="ngl">Career</div>
     <button class="ni" onclick="go('career',this)"><span class="ni-ic">◎</span><span>Career Journal</span></button>
   </div>
   <div class="ng">
-    <div class="ngl">Personal</div>
-    <button class="ni" onclick="go('review',this)"><span class="ni-ic">&#x2197;</span><span>Weekly Review</span></button>
-    <button class="ni" onclick="go('goals',this)"><span class="ni-ic">&#x25CE;</span><span>Goals</span></button>
-    <button class="ni" onclick="go('reading',this)"><span class="ni-ic">&#x25A4;</span><span>Reading List</span></button>
-    <button class="ni" onclick="go('journal',this)"><span class="ni-ic">&#x270D;</span><span>Journal</span></button>
-    <button class="ni" onclick="go('contacts',this)"><span class="ni-ic">&#x25CC;</span><span>People</span></button>
-    <button class="ni" onclick="go('affirmations',this)"><span class="ni-ic">&#x2665;</span><span>Affirmations</span></button>
-  </div>
-  <div class="ng">
     <div class="ngl">Study</div>
     <button class="ni" onclick="go('uni',this)"><span class="ni-ic">◑</span><span>Uni</span></button>
     <button class="ni" onclick="go('semester',this)"><span class="ni-ic">▦</span><span>Semester Plan</span></button>
   </div>
+  <div class="ng">
+    <div class="ngl">Personal</div>
+    <button class="ni" onclick="go('reflect',this)"><span class="ni-ic">◌</span><span>Reflections</span></button>
+    <button class="ni" onclick="go('curate',this)"><span class="ni-ic">❋</span><span>Curate</span></button>
+    <button class="ni" onclick="go('contacts',this)"><span class="ni-ic">◐</span><span>People</span></button>
+    <button class="ni" onclick="go('affirmations',this)"><span class="ni-ic">♡</span><span>Affirmations</span></button>
+  </div>
   <div class="sb-foot">
-    <button class="ni" onclick="toggleTheme()" id="theme-btn" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.5);"><span class="ni-ic" id="theme-ic">◑</span><span id="theme-label">Dark mode</span></button>
     <button class="ni" onclick="toggleTheme()" id="theme-btn" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.5);"><span class="ni-ic" id="theme-ic">◑</span><span id="theme-label">Dark mode</span></button>
     <button class="ni" onclick="saveAll();showToast('All saved!')" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.7);"><span class="ni-ic">✓</span><span>Save everything</span></button>
     <button id="drive-btn" class="ni" onclick="handleDriveAuth()" style="width:100%;justify-content:flex-start;color:rgba(255,255,255,0.5);"><span class="ni-ic">☁</span><span id="drive-btn-text">Connect Drive</span></button>
@@ -307,7 +329,6 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 
 
 <div class="main-wrap">
-
 <!-- DASHBOARD -->
 <div id="page-dashboard" class="page active">
   <div style="margin-bottom:1.25rem;">
@@ -347,11 +368,16 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     <div class="card"><div class="ch"><div class="ct">Tomorrow</div><span class="tag tn" id="dash-tomorrow-tag"></span></div><div id="dash-tomorrow-body" style="font-size:13px;color:var(--tx2);padding:.75rem 1.25rem;">Loading...</div></div>
     <div class="card"><div class="ch"><div class="ct">Quick notes</div></div><textarea id="quick-notes" style="border:none;background:transparent;padding:1rem;width:100%;min-height:120px;font-family:'Inter',sans-serif;font-size:13px;resize:vertical;" placeholder="Anything on your mind..." oninput="saveAll()"></textarea></div>
   </div>
-  <div class="g2">
+  <div class="g2" style="margin-bottom:1.25rem;">
+    <div class="card">
+      <div class="ch"><div class="ct">Due today</div><button class="btn btn-sm" onclick="go('tasks',document.querySelector('[onclick*=\"tasks\"]'))" style="font-size:11px;padding:4px 10px;">View all</button></div>
+      <div id="dash-tasks-today" style="padding:.25rem 0;"></div>
+    </div>
     <div class="card"><div class="ch"><div class="ct">Snapshot</div></div><div style="padding:.75rem 1.25rem;" id="dash-snap"></div></div>
   </div>
 </div>
 
+<!-- TASKS -->
 <!-- TASKS -->
 <div id="page-tasks" class="page">
   <div class="ph">My <em>Tasks</em></div>
@@ -397,6 +423,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
   <div id="task-list"></div>
 </div>
 
+<!-- SOCIAL -->
 <!-- SOCIAL -->
 <div id="page-social" class="page">
   <div class="ph">Social <em>Calendar</em></div>
@@ -445,6 +472,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- MOOD -->
+<!-- MOOD -->
 <div id="page-mood" class="page">
   <div class="ph">Mood &amp; <em>Energy Log</em></div>
   <div class="ps-sub" id="ps-sub-0" contenteditable="true" onblur="savePsSub(0,this.innerHTML)" title="Click to edit">Daily check-in. Spot patterns over time.</div>
@@ -480,6 +508,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- SCHEDULE -->
+<!-- SCHEDULE -->
 <div id="page-schedule" class="page">
   <div class="ph">Weekly <em>Schedule</em></div>
   <div class="ps-sub" id="ps-sub-1" contenteditable="true" onblur="savePsSub(1,this.innerHTML)" title="Click to edit">Click a day to view. Edit any day's rows inline — reset to default anytime.</div>
@@ -497,30 +526,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- GYM -->
-<div id="page-gym" class="page">
-  <div class="ph">Gym <em>Routine</em></div>
-  <div class="ps-sub" id="ps-sub-2" contenteditable="true" onblur="savePsSub(2,this.innerHTML)" title="Click to edit">5-day glutes-focused program. Log weights inline. Edit exercises anytime.</div>
-  <div style="display:flex;gap:4px;margin-bottom:1.5rem;flex-wrap:wrap;" id="gym-nav">
-    <button class="btn btn-primary" onclick="showGym(this,'d1')">Day 1 — Glutes Heavy</button>
-    <button class="btn" onclick="showGym(this,'d2')">Day 2 — Core + Cardio</button>
-    <button class="btn" onclick="showGym(this,'d3')">Day 3 — Glutes Shape</button>
-    <button class="btn" onclick="showGym(this,'d4')">Day 4 — Full Body</button>
-    <button class="btn" onclick="showGym(this,'d5')">Day 5 — Pump</button>
-    <button class="btn" onclick="showGym(this,'d6')">Day 6 — Cardio</button>
-  </div>
-  <div id="gym-content"></div>
-  <div id="gym-edit-panel"></div>
-  <div class="section-label">Personal records</div>
-  <div class="card">
-    <div class="ch"><div class="ct">PRs &amp; milestones</div></div>
-    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:34%;">Exercise</th><th style="width:15%;">Weight</th><th style="width:18%;">Date</th><th>Notes</th><th style="width:7%;"></th></tr></thead><tbody id="pr-body"></tbody></table></div>
-    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
-      <div class="field-row"><div class="field"><input type="text" id="pr-ex" placeholder="Exercise"></div><div class="field" style="max-width:90px;"><input type="text" id="pr-kg" placeholder="e.g. 70kg"></div><div class="field" style="max-width:140px;"><input type="date" id="pr-date"></div><div class="field"><input type="text" id="pr-notes" placeholder="Notes"></div><button class="btn btn-primary" onclick="addPR()">Add</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- AM TIMER -->
+<!-- TIMER -->
 <div id="page-timer" class="page">
   <div class="ph">Morning <em>Timer</em></div>
   <div class="ps-sub" id="ps-sub-3" contenteditable="true" onblur="savePsSub(3,this.innerHTML)" title="Click to edit">4:30–6:00am window. Customise your blocks — add, remove, reorder.</div>
@@ -552,29 +558,6 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- PROGRESS -->
-<div id="page-progress" class="page">
-  <div class="ph">Progress <em>Tracker</em></div>
-  <div class="ps-sub" id="ps-sub-4" contenteditable="true" onblur="savePsSub(4,this.innerHTML)" title="Click to edit">Body measurements and weight trend over time.</div>
-  <div class="g2" style="margin-bottom:1.5rem;">
-    <div class="card"><div class="ch"><div class="ct">Log measurements</div></div><div style="padding:1.25rem;">
-      <div class="field"><label>Date</label><input type="date" id="meas-date"></div>
-      <div class="g2" style="gap:8px;">
-        <div class="field"><label>Weight (kg)</label><input type="number" id="meas-w" step="0.1" placeholder="65.0"></div>
-        <div class="field"><label>Waist (cm)</label><input type="number" id="meas-wa" step="0.5"></div>
-        <div class="field"><label>Hips (cm)</label><input type="number" id="meas-h" step="0.5"></div>
-        <div class="field"><label>Glutes (cm)</label><input type="number" id="meas-g" step="0.5"></div>
-        <div class="field"><label>Thighs (cm)</label><input type="number" id="meas-t" step="0.5"></div>
-        <div class="field"><label>Notes</label><input type="text" id="meas-notes" placeholder="Notes..."></div>
-      </div>
-      <button class="btn btn-primary" style="margin-top:8px;" onclick="addMeas()">Save</button>
-    </div></div>
-    <div class="card"><div class="ch"><div class="ct">Weight trend</div></div><div style="padding:1rem;"><canvas id="weightChart" height="200"></canvas></div></div>
-  </div>
-  <div class="card"><div class="ch"><div class="ct">Measurement history</div></div>
-    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Hips</th><th>Glutes</th><th>Thighs</th><th>Notes</th><th></th></tr></thead><tbody id="meas-body"></tbody></table></div>
-  </div>
-</div>
-
 <!-- SKINCARE -->
 <div id="page-skincare" class="page">
   <div class="ph">Skincare <em>Routine</em></div>
@@ -600,77 +583,25 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- MEALS -->
-<div id="page-meals" class="page">
-  <div class="ph">Meal <em>Plan</em></div>
-  <div class="ps-sub" id="ps-sub-6" contenteditable="true" onblur="savePsSub(6,this.innerHTML)" title="Click to edit">Dairy-free · high protein · batch-cook friendly. Edit your templates anytime.</div>
-  <div class="g2" style="margin-bottom:1.5rem;">
-    <div class="card"><div class="ch"><div class="ct">Gym day meals</div></div><div id="gym-meals-view"></div></div>
-    <div class="card"><div class="ch"><div class="ct">Rest day meals</div></div><div id="rest-meals-view"></div></div>
-  </div>
-  <div class="card" style="margin-bottom:1rem;">
-    <div class="ch"><div class="ct">Saturday batch cook</div></div>
-    <div id="batch-list"></div>
-    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
-      <div class="field-row">
-        <div class="field"><input type="text" id="batch-new" placeholder="Add item..."></div>
-        <button class="btn btn-primary" onclick="addBatch()">Add</button>
-      </div>
-    </div>
-  </div>
-  <div class="card" style="margin-top:1rem;"><div class="ch"><div class="ct">Meal notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="meal-notes" style="min-height:80px;" placeholder="Meal ideas, macros, grocery notes..." oninput="saveAll()"></textarea></div></div>
-</div>
-
-<!-- GROCERY -->
-<div id="page-grocery" class="page">
-  <div class="ph">Grocery <em>List</em></div>
-  <div class="ps-sub" id="ps-sub-7" contenteditable="true" onblur="savePsSub(7,this.innerHTML)" title="Click to edit">Tied to your meal plan. Check off as you shop.</div>
-  <div class="g2">
-    <div>
-      <div class="section-label">This week's list</div>
-      <div class="card" style="margin-bottom:1rem;"><div id="groc-list" style="padding:.5rem 0;"></div></div>
-      <div class="card" style="margin-bottom:.75rem;"><div style="padding:.75rem 1.25rem;">
-        <div class="field-row">
-          <div class="field"><input type="text" id="groc-name" placeholder="Item name"></div>
-          <div class="field" style="max-width:120px;"><input type="text" id="groc-cat" placeholder="Category"></div>
-          <div class="field" style="max-width:80px;"><input type="text" id="groc-qty" placeholder="Qty"></div>
-          <button class="btn btn-primary" onclick="addGrocItem()">Add</button>
-        </div>
-      </div></div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn" onclick="loadStaples()">Load staples</button>
-        <button class="btn" onclick="clearChecked()">Clear checked</button>
-        <button class="btn btn-danger" onclick="clearAll()">Clear all</button>
-      </div>
-    </div>
-    <div>
-      <div class="section-label">Staples list</div>
-      <div class="card"><div style="padding:.75rem 1.25rem;"><textarea id="staples-txt" style="min-height:200px;font-size:12px;" placeholder="One item per line..." oninput="saveAll()"></textarea></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- HABITS -->
-<div id="page-habits" class="page">
-  <div class="ph">Habit <em>Tracker</em></div>
-  <div class="ps-sub" id="ps-sub-8" contenteditable="true" onblur="savePsSub(8,this.innerHTML)" title="Click to edit">7-day view. Click to check off. Rename or add habits anytime.</div>
-  <div class="card" style="margin-bottom:1.5rem;">
-    <div class="hab-hdr">
-      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);">Habit</div>
-      <div class="hab-col">Mon</div><div class="hab-col">Tue</div><div class="hab-col">Wed</div>
-      <div class="hab-col">Thu</div><div class="hab-col">Fri</div><div class="hab-col">Sat</div><div class="hab-col">Sun</div>
-      <div></div>
-    </div>
-    <div id="habits-rows"></div>
-    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
-      <button class="btn btn-primary" onclick="addHabit()">+ Add habit</button>
-    </div>
-  </div>
-  <div class="section-label">Streaks</div>
-  <div class="card" style="margin-bottom:1rem;"><div style="padding:.75rem 1.25rem;" id="habit-streaks"></div></div>
-  <div class="card"><div class="ch"><div class="ct">Notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="habit-notes" style="min-height:80px;" placeholder="Habit reflections..." oninput="saveAll()"></textarea></div></div>
-</div>
-
 <!-- BUDGET -->
+<div id="page-savings" class="page">
+  <div class="ph">Goals &amp; <em>Savings</em></div>
+  <div class="ps-sub" id="ps-sub-savings" contenteditable="true" onblur="savePsSub('savings',this.innerHTML)" title="Click to edit">Track what you are saving toward. These feed into your Net Worth automatically.</div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Savings goals</div></div>
+    <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div><div></div></div>
+    <div id="savings-rows"></div>
+    <button class="add-btn" onclick="addSavingsRow()">+ add goal</button>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Savings chart</div></div>
+    <div style="padding:1rem 1.25rem;"><canvas id="savingsChart" style="max-height:240px;"></canvas></div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;">
+    <button class="btn btn-primary" onclick="recalcBudget();renderSavingsChart();saveAll();showToast('Saved!')">Save</button>
+  </div>
+</div>
+
 <div id="page-budget" class="page">
   <div class="ph">Fortnightly <em>Budget</em></div>
   <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;flex-wrap:wrap;">
@@ -687,24 +618,20 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
   <div class="card" style="margin-bottom:1rem;">
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;">
       <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
-        <div class="sl2">Total expenses budgeted</div><div class="sv" id="b-budgeted-2" style="font-size:1.5rem;">$0</div>
+        <div class="sl2">Budgeted</div><div class="sv" id="b-budgeted-2" style="font-size:1.5rem;">$0</div>
       </div>
       <div style="padding:.85rem 1.25rem;border-right:1px solid var(--bd2);">
-        <div class="sl2">Total spent</div><div class="sv" id="b-spent-2" style="font-size:1.5rem;">$0</div>
+        <div class="sl2">Spent</div><div class="sv" id="b-spent-2" style="font-size:1.5rem;">$0</div>
       </div>
       <div style="padding:.85rem 1.25rem;">
         <div class="sl2">Leftover</div><div class="sv" id="b-leftover" style="font-size:1.5rem;">$0</div>
       </div>
     </div>
   </div>
-  <div class="g2" style="margin-bottom:1.25rem;">
-    <div class="card"><div class="ch"><div class="ct">Spending breakdown</div></div>
-      <div style="padding:.75rem .75rem 0;"><canvas id="budgetChart" height="200"></canvas></div>
-      <div id="chart-legend" style="padding:.5rem 1rem .75rem;display:flex;flex-wrap:wrap;gap:5px;"></div>
-    </div>
-    <div class="card"><div class="ch"><div class="ct">Savings — goal vs actual</div></div>
-      <div style="padding:1rem 1.25rem;"><canvas id="savingsChart" height="200"></canvas></div>
-    </div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Spending breakdown</div></div>
+    <div style="padding:.75rem .75rem 0;"><canvas id="budgetChart" style="max-height:260px;"></canvas></div>
+    <div id="chart-legend" style="padding:.5rem 1rem .75rem;display:flex;flex-wrap:wrap;gap:5px;"></div>
   </div>
   <div class="card" style="margin-bottom:1rem;">
     <div class="ch"><div class="ct">Income</div></div>
@@ -729,10 +656,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
     </div>
     <div id="sub-panel" style="display:none;">
       <div style="display:grid;grid-template-columns:1fr 90px 130px 28px;gap:6px;padding:5px 1.25rem;background:var(--sf2);">
-        <div class="b-lbl" style="text-align:left;">Name</div>
-        <div class="b-lbl">Amount $</div>
-        <div class="b-lbl">Frequency</div>
-        <div></div>
+        <div class="b-lbl" style="text-align:left;">Name</div><div class="b-lbl">Amount $</div><div class="b-lbl">Frequency</div><div></div>
       </div>
       <div id="sub-rows"></div>
       <button class="add-btn" onclick="addSubRow()">+ add subscription</button>
@@ -742,85 +666,119 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
       </div>
     </div>
   </div>
-  <div class="card" style="margin-bottom:1rem;">
-    <div class="ch"><div class="ct">Savings goals</div></div>
-    <div class="sav-hdr"><div class="b-lbl" style="text-align:left;">Goal</div><div class="b-lbl">This fortnight</div><div class="b-lbl">Total saved</div><div class="b-lbl">Target</div><div></div></div>
-    <div id="savings-rows"></div>
-    <button class="add-btn" onclick="addSavingsRow()">+ add goal</button>
-  </div>
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:2rem;">
     <button class="btn" onclick="exportCSV()">Export CSV</button>
     <button class="btn btn-primary" onclick="recalcBudget();saveAll();showToast('Budget saved!')">Save</button>
   </div>
-  <div style="border-top:2px solid var(--bd);padding-top:1.5rem;margin-bottom:1.5rem;">
-    <div class="ph" style="font-size:1.6rem;margin-bottom:.25rem;">Net <em>Worth</em></div>
-    <div class="ps-sub" style="margin-bottom:1rem;">Your total assets minus liabilities.</div>
-    <div class="g2">
-      <div class="card">
-        <div class="ch"><div class="ct">Net worth</div><button class="edit-toggle" id="nw-edit-btn" onclick="toggleNWEdit()">Edit</button></div>
-        <div style="padding:1.25rem;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--tx);margin-bottom:4px;" id="nw-total">$0</div>
-          <div style="font-size:11px;color:var(--tx3);margin-bottom:1rem;">assets minus liabilities</div>
-          <canvas id="nwChart" height="160"></canvas>
-          <div id="nw-legend" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;"></div>
-        </div>
-        <div id="nw-edit-panel" style="display:none;border-top:1px solid var(--bd2);padding:1rem 1.25rem;">
-          <div class="section-label" style="margin-top:0;">Assets</div>
-          <div id="nw-assets"></div>
-          <button class="add-btn" onclick="addNWRow('asset')">+ add asset</button>
-          <div class="section-label">Liabilities</div>
-          <div id="nw-liabilities"></div>
-          <button class="add-btn" onclick="addNWRow('liability')">+ add liability</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="ch"><div class="ct">Asset &amp; liability breakdown</div></div>
-        <div style="padding:1.25rem;"><div id="nw-breakdown-list" style="font-size:13px;color:var(--tx2);">Add assets and liabilities to see breakdown.</div></div>
+</div>
+
+<div id="page-networth" class="page">
+  <div class="ph">Net <em>Worth</em></div>
+  <div class="ps-sub" id="ps-sub-networth" contenteditable="true" onblur="savePsSub('networth',this.innerHTML)" title="Click to edit">Assets pulled from your savings goals. Add liabilities below.</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="ch"><div class="ct">Net worth</div></div>
+      <div style="padding:1.25rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--tx);margin-bottom:4px;" id="nw-total">$0</div>
+        <div style="font-size:11px;color:var(--tx3);margin-bottom:1rem;">assets minus liabilities</div>
+        <canvas id="nwChart" height="160"></canvas>
+        <div id="nw-legend" style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;"></div>
       </div>
     </div>
+    <div class="card">
+      <div class="ch"><div class="ct">Breakdown</div></div>
+      <div style="padding:1.25rem;" id="nw-breakdown-list">Add savings and liabilities to see breakdown.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Liabilities</div><button class="btn btn-sm" onclick="addNWRow('liability')" style="font-size:11px;padding:4px 10px;">+ Add</button></div>
+    <div id="nw-liabilities"></div>
+    <div style="padding:.5rem 1.25rem;font-size:11px;color:var(--tx3);">Assets are pulled automatically from your savings goals above.</div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-bottom:1rem;">
+    <button class="btn btn-primary" onclick="renderNWChart();renderNWBreakdown();saveAll();showToast('Saved!')">Refresh chart</button>
   </div>
 </div>
 
-<!-- CAREER -->
 <div id="page-career" class="page">
   <div class="ph">Career <em>Journal</em></div>
-  <div class="ps-sub" id="ps-sub-9" contenteditable="true" onblur="savePsSub(9,this.innerHTML)" title="Click to edit">Your space — role, challenges, priorities, and where you're headed.</div>
+  <div class="ps-sub" id="ps-sub-career" contenteditable="true" onblur="savePsSub('career',this.innerHTML)" title="Click to edit">Your space — role, growth, challenges and where you are headed.</div>
+
+  <!-- DREAM ROLE BUTTON - top of page -->
+  <div style="margin-bottom:1.5rem;">
+    <button class="btn btn-primary" onclick="showAddDreamBtn()" style="padding:10px 24px;font-size:14px;">+ Add dream role</button>
+  </div>
+
+  <!-- CURRENT ROLE DISPLAY/EDIT -->
   <div class="section-label">Current role</div>
-  <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
-    <div class="g2" style="gap:1rem;margin-bottom:10px;">
-      <div class="field" style="margin-bottom:0;"><label>Role title</label><input type="text" id="career-role" placeholder="e.g. Project Coordinator" oninput="saveAll()"></div>
-      <div class="field" style="margin-bottom:0;"><label>Company</label><input type="text" id="career-company" placeholder="e.g. Saltire Infrastructure" oninput="saveAll()"></div>
-    </div>
-    <div class="field"><label>What I actually do</label><textarea id="career-actual" placeholder="The real scope of your role day to day..." oninput="saveAll()"></textarea></div>
-    <div class="field"><label>What's going well</label><textarea id="career-good" placeholder="Wins, things clicking, growth you're seeing..." oninput="saveAll()"></textarea></div>
-  </div></div>
-  <div class="section-label">Where I'm heading</div>
-  <div class="card" style="margin-bottom:1.5rem;"><div style="padding:1.25rem;">
-    <div class="field"><label>Next role target</label><input type="text" id="career-next-role" placeholder="e.g. Resource Planner" oninput="saveAll()"></div>
-    <div class="g2" style="gap:1rem;">
-      <div class="field" style="margin-bottom:0;"><label>Long-term vision</label><textarea id="career-longterm" style="min-height:90px;" placeholder="BBA then MBA then governance..." oninput="saveAll()"></textarea></div>
-      <div class="field" style="margin-bottom:0;"><label>Skills I'm building</label><textarea id="career-skills" style="min-height:90px;" placeholder="What you're actively working on..." oninput="saveAll()"></textarea></div>
-    </div>
-  </div></div>
-  <div class="card" style="margin-bottom:1.5rem;">
-    <div class="ch"><div class="ct">This week</div></div>
-    <div style="padding:1.25rem;">
-      <div class="g2" style="gap:1rem;">
-        <div class="field" style="margin-bottom:0;"><label>Challenges</label><textarea id="career-challenges" style="min-height:90px;" placeholder="What's hard, what's draining you..." oninput="saveAll()"></textarea></div>
-        <div class="field" style="margin-bottom:0;"><label>Priorities</label><textarea id="career-priorities" style="min-height:90px;" placeholder="Top 3–5 things to move forward this week..." oninput="saveAll()"></textarea></div>
+  <div id="career-role-display"></div>
+  <div id="career-role-form" style="display:none;">
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="ch"><div class="ct">Role details</div></div>
+      <div style="padding:1.25rem;">
+        <div class="g2" style="gap:1rem;margin-bottom:10px;">
+          <div class="field" style="margin-bottom:0;"><label>Role title</label><input type="text" id="career-role" placeholder="e.g. Project Coordinator" oninput="saveAll()"></div>
+          <div class="field" style="margin-bottom:0;"><label>Company</label><input type="text" id="career-company" placeholder="e.g. Saltire Infrastructure" oninput="saveAll()"></div>
+        </div>
+        <div class="field"><label>What I actually do</label><textarea id="career-actual" style="min-height:80px;" placeholder="The real scope of your role day to day..." oninput="saveAll()"></textarea></div>
+        <div class="field"><label>What is going well</label><textarea id="career-good" style="min-height:70px;" placeholder="Wins, things clicking, growth you are seeing..." oninput="saveAll()"></textarea></div>
+        <div class="g2" style="gap:1rem;">
+          <div class="field" style="margin-bottom:0;"><label>Challenges</label><textarea id="career-challenges" style="min-height:70px;" placeholder="What is hard or draining you..." oninput="saveAll()"></textarea></div>
+          <div class="field" style="margin-bottom:0;"><label>This week priorities</label><textarea id="career-priorities" style="min-height:70px;" placeholder="Top 3 to 5 things to move forward..." oninput="saveAll()"></textarea></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:1rem;">
+          <button class="btn btn-primary" onclick="saveCareerRole()">Save role</button>
+          <button class="btn" onclick="cancelCareerEdit()">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- DREAM ROLE - button triggered -->
+  <div id="career-dream-display"></div>
+  <div id="career-dream-form" style="display:none;">
+    <div class="card" style="margin-bottom:1.5rem;">
+      <div class="ch"><div class="ct">Next / Dream role</div><button class="btn btn-sm" onclick="hideDreamForm()">Cancel</button></div>
+      <div style="padding:1.25rem;">
+        <div class="field"><label>Role target</label><input type="text" id="dream-title" placeholder="e.g. Resource Planner, Head of Ops..."></div>
+        <div class="field"><label>Why this role</label><textarea id="dream-why" style="min-height:70px;" placeholder="What draws you to it..."></textarea></div>
+        <div class="g2" style="gap:1rem;">
+          <div class="field" style="margin-bottom:0;"><label>Skills to build</label><textarea id="dream-skills" style="min-height:70px;" placeholder="What you need to get there..."></textarea></div>
+          <div class="field" style="margin-bottom:0;"><label>Long-term vision</label><textarea id="dream-vision" style="min-height:70px;" placeholder="Where this leads..."></textarea></div>
+        </div>
+        <button class="btn btn-primary" onclick="saveDreamRole()" style="margin-top:1rem;">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURSES TO WATCH -->
+  <div class="section-label">Courses</div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Courses to look out for</div></div>
+    <div id="career-courses-list"></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row" style="flex-wrap:wrap;">
+        <div class="field" style="flex:2;min-width:140px;"><input type="text" id="cc-name" placeholder="Course name or provider..."></div>
+        <div class="field" style="max-width:120px;"><input type="text" id="cc-provider" placeholder="Provider"></div>
+        <div class="field" style="max-width:90px;"><input type="text" id="cc-cost" placeholder="Cost"></div>
+        <div class="field" style="max-width:120px;"><select id="cc-status"><option value="watchlist">Watchlist</option><option value="enrolled">Enrolled</option><option value="done">Done</option></select></div>
+        <button class="btn btn-primary" onclick="addCareerCourse()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNAL ENTRIES -->
   <div class="section-label">Journal entries</div>
-  <div class="card" style="margin-bottom:1rem;"><div style="padding:1.25rem;">
-    <div class="field"><label>New entry</label><textarea id="journal-new" style="min-height:100px;" placeholder="Reflect, vent, plan, note. No rules. Date-stamped automatically..."></textarea></div>
-    <button class="btn btn-primary" onclick="addJournalEntry()">Save entry</button>
-  </div></div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">New entry</div></div>
+    <div style="padding:1.25rem;">
+      <div class="field"><textarea id="journal-new" style="min-height:100px;" placeholder="Reflect, vent, plan, note. Entries are date-stamped automatically..."></textarea></div>
+      <button class="btn btn-primary" onclick="addJournalEntry()">Save entry</button>
+    </div>
+  </div>
   <div id="journal-list"></div>
 </div>
 
-
-<!-- UNI -->
 <div id="page-uni" class="page">
   <div class="ph">Uni <em>Tracker</em></div>
   <div class="ps-sub" id="ps-sub-10" contenteditable="true" onblur="savePsSub(10,this.innerHTML)" title="Click to edit">Your courses, tasks, grades and notes all in one place.</div>
@@ -850,6 +808,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- SEMESTER -->
+<!-- SEMESTER -->
 <div id="page-semester" class="page">
   <div class="ph">Semester <em>Planner</em></div>
   <div class="ps-sub" id="ps-sub-11" contenteditable="true" onblur="savePsSub(11,this.innerHTML)" title="Click to edit">Visual week-by-week map. Add tasks and see your whole semester at once.</div>
@@ -874,104 +833,6 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 <!-- WEEKLY REVIEW -->
-<div id="page-review" class="page">
-  <div class="ph">Weekly <em>Review</em></div>
-  <div class="ps-sub" id="ps-sub-review" contenteditable="true" onblur="savePsSub('review',this.innerHTML)" title="Click to edit">A Sunday ritual. Reflect, reset, and set yourself up for the week ahead.</div>
-  <div class="g2" style="margin-bottom:1.25rem;">
-    <div class="card"><div class="ch"><div class="ct">Last week</div></div><div style="padding:1.25rem;">
-      <div class="field"><label>Top wins</label><textarea id="rev-wins" style="min-height:80px;" placeholder="What went well? What are you proud of?" oninput="saveAll()"></textarea></div>
-      <div class="field"><label>What drained you</label><textarea id="rev-drain" style="min-height:60px;" placeholder="What felt hard or heavy?" oninput="saveAll()"></textarea></div>
-      <div class="field"><label>Energy this week (1-5)</label>
-        <div style="display:flex;gap:6px;" id="rev-energy-row">
-          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(1,this)">1</button>
-          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(2,this)">2</button>
-          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(3,this)">3</button>
-          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(4,this)">4</button>
-          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(5,this)">5</button>
-        </div>
-      </div>
-    </div></div>
-    <div class="card"><div class="ch"><div class="ct">This week</div></div><div style="padding:1.25rem;">
-      <div class="field"><label>Top 3 priorities</label><textarea id="rev-prio" style="min-height:80px;" placeholder="The 3 things that actually matter this week..." oninput="saveAll()"></textarea></div>
-      <div class="field"><label>What to drop or defer</label><textarea id="rev-drop" style="min-height:60px;" placeholder="What are you saying no to?" oninput="saveAll()"></textarea></div>
-      <div class="field"><label>Intention for the week</label><input type="text" id="rev-intention" placeholder="One word or phrase..." oninput="saveAll()"></div>
-    </div></div>
-  </div>
-  <div class="card" style="margin-bottom:1.25rem;">
-    <div class="ch"><div class="ct">Review history</div></div>
-    <div style="padding:1rem 1.25rem;"><button class="btn btn-primary" onclick="saveWeeklyReview()">Save this review</button></div>
-    <div id="review-history"></div>
-  </div>
-</div>
-
-<!-- GOALS -->
-<div id="page-goals" class="page">
-  <div class="ph">My <em>Goals</em></div>
-  <div class="ps-sub" id="ps-sub-goals" contenteditable="true" onblur="savePsSub('goals',this.innerHTML)" title="Click to edit">The big picture. What are you building toward?</div>
-  <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;">
-    <button class="btn btn-primary" onclick="setGoalView('all',this)">All</button>
-    <button class="btn" onclick="setGoalView('6m',this)">6 months</button>
-    <button class="btn" onclick="setGoalView('1y',this)">1 year</button>
-    <button class="btn" onclick="setGoalView('5y',this)">5 years</button>
-  </div>
-  <div class="card" style="margin-bottom:1.25rem;">
-    <div class="ch"><div class="ct">Add a goal</div></div>
-    <div style="padding:1rem 1.25rem;">
-      <div class="field-row" style="flex-wrap:wrap;">
-        <div class="field" style="flex:2;min-width:160px;"><input type="text" id="goal-title" placeholder="What do you want to achieve?"></div>
-        <div class="field" style="max-width:130px;"><select id="goal-horizon"><option value="6m">6 months</option><option value="1y">1 year</option><option value="5y">5 years</option></select></div>
-        <div class="field" style="max-width:130px;"><select id="goal-area"><option value="career">Career</option><option value="study">Study</option><option value="health">Health</option><option value="finance">Finance</option><option value="personal">Personal</option><option value="relationships">Relationships</option></select></div>
-        <button class="btn btn-primary" onclick="addGoal()">Add</button>
-      </div>
-      <div class="field" style="margin-top:8px;"><input type="text" id="goal-why" placeholder="Why does this matter to you?"></div>
-    </div>
-  </div>
-  <div id="goals-list"></div>
-</div>
-
-<!-- READING -->
-<div id="page-reading" class="page">
-  <div class="ph">Reading <em>List</em></div>
-  <div class="ps-sub" id="ps-sub-reading" contenteditable="true" onblur="savePsSub('reading',this.innerHTML)" title="Click to edit">Books, articles, papers and anything you want to get through.</div>
-  <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;">
-    <button class="btn btn-primary" onclick="filterReading('all',this)">All</button>
-    <button class="btn" onclick="filterReading('want',this)">Want to read</button>
-    <button class="btn" onclick="filterReading('reading',this)">Reading now</button>
-    <button class="btn" onclick="filterReading('done',this)">Finished</button>
-  </div>
-  <div class="card" style="margin-bottom:1.25rem;">
-    <div class="ch"><div class="ct">Add item</div></div>
-    <div style="padding:1rem 1.25rem;">
-      <div class="field-row" style="flex-wrap:wrap;">
-        <div class="field" style="flex:2;min-width:160px;"><input type="text" id="read-title" placeholder="Title..."></div>
-        <div class="field" style="max-width:130px;"><input type="text" id="read-author" placeholder="Author..."></div>
-        <div class="field" style="max-width:120px;"><select id="read-type"><option value="book">Book</option><option value="article">Article</option><option value="paper">Paper</option><option value="podcast">Podcast</option><option value="other">Other</option></select></div>
-        <div class="field" style="max-width:120px;"><select id="read-status"><option value="want">Want to read</option><option value="reading">Reading now</option><option value="done">Finished</option></select></div>
-        <button class="btn btn-primary" onclick="addReading()">Add</button>
-      </div>
-    </div>
-  </div>
-  <div id="reading-list"></div>
-</div>
-
-<!-- REFLECTION -->
-<div id="page-journal" class="page">
-  <div class="ph">Reflection <em>Journal</em></div>
-  <div class="ps-sub" id="ps-sub-journal" contenteditable="true" onblur="savePsSub('journal',this.innerHTML)" title="Click to edit">Private. No rules. Just you.</div>
-  <div class="card" style="margin-bottom:1.25rem;">
-    <div class="ch"><div class="ct">New entry</div><span style="font-size:12px;color:var(--tx3);" id="jnl-date-lbl"></span></div>
-    <div style="padding:1.25rem;">
-      <div class="field"><input type="text" id="jnl-mood-word" placeholder="How are you feeling in one word?"></div>
-      <div class="field"><textarea id="jnl-body" style="min-height:180px;" placeholder="Write freely. This is just for you..."></textarea></div>
-      <div class="field-row">
-        <div class="field"><select id="jnl-tag"><option value="">No tag</option><option value="grateful">Grateful</option><option value="processing">Processing</option><option value="planning">Planning</option><option value="venting">Venting</option><option value="celebrating">Celebrating</option><option value="reflecting">Reflecting</option></select></div>
-        <button class="btn btn-primary" onclick="saveJournalEntry()">Save entry</button>
-      </div>
-    </div>
-  </div>
-  <div id="jnl-history"></div>
-</div>
-
 <!-- CONTACTS -->
 <div id="page-contacts" class="page">
   <div class="ph">My <em>People</em></div>
@@ -991,6 +852,7 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
   <div id="contacts-list"></div>
 </div>
 
+<!-- AFFIRMATIONS -->
 <!-- AFFIRMATIONS -->
 <div id="page-affirmations" class="page">
   <div class="ph">Affirmation <em>Bank</em></div>
@@ -1015,7 +877,322 @@ label{font-size:12px;font-weight:500;color:var(--tx2);display:block;margin-botto
 </div>
 
 </div>
+<!-- GYM & PROGRESS -->
+<div id="page-gym" class="page">
+  <div class="ph">Gym &amp; <em>Progress</em></div>
+  <div class="ps-sub" id="ps-sub-gym" contenteditable="true" onblur="savePsSub('gym',this.innerHTML)" title="Click to edit">5-day glutes-focused program. Log weights inline. Track measurements and weight trend here too.</div>
+
+  <div class="section-label">Routine</div>
+  <div style="display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap;" id="gym-nav">
+    <button class="btn btn-primary" onclick="showGym(this,'d1')">Day 1</button>
+    <button class="btn" onclick="showGym(this,'d2')">Day 2</button>
+    <button class="btn" onclick="showGym(this,'d3')">Day 3</button>
+    <button class="btn" onclick="showGym(this,'d4')">Day 4</button>
+    <button class="btn" onclick="showGym(this,'d5')">Day 5</button>
+    <button class="btn" onclick="showGym(this,'d6')">Day 6</button>
+  </div>
+  <div id="gym-content"></div>
+  <div id="gym-edit-panel"></div>
+
+  <div class="section-label">Personal records</div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">PRs &amp; milestones</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th style="width:34%;">Exercise</th><th style="width:15%;">Weight</th><th style="width:18%;">Date</th><th>Notes</th><th style="width:7%;"></th></tr></thead><tbody id="pr-body"></tbody></table></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row"><div class="field"><input type="text" id="pr-ex" placeholder="Exercise"></div><div class="field" style="max-width:90px;"><input type="text" id="pr-kg" placeholder="e.g. 70kg"></div><div class="field" style="max-width:140px;"><input type="date" id="pr-date"></div><div class="field"><input type="text" id="pr-notes" placeholder="Notes"></div><button class="btn btn-primary" onclick="addPR()">Add</button></div>
+    </div>
+  </div>
+
+  <div class="section-label">Measurements</div>
+  <div class="g2" style="margin-bottom:1.5rem;">
+    <div class="card"><div class="ch"><div class="ct">Log measurements</div></div><div style="padding:1.25rem;">
+      <div class="field"><label>Date</label><input type="date" id="meas-date"></div>
+      <div class="g2" style="gap:8px;">
+        <div class="field"><label>Weight (kg)</label><input type="number" id="meas-w" step="0.1" placeholder="65.0"></div>
+        <div class="field"><label>Waist (cm)</label><input type="number" id="meas-wa" step="0.5"></div>
+        <div class="field"><label>Hips (cm)</label><input type="number" id="meas-h" step="0.5"></div>
+        <div class="field"><label>Glutes (cm)</label><input type="number" id="meas-g" step="0.5"></div>
+        <div class="field"><label>Thighs (cm)</label><input type="number" id="meas-t" step="0.5"></div>
+        <div class="field"><label>Notes</label><input type="text" id="meas-notes" placeholder="Notes..."></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:8px;" onclick="addMeas()">Save</button>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">Weight trend</div></div><div style="padding:1rem;"><canvas id="weightChart" height="200"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">Measurement history</div></div>
+    <div style="overflow-x:auto;"><table class="dt"><thead><tr><th>Date</th><th>Weight</th><th>Waist</th><th>Hips</th><th>Glutes</th><th>Thighs</th><th>Notes</th><th></th></tr></thead><tbody id="meas-body"></tbody></table></div>
+  </div>
+</div>
+
+
+<!-- MEALS & GROCERY -->
+<div id="page-meals" class="page">
+  <div class="ph">Meals &amp; <em>Grocery</em></div>
+  <div class="ps-sub" id="ps-sub-meals" contenteditable="true" onblur="savePsSub('meals',this.innerHTML)" title="Click to edit">Dairy-free · high protein · batch-cook friendly. Grocery list below your meal plan.</div>
+
+  <div class="section-label">Meal plan</div>
+  <div class="g2" style="margin-bottom:1rem;">
+    <div class="card"><div class="ch"><div class="ct">Gym day</div></div><div id="gym-meals-view"></div></div>
+    <div class="card"><div class="ch"><div class="ct">Rest day</div></div><div id="rest-meals-view"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Saturday batch cook</div></div>
+    <div id="batch-list"></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row">
+        <div class="field"><input type="text" id="batch-new" placeholder="Add item..."></div>
+        <button class="btn btn-primary" onclick="addBatch()">Add</button>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Meal notes</div></div>
+    <div style="padding:.75rem 1.25rem;"><textarea id="meal-notes" style="min-height:80px;" placeholder="Meal ideas, macros, grocery notes..." oninput="saveAll()"></textarea></div>
+  </div>
+
+  <div class="section-label">Grocery list</div>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:.75rem;">
+        <div style="padding:.75rem 1.25rem;">
+          <div class="field-row">
+            <div class="field"><input type="text" id="groc-name" placeholder="Item name"></div>
+            <div class="field" style="max-width:120px;"><input type="text" id="groc-cat" placeholder="Category"></div>
+            <div class="field" style="max-width:80px;"><input type="text" id="groc-qty" placeholder="Qty"></div>
+            <button class="btn btn-primary" onclick="addGrocItem()">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:.75rem;"><div id="groc-list" style="padding:.5rem 0;"></div></div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="loadStaples()">Load staples</button>
+        <button class="btn" onclick="clearChecked()">Clear checked</button>
+        <button class="btn btn-danger" onclick="clearAll()">Clear all</button>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Staples list</div>
+      <div class="card"><div style="padding:.75rem 1.25rem;"><textarea id="staples-txt" style="min-height:200px;font-size:12px;" placeholder="One item per line..." oninput="saveAll()"></textarea></div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- REFLECTIONS -->
+<div id="page-reflect" class="page">
+  <div class="ph"><em>Reflections</em></div>
+  <div class="ps-sub" id="ps-sub-reflect" contenteditable="true" onblur="savePsSub('reflect',this.innerHTML)" title="Click to edit">Journal, goals, weekly review and habits — all in one place.</div>
+
+  <!-- JOURNAL -->
+  <div class="section-label" style="display:flex;align-items:center;justify-content:space-between;">
+    <span>Journal</span>
+    <button class="btn btn-primary btn-sm" onclick="openJournalModal()" style="font-size:12px;padding:5px 14px;">+ New entry</button>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Entry log</div><span style="font-size:11px;color:var(--tx3);" id="jnl-count"></span></div>
+    <div id="jnl-history" style="max-height:500px;overflow-y:auto;"></div>
+    <div id="jnl-empty" style="padding:1rem 1.25rem;font-size:13px;color:var(--tx3);display:none;">No entries yet. Hit New entry to start writing.</div>
+  </div>
+
+  <!-- JOURNAL MODAL -->
+  <div id="jnl-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:center;justify-content:center;">
+    <div style="background:var(--sf);border-radius:var(--r);padding:1.75rem;width:min(560px,92vw);max-height:90vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,0.25);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;">New entry</div>
+        <button onclick="closeJournalModal()" style="background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--tx3);">&#x2715;</button>
+      </div>
+      <div class="field"><label>How are you feeling?</label><input type="text" id="jnl-mood-word" placeholder="One word..."></div>
+      <div class="field"><label>Entry</label><textarea id="jnl-body" style="min-height:200px;" placeholder="Write freely. This is just for you..."></textarea></div>
+      <div class="field-row">
+        <div class="field"><select id="jnl-tag"><option value="">No tag</option><option value="grateful">Grateful</option><option value="processing">Processing</option><option value="planning">Planning</option><option value="venting">Venting</option><option value="celebrating">Celebrating</option><option value="reflecting">Reflecting</option></select></div>
+        <button class="btn btn-primary" onclick="saveJournalEntry()">Save entry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOALS -->
+  <div class="section-label">Goals</div>
+  <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="setGoalView('all',this)">All</button>
+    <button class="btn" onclick="setGoalView('6m',this)">6 months</button>
+    <button class="btn" onclick="setGoalView('1y',this)">1 year</button>
+    <button class="btn" onclick="setGoalView('5y',this)">5 years</button>
+  </div>
+  <div class="card" style="margin-bottom:.75rem;">
+    <div class="ch"><div class="ct">Add a goal</div></div>
+    <div style="padding:1rem 1.25rem;">
+      <div class="field-row" style="flex-wrap:wrap;">
+        <div class="field" style="flex:2;min-width:160px;"><input type="text" id="goal-title" placeholder="What do you want to achieve?"></div>
+        <div class="field" style="max-width:130px;"><select id="goal-horizon"><option value="6m">6 months</option><option value="1y">1 year</option><option value="5y">5 years</option></select></div>
+        <div class="field" style="max-width:130px;"><select id="goal-area"><option value="career">Career</option><option value="study">Study</option><option value="health">Health</option><option value="finance">Finance</option><option value="personal">Personal</option><option value="relationships">Relationships</option></select></div>
+        <button class="btn btn-primary" onclick="addGoal()">Add</button>
+      </div>
+      <div class="field" style="margin-top:8px;"><input type="text" id="goal-why" placeholder="Why does this matter to you?"></div>
+    </div>
+  </div>
+  <div id="goals-list" style="margin-bottom:1.5rem;"></div>
+
+  <!-- REVIEW -->
+  <div class="section-label">Weekly Review</div>
+  <div class="g2" style="margin-bottom:1rem;">
+    <div class="card"><div class="ch"><div class="ct">Last week</div></div><div style="padding:1.25rem;">
+      <div class="field"><label>Top wins</label><textarea id="rev-wins" style="min-height:70px;" placeholder="What went well?" oninput="saveAll()"></textarea></div>
+      <div class="field"><label>What drained you</label><textarea id="rev-drain" style="min-height:60px;" placeholder="What felt hard?" oninput="saveAll()"></textarea></div>
+      <div class="field"><label>Energy this week (1-5)</label>
+        <div style="display:flex;gap:6px;" id="rev-energy-row">
+          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(1,this)">1</button>
+          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(2,this)">2</button>
+          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(3,this)">3</button>
+          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(4,this)">4</button>
+          <button class="btn btn-sm" style="flex:1;" onclick="setRevEnergy(5,this)">5</button>
+        </div>
+      </div>
+    </div></div>
+    <div class="card"><div class="ch"><div class="ct">This week</div></div><div style="padding:1.25rem;">
+      <div class="field"><label>Top 3 priorities</label><textarea id="rev-prio" style="min-height:70px;" placeholder="The 3 things that matter most..." oninput="saveAll()"></textarea></div>
+      <div class="field"><label>What to drop or defer</label><textarea id="rev-drop" style="min-height:60px;" placeholder="What are you saying no to?" oninput="saveAll()"></textarea></div>
+      <div class="field"><label>Intention for the week</label><input type="text" id="rev-intention" placeholder="One word or phrase..." oninput="saveAll()"></div>
+    </div></div>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="ch"><div class="ct">Review history</div></div>
+    <div style="padding:1rem 1.25rem;"><button class="btn btn-primary" onclick="saveWeeklyReview()">Save this review</button></div>
+    <div id="review-history"></div>
+  </div>
+
+  <!-- HABITS -->
+  <div class="section-label">Habit Tracker</div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="hab-hdr">
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);">Habit</div>
+      <div class="hab-col">Mon</div><div class="hab-col">Tue</div><div class="hab-col">Wed</div>
+      <div class="hab-col">Thu</div><div class="hab-col">Fri</div><div class="hab-col">Sat</div><div class="hab-col">Sun</div>
+      <div></div>
+    </div>
+    <div id="habits-rows"></div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <button class="btn btn-primary" onclick="addHabit()">+ Add habit</button>
+    </div>
+  </div>
+  <div class="section-label">Streaks</div>
+  <div class="card" style="margin-bottom:1rem;"><div style="padding:.75rem 1.25rem;" id="habit-streaks"></div></div>
+  <div class="card"><div class="ch"><div class="ct">Notes</div></div><div style="padding:.75rem 1.25rem;"><textarea id="habit-notes" style="min-height:80px;" placeholder="Habit reflections..." oninput="saveAll()"></textarea></div></div>
+</div>
+
+
+<!-- CURATE -->
+<div id="page-curate" class="page">
+  <div class="ph"><em>Curate</em></div>
+  <div class="ps-sub" id="ps-sub-curate" contenteditable="true" onblur="savePsSub('curate',this.innerHTML)" title="Click to edit">Wishlist, reading, watching, substacks and podcasts — things worth your time and money.</div>
+
+  <!-- WISHLIST -->
+  <div class="section-label">Wishlist</div>
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="ch"><div class="ct">Items to buy</div><button class="btn btn-sm" onclick="exportWishlistCSV()" style="font-size:11px;padding:4px 10px;">Export CSV</button></div>
+    <div id="wishlist-items"></div>
+    <div id="wishlist-purchased" style="display:none;">
+      <div style="padding:8px 1.25rem;background:var(--sf2);border-top:1px solid var(--bd2);">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);">Purchased</div>
+      </div>
+      <div id="wishlist-purchased-items"></div>
+    </div>
+    <div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);">
+      <div class="field-row" style="flex-wrap:wrap;">
+        <div class="field" style="flex:2;min-width:140px;"><input type="text" id="wish-name" placeholder="Item name..."></div>
+        <div class="field" style="max-width:120px;"><input type="text" id="wish-cat" placeholder="Category"></div>
+        <div class="field" style="max-width:90px;"><input type="number" id="wish-price" placeholder="Price" step="0.01"></div>
+        <div class="field" style="max-width:110px;"><select id="wish-prio"><option value="want">Want</option><option value="need">Need</option><option value="someday">Someday</option></select></div>
+        <button class="btn btn-primary" onclick="addWishItem()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTERTAINMENT -->
+  <div class="section-label">Entertainment</div>
+  <div style="display:flex;border-bottom:1px solid var(--bd2);margin-bottom:1rem;">
+    <button onclick="setCurateTab('reading',this)" class="curate-tab active-tab" style="padding:8px 16px;border:none;background:none;font-size:13px;cursor:pointer;color:var(--pk);border-bottom:2px solid var(--pk);font-weight:500;">Reading</button>
+    <button onclick="setCurateTab('watching',this)" class="curate-tab" style="padding:8px 16px;border:none;background:none;font-size:13px;cursor:pointer;color:var(--tx3);border-bottom:2px solid transparent;">Watching</button>
+    <button onclick="setCurateTab('substacks',this)" class="curate-tab" style="padding:8px 16px;border:none;background:none;font-size:13px;cursor:pointer;color:var(--tx3);border-bottom:2px solid transparent;">Substacks</button>
+    <button onclick="setCurateTab('podcasts',this)" class="curate-tab" style="padding:8px 16px;border:none;background:none;font-size:13px;cursor:pointer;color:var(--tx3);border-bottom:2px solid transparent;">Podcasts</button>
+  </div>
+
+  <!-- Reading tab -->
+  <div id="ctab-reading">
+    <div class="card" style="margin-bottom:.75rem;">
+      <div class="ch"><div class="ct">Add to reading list</div></div>
+      <div style="padding:.75rem 1.25rem;">
+        <div class="field-row" style="flex-wrap:wrap;">
+          <div class="field" style="flex:2;min-width:140px;"><input type="text" id="read-title" placeholder="Title..."></div>
+          <div class="field" style="max-width:130px;"><input type="text" id="read-author" placeholder="Author..."></div>
+          <div class="field" style="max-width:110px;"><select id="read-type"><option value="book">Book</option><option value="article">Article</option><option value="paper">Paper</option><option value="other">Other</option></select></div>
+          <div class="field" style="max-width:120px;"><select id="read-status"><option value="want">Want to read</option><option value="reading">Reading now</option><option value="done">Finished</option></select></div>
+          <button class="btn btn-primary" onclick="addReading()">Add</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:.75rem;">
+      <button class="btn btn-primary btn-sm" onclick="filterReading('all',this)">All</button>
+      <button class="btn btn-sm" onclick="filterReading('want',this)">Want</button>
+      <button class="btn btn-sm" onclick="filterReading('reading',this)">Reading</button>
+      <button class="btn btn-sm" onclick="filterReading('done',this)">Done</button>
+    </div>
+    <div id="reading-list"></div>
+  </div>
+
+  <!-- Watching tab -->
+  <div id="ctab-watching" style="display:none;">
+    <div class="card" style="margin-bottom:.75rem;">
+      <div class="ch"><div class="ct">Add to watch list</div></div>
+      <div style="padding:.75rem 1.25rem;">
+        <div class="field-row" style="flex-wrap:wrap;">
+          <div class="field" style="flex:2;min-width:140px;"><input type="text" id="watch-title" placeholder="Title..."></div>
+          <div class="field" style="max-width:110px;"><select id="watch-type"><option value="movie">Movie</option><option value="show">TV Show</option><option value="doco">Documentary</option><option value="other">Other</option></select></div>
+          <div class="field" style="max-width:120px;"><select id="watch-status"><option value="want">Want to watch</option><option value="watching">Watching</option><option value="done">Watched</option></select></div>
+          <button class="btn btn-primary" onclick="addWatchItem()">Add</button>
+        </div>
+      </div>
+    </div>
+    <div id="watch-list"></div>
+  </div>
+
+  <!-- Substacks tab -->
+  <div id="ctab-substacks" style="display:none;">
+    <div class="card" style="margin-bottom:.75rem;">
+      <div class="ch"><div class="ct">Add Substack</div></div>
+      <div style="padding:.75rem 1.25rem;">
+        <div class="field-row">
+          <div class="field" style="flex:1;"><input type="text" id="sub-name" placeholder="Name / author"></div>
+          <div class="field" style="flex:1;"><input type="text" id="sub-url" placeholder="https://..."></div>
+          <div class="field" style="flex:1;"><input type="text" id="sub-note" placeholder="Notes..."></div>
+          <button class="btn btn-primary" onclick="addSubstack()" style="flex-shrink:0;">Add</button>
+        </div>
+      </div>
+    </div>
+    <div id="substacks-list"></div>
+  </div>
+
+  <!-- Podcasts tab -->
+  <div id="ctab-podcasts" style="display:none;">
+    <div class="card" style="margin-bottom:.75rem;">
+      <div class="ch"><div class="ct">Add podcast</div></div>
+      <div style="padding:.75rem 1.25rem;">
+        <div class="field-row" style="flex-wrap:wrap;">
+          <div class="field" style="flex:1;min-width:140px;"><input type="text" id="pod-name" placeholder="Podcast name"></div>
+          <div class="field" style="max-width:120px;"><input type="text" id="pod-host" placeholder="Host"></div>
+          <div class="field"><input type="text" id="pod-note" placeholder="Notes..."></div>
+          <button class="btn btn-primary" onclick="addPodcast()">Add</button>
+        </div>
+      </div>
+    </div>
+    <div id="podcasts-list"></div>
+  </div>
+
+</div>
+
+
+
 <div class="toast" id="toast"></div>
+<div id="save-indicator" style="position:fixed;bottom:20px;right:20px;font-size:11px;color:var(--pk);background:var(--sf);border:1px solid var(--bd);border-radius:var(--rsm);padding:5px 12px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:100;">Saved</div>
 <script>
 // === SASHA LIFE BINDER v5 ===
 const SK = 'sasha_binder_v4';
@@ -1081,7 +1258,7 @@ const GYM = {
 const DEF_HABITS=['4:30am gym alarm','Pre-gym snack','8 glasses water','Skincare AM','Skincare PM','Study block','No phone before bed'];
 const DEF_EXP=['Rent / mortgage','Groceries','Fuel & transport','Subscriptions','Eating out','Personal care','Clothing','Entertainment','Health & medical','Savings transfer'];
 const DEF_SAV=[{n:'Emergency fund',t:10000},{n:'Holiday',t:3000},{n:'Investment',t:5000}];
-const PAL=['#c0436a','#e8a0b4','#b8933a','#3a7a5a','#3a5a7a','#7a3d52','#d9648a'];
+const PAL=['#800020','#A8003A','#F7CECE','#D4849A','#6E3050','#C0305A','#F5C0CC','#A97BA8'];
 const DEF_AFFS=['You are doing better than you think.','Progress over perfection.','You are capable of more than you know.','One step at a time.','Your effort matters, even when results are slow.'];
 const DEF_SK_AM=['Cleanser','Vitamin C serum','Moisturiser','SPF 50+'];
 const DEF_SK_PM=['Double cleanse','Toner','Retinol / treatment','Eye cream','Moisturiser'];
@@ -1110,26 +1287,27 @@ function go(id,btn){
   if(id==='social'){renderCal();renderPWList();renderSocialList();}
   if(id==='mood'){renderMoodLog();renderMoodChart();}
   if(id==='schedule')renderSchedule(currentSchDay);
-  if(id==='gym')renderGym(currentGymDay);
+  if(id==='gym'){renderGym(currentGymDay);renderMeas();renderWeightChart();}
   if(id==='timer')renderTimerUI();
-  if(id==='progress'){renderMeas();renderWeightChart();}
   if(id==='skincare')renderRoutines();
-  if(id==='meals')renderMeals();
-  if(id==='grocery'){const d=getData();renderGroc(d.grocery||[]);}
+  if(id==='meals'){renderMeals();const dm=getData();renderGroc(dm.grocery||[]);}
   if(id==='habits')initHabits();
-  if(id==='budget'){recalcBudget();setTimeout(()=>{renderSavingsChart();renderNWChart();renderNWBreakdown();},50);}
-  if(id==='career')renderJournal();
+  if(id==='budget'){recalcBudget();setTimeout(renderBudgetChart,50);}
+  if(id==='savings'){renderSavingsChart();}
+  if(id==='networth'){renderNWEditRows();setTimeout(()=>{renderNWChart();renderNWBreakdown();},50);}
+  if(id==='career'){renderJournal();renderCareerRoleDisplay();renderDreamRoles();renderCareerCourses();}
   if(id==='uni')renderCourseList();
   if(id==='semester')renderSem();
-  if(id==='dashboard'){renderTomorrow();refreshDashHabMini();refreshSnap();}
+  if(id==='dashboard'){renderTomorrow();refreshDashHabMini();refreshSnap();renderDashTasks();}
+  if(id==='reflect')initReflect();
+  if(id==='curate'){renderWishlist();renderReading();renderWatchList();renderSubstacks();renderPodcasts();}
+  if(id==='contacts')renderContacts();
+  if(id==='affirmations'){renderAffList();showTodayAff();}
   if(id==='review')renderReviewHistory();
   if(id==='goals')renderGoals();
   if(id==='reading')renderReading();
   if(id==='journal')renderJnlHistory();
-  if(id==='contacts')renderContacts();
-  if(id==='affirmations'){renderAffList();showTodayAff();}
 }
-
 function showToast(msg,dur=2200){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
 // ── THEME ──
 function toggleTheme(){
@@ -1223,11 +1401,34 @@ function logDashMood(){if(!curMood){showToast('Tap a number first');return;}cons
 function addMood(){const d=getData();if(!d.moods)d.moods=[];if(!moodSelVal){showToast('Select a mood');return;}d.moods.push({date:document.getElementById('mood-date')?.value||new Date().toISOString().split('T')[0],mood:moodSelVal,energy:energySelVal,sleep:document.getElementById('mood-sleep')?.value||'',gym:document.getElementById('mood-gym')?.value||'',notes:document.getElementById('mood-note-inp')?.value||''});setData(d);moodSelVal=0;energySelVal=0;document.getElementById('mood-note-inp').value='';renderMoodLog();renderMoodChart();showToast('Logged!');}
 function delMood(ri){const d=getData();const idx=(d.moods||[]).length-1-ri;if(idx>=0){d.moods.splice(idx,1);setData(d);renderMoodLog();renderMoodChart();}}
 function renderMoodLog(){const d=getData(),moods=(d.moods||[]).slice().reverse();const el=document.getElementById('mood-body');if(!el)return;el.innerHTML=moods.map((m,i)=>'<tr><td>'+m.date+'</td><td>'+m.mood+'</td><td>'+(m.energy||'—')+'</td><td>'+(m.sleep||'—')+'</td><td>'+(m.gym||'—')+'</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;">'+(m.notes||'')+'</td><td><button onclick="delMood('+i+')" class="btn btn-sm btn-danger">✕</button></td></tr>').join('');}
-function renderMoodChart(){const ctx=document.getElementById('moodChart')?.getContext('2d');if(!ctx)return;const d=getData();const moods=(d.moods||[]).slice(-14);if(moodChart)moodChart.destroy();moodChart=new Chart(ctx,{type:'line',data:{labels:moods.map(m=>m.date.slice(5)),datasets:[{label:'Mood',data:moods.map(m=>m.mood),borderColor:'var(--pk)',tension:.4,fill:false,pointBackgroundColor:'var(--pk)'},{label:'Energy',data:moods.map(m=>m.energy||0),borderColor:'var(--gold)',tension:.4,fill:false,borderDash:[4,4]}]},options:{responsive:true,scales:{y:{min:0,max:5,ticks:{stepSize:1}}},plugins:{legend:{labels:{font:{size:10}}}}}});}
-// ── SCHEDULE ──
+function renderMoodChart(){
+  const ctx=document.getElementById('moodChart')?.getContext('2d');if(!ctx)return;
+  const d=getData();const moods=(d.moods||[]).slice(-14);
+  if(moodChart)moodChart.destroy();
+  moodChart=new Chart(ctx,{type:'line',data:{labels:moods.map(m=>m.date.slice(5)),datasets:[
+    {label:'Mood',data:moods.map(m=>m.mood),
+     borderColor:'#c0436a',backgroundColor:'rgba(192,67,106,0.12)',
+     tension:.4,fill:true,pointBackgroundColor:'#c0436a',
+     pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:5,pointHoverRadius:7},
+    {label:'Energy',data:moods.map(m=>m.energy||0),
+     borderColor:'#b8933a',backgroundColor:'rgba(184,147,58,0.08)',
+     tension:.4,fill:true,borderDash:[4,4],
+     pointBackgroundColor:'#b8933a',pointBorderColor:'#fff',pointBorderWidth:2,pointRadius:4}
+  ]},options:{responsive:true,
+    scales:{y:{min:0,max:5,ticks:{stepSize:1,color:'#c0909a'},grid:{color:'rgba(192,67,106,0.07)'}},
+            x:{ticks:{color:'#c0909a'},grid:{display:false}}},
+    plugins:{legend:{labels:{font:{size:11},color:'#6b4a52',boxWidth:12}},
+             tooltip:{backgroundColor:'#fff',titleColor:'#1a0d10',bodyColor:'#6b4a52',
+                      borderColor:'rgba(192,67,106,0.2)',borderWidth:1}}}});
+}
 function showDay(btn,key){
-  document.querySelectorAll('#day-nav .btn').forEach(b=>{if(b.dataset.today==='1'){b.style.background='var(--pkl)';b.style.color='var(--pk)';b.style.borderColor='var(--rose)';b.style.fontWeight='500';}else{b.style.background='';b.style.color='';b.style.borderColor='';b.style.fontWeight='';}});
-  btn.style.background='var(--pk)';btn.style.color='#fff';btn.style.borderColor='var(--pk)';btn.style.fontWeight='600';
+  document.querySelectorAll('#day-nav .btn').forEach(b=>{
+    b.classList.remove('active-btn');
+    if(b.dataset.today==='1'){b.style.background='var(--pkl)';b.style.color='var(--pk)';b.style.borderColor='var(--rose)';}
+    else{b.style.background='';b.style.color='';b.style.borderColor='';}
+    b.style.fontWeight='';
+  });
+  btn.classList.add('active-btn');btn.style.background='';btn.style.color='';btn.style.borderColor='';
   currentSchDay=key;renderSchedule(key);
 }
 function renderSchedule(key){
@@ -1236,7 +1437,7 @@ function renderSchedule(key){
   const editing=d.schEditMode===key;
   const hdr=editing?'<button class="btn btn-sm" style="color:var(--grn)" onclick="endSchEdit(\''+key+'\')">Done</button><button class="btn btn-sm btn-danger" onclick="resetSchDay(\''+key+'\')">Reset</button>':'<button onclick="startSchEdit(\''+key+'\')" style="background:none;border:none;cursor:pointer;padding:4px;color:var(--tx3);font-size:15px;">&#x270F;</button>';
   let body='';
-  if(editing){body='<div id="sch-edit-rows">'+day.rows.map((r,i)=>'<div class="editable-row" style="padding:5px 1.25rem;"><input value="'+r.t+'" style="width:110px;" oninput="saveSchItem(\''+key+'\','+i+',\'t\',this.value)"><input value="'+r.l+'" style="flex:1;" oninput="saveSchItem(\''+key+'\','+i+',\'l\',this.value)"><select onchange="saveSchItem(\''+key+'\','+i+',\'p\',this.value)"><option value="p-free"'+(r.p==='p-free'?' selected':'')+'>free</option><option value="p-gym"'+(r.p==='p-gym'?' selected':'')+'>gym</option><option value="p-work"'+(r.p==='p-work'?' selected':'')+'>work</option><option value="p-study"'+(r.p==='p-study'?' selected':'')+'>study</option><option value="p-social"'+(r.p==='p-social'?' selected':'')+'>social</option><option value="p-prep"'+(r.p==='p-prep'?' selected':'')+'>prep</option></select><button class="btn btn-sm btn-danger" onclick="delSchRow(\''+key+'\','+i+')">✕</button></div>').join('')+'</div>';body+='<div style="padding:.5rem 1.25rem;border-top:1px solid var(--bd2);display:flex;gap:8px;"><input id="new-sch-t" placeholder="Time" style="width:120px;"><input id="new-sch-l" placeholder="Label" style="flex:1;"><select id="new-sch-p"><option value="p-free">free</option><option value="p-gym">gym</option><option value="p-work">work</option><option value="p-study">study</option><option value="p-social">social</option><option value="p-prep">prep</option></select><button class="btn btn-primary" onclick="addSchRow(\''+key+'\')">Add</button></div>';}
+  if(editing){body='<div id="sch-edit-rows">'+day.rows.map((r,i)=>'<div class="editable-row" style="padding:5px 1.25rem;"><input value="'+r.t+'" style="width:110px;min-width:80px;" oninput="saveSchItem(\''+key+'\','+i+',\'t\',this.value)"><input value="'+r.l+'" style="flex:1;" oninput="saveSchItem(\''+key+'\','+i+',\'l\',this.value)"><select onchange="saveSchItem(\''+key+'\','+i+',\'p\',this.value)"><option value="p-free"'+(r.p==='p-free'?' selected':'')+'>free</option><option value="p-gym"'+(r.p==='p-gym'?' selected':'')+'>gym</option><option value="p-work"'+(r.p==='p-work'?' selected':'')+'>work</option><option value="p-study"'+(r.p==='p-study'?' selected':'')+'>study</option><option value="p-social"'+(r.p==='p-social'?' selected':'')+'>social</option><option value="p-prep"'+(r.p==='p-prep'?' selected':'')+'>prep</option></select><button class="btn btn-sm btn-danger" onclick="delSchRow(\''+key+'\','+i+')">✕</button></div>').join('')+'</div>';body+='<div style="padding:.5rem 1.25rem;border-top:1px solid var(--bd2);display:flex;gap:8px;"><input id="new-sch-t" placeholder="Time" style="width:120px;"><input id="new-sch-l" placeholder="Label" style="flex:1;"><select id="new-sch-p"><option value="p-free">free</option><option value="p-gym">gym</option><option value="p-work">work</option><option value="p-study">study</option><option value="p-social">social</option><option value="p-prep">prep</option></select><button class="btn btn-primary" onclick="addSchRow(\''+key+'\')">Add</button></div>';}
   else{body='<div>'+day.rows.map(r=>'<div class="sch-row"><div class="sch-time-col">'+r.t+'</div><div class="sch-plan-col"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><span class="sch-label">'+r.l+'</span><span class="pill '+r.p+'">'+r.p.replace('p-','')+'</span></div>'+(r.s?'<div class="sch-sub">'+r.s+'</div>':'')+' </div></div>').join('')+'</div>';}
   el.innerHTML='<div class="card"><div class="ch">'+(editing?'<input value="'+day.la+'" oninput="saveSchMeta(\''+key+'\',\'la\',this.value)" style="font-family:\'Cormorant Garamond\',serif;font-size:1.1rem;border:none;background:transparent;outline:none;border-bottom:1px solid var(--pk2);">':'<div class="ct">'+day.la+'</div>')+hdr+'</div>'+body+'</div>';
 }
@@ -1249,7 +1450,7 @@ function endSchEdit(k){const d=getData();delete d.schEditMode;setData(d);renderS
 function resetSchDay(k){const d=getData();if(!d.customSch)d.customSch={};delete d.customSch[k];delete d.schEditMode;setData(d);renderSchedule(k);}
 
 // ── GYM ──
-function showGym(btn,key){document.querySelectorAll('#gym-nav .btn').forEach(b=>{b.style.background='';b.style.color='';b.style.borderColor='';});btn.style.background='var(--pk)';btn.style.color='#fff';btn.style.borderColor='var(--pk)';currentGymDay=key;renderGym(key);}
+function showGym(btn,key){document.querySelectorAll('#gym-nav .btn').forEach(b=>b.classList.remove('active-btn'));btn.classList.add('active-btn');currentGymDay=key;renderGym(key);}
 function renderGym(key){
   const d=getData();const g=(d.customGym&&d.customGym[key])||GYM[key];
   const saved=d.gymLogs||{};const editing=d.gymEditMode===key;
@@ -1311,7 +1512,7 @@ function renderRoutines(){
 }
 function toggleSkEdit(side){const el=document.getElementById(side+'-routine');if(!el)return;el.dataset.editing=el.dataset.editing==='1'?'0':'1';const btn=document.getElementById(side+'-edit-btn');if(btn){btn.textContent=el.dataset.editing==='1'?'Done':'Edit steps';btn.classList.toggle('on',el.dataset.editing==='1');}renderRoutines();}
 function saveSkinStep(s,i,v){const d=getData();if(!d['skinSteps_'+s])d['skinSteps_'+s]=s==='am'?[...DEF_SK_AM]:[...DEF_SK_PM];d['skinSteps_'+s][i]=v;setData(d);}
-function saveSkinProd(s,i,v){const d=getData();if(!d['skinProds_'+s])d['skinProds_'+s]=[];d['skinProds_'+s][i]=v;setData(d);}
+function saveSkinProd(s,i,v){const d=getData();if(!d['skinProds_'+s])d['skinProds_'+s]=[];d['skinProds_'+s][i]=v;setData(d);showSaveFlash();}
 function addSkinStep(s){const d=getData();if(!d['skinSteps_'+s])d['skinSteps_'+s]=s==='am'?[...DEF_SK_AM]:[...DEF_SK_PM];d['skinSteps_'+s].push('New step');setData(d);renderRoutines();}
 function delSkinStep(s,i){const d=getData();if(!d['skinSteps_'+s])d['skinSteps_'+s]=s==='am'?[...DEF_SK_AM]:[...DEF_SK_PM];d['skinSteps_'+s].splice(i,1);setData(d);renderRoutines();}
 function addProduct(){const d=getData();if(!d.skinProds)d.skinProds=[];d.skinProds.push({name:document.getElementById('prod-name')?.value||'',cat:document.getElementById('prod-cat')?.value||'',date:document.getElementById('prod-date')?.value||'',notes:document.getElementById('prod-notes')?.value||''});setData(d);renderProducts();['prod-name','prod-cat','prod-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';}); }
@@ -1386,20 +1587,150 @@ function recalcBudget(){
   const le=document.getElementById('b-leftover');if(le){le.textContent=(left<0?'-':'')+fmt(left);le.style.color=left<0?'#a0243a':left===0?'var(--tx)':'var(--pk)';}
   const dl=document.getElementById('dash-left');if(dl)dl.textContent=(left<0?'-':'')+fmt(left);
   renderBudgetChart(budgeted,savC,left);
+  renderSavingsChart();
+  setTimeout(()=>{renderNWChart();renderNWBreakdown();},50);
 }
-function renderBudgetChart(){const ctx=document.getElementById('budgetChart')?.getContext('2d');if(!ctx)return;const rows=Array.from(document.querySelectorAll('.exp-row'));const labels=rows.map(r=>r.querySelector('[contenteditable]')?.textContent||'');const data=rows.map(r=>fv(r.querySelector('.bud-val')));const fl=labels.filter((_,i)=>data[i]>0);const fd=data.filter((_,i)=>data[i]>0);if(budgetChart)budgetChart.destroy();budgetChart=new Chart(ctx,{type:'doughnut',data:{labels:fl,datasets:[{data:fd,backgroundColor:PAL,borderWidth:0}]},options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});const leg=document.getElementById('chart-legend');if(leg)leg.innerHTML=fl.map((l,i)=>'<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)"><span style="width:8px;height:8px;border-radius:50%;background:'+PAL[i%PAL.length]+';display:inline-block;"></span>'+l+'</div>').join('');}
-function renderSavingsChart(){const ctx=document.getElementById('savingsChart')?.getContext('2d');if(!ctx)return;const rows=Array.from(document.querySelectorAll('.sav-row'));if(!rows.length){ctx.canvas.style.display='none';return;}ctx.canvas.style.display='';const labels=rows.map(r=>r.querySelector('[contenteditable]')?.textContent||'Goal');const saved=rows.map(r=>parseFloat(r.querySelector('.sav-s')?.value)||0);const targets=rows.map(r=>parseFloat(r.querySelector('.sav-t')?.value)||0);if(savingsChart)savingsChart.destroy();savingsChart=new Chart(ctx,{type:'bar',data:{labels,datasets:[{label:'Target',data:targets,backgroundColor:'rgba(232,160,180,0.35)',borderColor:'rgba(232,160,180,0.8)',borderWidth:1,borderRadius:4,borderSkipped:false,barPercentage:.7},{label:'Saved',data:saved,backgroundColor:'var(--pk)',borderRadius:4,borderSkipped:false,barPercentage:.45}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:10}},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}},scales:{x:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'k',font:{size:10}}},y:{ticks:{font:{size:10}},grid:{display:false}}}}});}
-function renderNWChart(){const ctx=document.getElementById('nwChart')?.getContext('2d');const le=document.getElementById('nw-legend');const te=document.getElementById('nw-total');if(!ctx)return;const d=getData();const assets=d.nwAssets||[];const liab=d.nwLiabilities||[];const ta=assets.reduce((s,a)=>s+(parseFloat(a.value)||0),0);const tl=liab.reduce((s,l)=>s+(parseFloat(l.value)||0),0);const nw=ta-tl;if(te){te.textContent=(nw<0?'-':'')+fmt(nw);te.style.color=nw<0?'#a0243a':'var(--tx)';}const labels=[...assets.map(a=>a.name||'Asset'),...liab.map(l=>l.name||'Liability')];const data=[...assets.map(a=>parseFloat(a.value)||0),...liab.map(l=>parseFloat(l.value)||0)];const colours=[...assets.map((_,i)=>PAL[i%PAL.length]),...liab.map(()=>'#e8a0b4')];if(!data.length){if(ctx.canvas)ctx.canvas.style.display='none';if(le)le.innerHTML='<div style="font-size:12px;color:var(--tx3)">Add assets and liabilities.</div>';return;}if(ctx.canvas)ctx.canvas.style.display='';if(nwChart)nwChart.destroy();nwChart=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colours,borderWidth:0}]},options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});if(le)le.innerHTML=labels.map((l,i)=>'<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)"><span style="width:8px;height:8px;border-radius:50%;background:'+colours[i]+';display:inline-block;flex-shrink:0"></span>'+l+'</div>').join('');}
-function renderNWBreakdown(){const el=document.getElementById('nw-breakdown-list');if(!el)return;const d=getData();const assets=d.nwAssets||[];const liab=d.nwLiabilities||[];if(!assets.length&&!liab.length){el.innerHTML='<div style="font-size:13px;color:var(--tx3)">Add assets and liabilities using the Edit button.</div>';return;}const ta=assets.reduce((s,a)=>s+(parseFloat(a.value)||0),0);const tl=liab.reduce((s,l)=>s+(parseFloat(l.value)||0),0);let html='';if(assets.length){html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Assets</div>';assets.forEach((a,i)=>{const v=parseFloat(a.value)||0;const pct=ta>0?Math.round((v/ta)*100):0;html+='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+(a.name||'Asset')+'</span><span style="color:var(--tx3)">'+fmt(v)+' ('+pct+'%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:'+PAL[i%PAL.length]+'"></div></div></div>';});html+='<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);font-weight:500;border-top:1px solid var(--bd2);padding-top:6px;margin-bottom:14px"><span>Total assets</span><span>'+fmt(ta)+'</span></div>';}if(liab.length){html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Liabilities</div>';liab.forEach((l,i)=>{const v=parseFloat(l.value)||0;const pct=tl>0?Math.round((v/tl)*100):0;html+='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+(l.name||'Liability')+'</span><span style="color:#a0243a;">'+fmt(v)+'</span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:#e8a0b4"></div></div></div>';});html+='<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:500;border-top:1px solid var(--bd2);padding-top:6px"><span>Total liabilities</span><span style="color:#a0243a;">'+fmt(tl)+'</span></div>';}el.innerHTML=html;}
-function toggleNWEdit(){const p=document.getElementById('nw-edit-panel'),btn=document.getElementById('nw-edit-btn');const open=p.style.display!=='none';p.style.display=open?'none':'block';btn.classList.toggle('on',!open);if(!open)renderNWEditRows();}
+function renderBudgetChart(){const ctx=document.getElementById('budgetChart')?.getContext('2d');if(!ctx)return;const rows=Array.from(document.querySelectorAll('.exp-row'));const labels=rows.map(r=>r.querySelector('[contenteditable]')?.textContent||'');const data=rows.map(r=>fv(r.querySelector('.bud-val')));const fl=labels.filter((_,i)=>data[i]>0);const fd=data.filter((_,i)=>data[i]>0);if(budgetChart)budgetChart.destroy();budgetChart=new Chart(ctx,{type:'doughnut',data:{labels:fl,datasets:[{data:fd,backgroundColor:PAL,borderWidth:0}]},options:{maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});const leg=document.getElementById('chart-legend');if(leg)leg.innerHTML=fl.map((l,i)=>'<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)"><span style="width:8px;height:8px;border-radius:50%;background:'+PAL[i%PAL.length]+';display:inline-block;"></span>'+l+'</div>').join('');}
+function renderSavingsChart(){
+  const ctx=document.getElementById('savingsChart')?.getContext('2d');if(!ctx)return;
+  const rows=Array.from(document.querySelectorAll('.sav-row'));
+  if(!rows.length){ctx.canvas.style.display='none';return;}
+  ctx.canvas.style.display='';
+  const labels=rows.map(r=>r.querySelector('[contenteditable]')?.textContent||'Goal');
+  const saved=rows.map(r=>parseFloat(r.querySelector('.sav-s')?.value)||0);
+  const targets=rows.map(r=>parseFloat(r.querySelector('.sav-t')?.value)||0);
+  const pcts=targets.map((t,i)=>t>0?Math.min(100,Math.round((saved[i]/t)*100)):0);
+  // Palette from the main PAL — rich burgundy to rose
+  const barCols=['#800020','#A8003A','#C0305A','#6E3050','#D4849A','#A97BA8','#F7CECE','#F5C0CC'];
+  if(savingsChart)savingsChart.destroy();
+  savingsChart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {
+          label:'Target',
+          data:targets,
+          backgroundColor:'rgba(247,206,206,0.25)',
+          borderColor:'rgba(212,132,154,0.4)',
+          borderWidth:1,
+          borderRadius:6,
+          borderSkipped:false,
+          barPercentage:.75,
+          categoryPercentage:.8
+        },
+        {
+          label:'Saved',
+          data:saved,
+          backgroundColor:labels.map((_,i)=>barCols[i%barCols.length]),
+          borderRadius:6,
+          borderSkipped:false,
+          barPercentage:.75,
+          categoryPercentage:.8
+        }
+      ]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#fff',
+          titleColor:'#1a0d10',
+          bodyColor:'#6b4a52',
+          borderColor:'rgba(192,67,106,0.2)',
+          borderWidth:1,
+          callbacks:{
+            label:function(c){
+              const i=c.dataIndex;
+              if(c.datasetIndex===1){
+                return ' Saved: '+fmt(c.raw)+' ('+pcts[i]+'% of target)';
+              }
+              return ' Target: '+fmt(c.raw);
+            }
+          }
+        }
+      },
+      scales:{
+        x:{
+          ticks:{callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'k':v),font:{size:11},color:'#c0909a'},
+          grid:{color:'rgba(192,67,106,0.06)'},
+          border:{display:false}
+        },
+        y:{
+          ticks:{font:{size:12,weight:'500'},color:'#1a0d10'},
+          grid:{display:false},
+          border:{display:false}
+        }
+      }
+    }
+  });
+  // Draw % labels on bars after render
+  savingsChart._pcts=pcts;
+}
+function renderNWChart(){
+  const ctx=document.getElementById('nwChart')?.getContext('2d');
+  const le=document.getElementById('nw-legend');
+  const te=document.getElementById('nw-total');
+  if(!ctx)return;
+  const d=getData();
+  // Assets = savings goals saved amounts
+  const savRows=Array.from(document.querySelectorAll('.sav-row'));
+  const assets=savRows.map(r=>({name:r.querySelector('[contenteditable]')?.textContent||'Savings',value:parseFloat(r.querySelector('.sav-s')?.value)||0})).filter(a=>a.value>0);
+  // If no DOM rows yet, fall back to stored savings
+  const storedAssets=assets.length?assets:(d.savings||[]).map(s=>({name:s.name||'Savings',value:parseFloat(s.saved)||0})).filter(a=>a.value>0);
+  const finalAssets=storedAssets;
+  const liab=d.nwLiabilities||[];
+  const ta=finalAssets.reduce((s,a)=>s+a.value,0);
+  const tl=liab.reduce((s,l)=>s+(parseFloat(l.value)||0),0);
+  const nw=ta-tl;
+  if(te){te.textContent=(nw<0?'-':'')+fmt(nw);te.style.color=nw<0?'#a0243a':'var(--tx)';}
+  const NW_PALETTE=['#800020','#A8003A','#F7CECE','#D4849A','#6E3050','#C0305A','#F5C0CC','#A97BA8'];
+  const LIA_COL='#a0243a';
+  const labels=[...finalAssets.map(a=>a.name),...liab.map(l=>l.name||'Liability')];
+  const data=[...finalAssets.map(a=>a.value),...liab.map(l=>parseFloat(l.value)||0)];
+  const colours=[...finalAssets.map((_,i)=>NW_PALETTE[i%NW_PALETTE.length]),...liab.map(()=>LIA_COL)];
+  if(!data.filter(v=>v>0).length){if(ctx.canvas)ctx.canvas.style.display='none';if(le)le.innerHTML='<div style="font-size:12px;color:var(--tx3)">Add savings and liabilities to see chart.</div>';return;}
+  if(ctx.canvas)ctx.canvas.style.display='';
+  if(nwChart)nwChart.destroy();
+  nwChart=new Chart(ctx,{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colours,borderWidth:0}]},options:{cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}}});
+  if(le)le.innerHTML=labels.map((l,i)=>'<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)"><span style="width:8px;height:8px;border-radius:50%;background:'+colours[i]+';display:inline-block;flex-shrink:0"></span>'+l+'</div>').join('');
+}
+function renderNWBreakdown(){
+  const el=document.getElementById('nw-breakdown-list');if(!el)return;
+  const d=getData();
+  const savRows=Array.from(document.querySelectorAll('.sav-row'));
+  const assets=savRows.length?savRows.map(r=>({name:r.querySelector('[contenteditable]')?.textContent||'Savings',value:parseFloat(r.querySelector('.sav-s')?.value)||0})).filter(a=>a.value>0):(d.savings||[]).map(s=>({name:s.name||'Savings',value:parseFloat(s.saved)||0})).filter(a=>a.value>0);
+  const liab=d.nwLiabilities||[];
+  if(!assets.length&&!liab.length){el.innerHTML='<div style="font-size:13px;color:var(--tx3)">Add savings amounts and liabilities to see breakdown.</div>';return;}
+  const ta=assets.reduce((s,a)=>s+a.value,0);
+  const tl=liab.reduce((s,l)=>s+(parseFloat(l.value)||0),0);
+  const NW_PALETTE=['#800020','#A8003A','#F7CECE','#D4849A','#6E3050','#C0305A','#F5C0CC','#A97BA8'];
+  let html='';
+  if(assets.length){
+    html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Assets (from savings goals)</div>';
+    assets.forEach((a,i)=>{const pct=ta>0?Math.round((a.value/ta)*100):0;html+='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+a.name+'</span><span style="color:var(--tx3)">'+fmt(a.value)+' ('+pct+'%)</span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:'+NW_PALETTE[i%NW_PALETTE.length]+'"></div></div></div>';});
+    html+='<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);font-weight:500;border-top:1px solid var(--bd2);padding-top:6px;margin-bottom:14px"><span>Total assets</span><span>'+fmt(ta)+'</span></div>';
+  }
+  if(liab.length){
+    html+='<div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:8px;">Liabilities</div>';
+    liab.forEach((l,i)=>{const v=parseFloat(l.value)||0;const pct=tl>0?Math.round((v/tl)*100):0;html+='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+(l.name||'Liability')+'</span><span style="color:#a0243a;">'+fmt(v)+'</span></div><div class="prog-wrap"><div class="prog-bar" style="width:'+pct+'%;background:#e8a0b4"></div></div></div>';});
+    html+='<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:500;border-top:1px solid var(--bd2);padding-top:6px"><span>Total liabilities</span><span style="color:#a0243a;">'+fmt(tl)+'</span></div>';
+  }
+  el.innerHTML=html;
+}
+function toggleNWEdit(){
+  // Liabilities are always visible on the Net Worth page
+  renderNWEditRows();renderNWChart();renderNWBreakdown();
+}
 function renderNWEditRows(){const d=getData();const assets=d.nwAssets||[];const liab=d.nwLiabilities||[];const renderRows=(items,type,cid)=>{const el=document.getElementById(cid);if(!el)return;el.innerHTML=items.map((item,i)=>'<div class="editable-row"><input value="'+(item.name||'').replace(/"/g,'&quot;')+'" placeholder="Name" oninput="saveNWItem(\''+type+'\','+i+',\'name\',this.value)" style="flex:1"><div style="display:flex;align-items:center;gap:3px;flex-shrink:0"><span style="font-size:11px;color:var(--tx3);">$</span><input type="number" value="'+(item.value||'')+'" placeholder="0" oninput="saveNWItem(\''+type+'\','+i+',\'value\',this.value)" style="width:100px;text-align:right;"></div><button class="btn btn-sm btn-danger" onclick="delNWItem(\''+type+'\','+i+')">&#x2715;</button></div>').join('');};renderRows(assets,'asset','nw-assets');renderRows(liab,'liability','nw-liabilities');}
 function addNWRow(type){const d=getData();if(type==='asset'){if(!d.nwAssets)d.nwAssets=[];d.nwAssets.push({name:'',value:''});}else{if(!d.nwLiabilities)d.nwLiabilities=[];d.nwLiabilities.push({name:'',value:''});}setData(d);renderNWEditRows();renderNWChart();}
 function saveNWItem(type,i,f,v){const d=getData();const key=type==='asset'?'nwAssets':'nwLiabilities';if(!d[key])d[key]=[];if(d[key][i])d[key][i][f]=v;setData(d);renderNWChart();}
 function delNWItem(type,i){const d=getData();const key=type==='asset'?'nwAssets':'nwLiabilities';if(d[key])d[key].splice(i,1);setData(d);renderNWEditRows();renderNWChart();}
 function exportCSV(){const rows=[['Category','Budgeted','Spent'],...Array.from(document.querySelectorAll('.exp-row')).map(r=>[r.querySelector('[contenteditable]')?.textContent||'',r.querySelector('.bud-val')?.value||'',r.querySelector('.spt-val')?.value||''])];const csv=rows.map(r=>r.join(',')).join('\n');const a=document.createElement('a');a.href='data:text/csv,'+encodeURIComponent(csv);a.download='budget.csv';a.click();}
 // ── CAREER JOURNAL ──
-function addJournalEntry(){const text=document.getElementById('journal-new')?.value?.trim();if(!text)return;const d=getData();if(!d.journalEntries)d.journalEntries=[];d.journalEntries.unshift({date:new Date().toLocaleDateString('en-AU'),text});setData(d);document.getElementById('journal-new').value='';renderJournal();}
-function renderJournal(){const d=getData(),entries=d.journalEntries||[];const el=document.getElementById('journal-list');if(!el)return;if(!entries.length){el.innerHTML='<div class="note-box">No entries yet.</div>';return;}el.innerHTML=entries.map((e,i)=>'<div class="journal-entry"><div class="journal-date">'+e.date+'<button onclick="delJournalEntry('+i+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;float:right;">✕</button></div><div class="journal-body">'+e.text.replace(/\n/g,'<br>')+'</div></div>').join('');}
 function delJournalEntry(i){const d=getData();d.journalEntries.splice(i,1);setData(d);renderJournal();}
 
 // ── UNI ──
@@ -1538,7 +1869,17 @@ function renderCal(){
 // ── TASKS ──
 function filterTasks(filter,btn){taskFilter=filter;document.querySelectorAll('#page-tasks .btn').forEach(b=>{b.style.background='';b.style.color='';b.style.borderColor='';});if(btn){btn.style.background='var(--pk)';btn.style.color='#fff';btn.style.borderColor='var(--pk)';}renderTaskList();}
 function addTask(){const title=document.getElementById('task-title')?.value?.trim();if(!title)return;const d=getData();if(!d.tasks)d.tasks=[];d.tasks.push({id:Date.now(),title,source:document.getElementById('task-source')?.value||'personal',priority:document.getElementById('task-priority')?.value||'medium',due:document.getElementById('task-due')?.value||'',done:false,created:new Date().toISOString().split('T')[0]});setData(d);document.getElementById('task-title').value='';document.getElementById('task-due').value='';renderTaskList();refreshSnap();}
-function toggleTask(id){const d=getData();if(!d.tasks)return;const t=d.tasks.find(t=>t.id===id);if(t){t.done=!t.done;setData(d);renderTaskList();refreshSnap();}}
+function toggleTask(id){
+  const d=getData();
+  if(typeof id === 'string' && id.startsWith('uni-')){
+    const asgnId=parseInt(id.replace('uni-',''));
+    const a=(d.assignments||[]).find(a=>a.id===asgnId);
+    if(a){a.status=a.status==='Graded'?'Pending':'Submitted';setData(d);renderTaskList();refreshSnap();}
+    return;
+  }
+  if(!d.tasks)return;
+  const t=d.tasks.find(t=>t.id===id);if(t){t.done=!t.done;setData(d);renderTaskList();refreshSnap();}
+}
 function deleteTask(id){const d=getData();d.tasks=(d.tasks||[]).filter(t=>t.id!==id);setData(d);renderTaskList();refreshSnap();}
 function getAllTasks(){const d=getData();let tasks=[...(d.tasks||[])];(d.assignments||[]).forEach(a=>{tasks.push({id:'uni-'+a.id,title:(a.course?'['+a.course+'] ':'')+a.name,source:'uni',priority:parseFloat(a.weight)>=30?'high':'medium',due:a.due||'',done:a.status==='Graded'||a.status==='Submitted',readonly:true});});(d.semEvents||[]).forEach((e,i)=>{tasks.push({id:'sem-'+i,title:'[Wk'+e.week+'] '+e.task,source:'semester',priority:e.type==='Exam'?'high':'medium',due:'',done:false,readonly:true});});return tasks;}
 function renderTaskList(){
@@ -1597,11 +1938,6 @@ function delReading(id){const d=getData();d.reading=(d.reading||[]).filter(r=>r.
 function renderReading(){const el=document.getElementById('reading-list');if(!el)return;const d=getData();let items=d.reading||[];if(readFilter!=='all')items=items.filter(r=>r.status===readFilter);if(!items.length){el.innerHTML='<div class="note-box">Nothing here yet. Add something above.</div>';return;}const ti={book:'&#128214;',article:'&#128196;',paper:'&#128209;',podcast:'&#127897;',other:'&#8226;'};const sc={want:'var(--tx3)',reading:'var(--gold)',done:'var(--grn)'};el.innerHTML='<div class="card">'+items.map(r=>'<div style="display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);"><span style="font-size:16px;flex-shrink:0;">'+(ti[r.type]||'&#8226;')+'</span><div style="flex:1;min-width:0;"><div style="font-size:13px;color:var(--tx);">'+r.title+'</div>'+(r.author?'<div style="font-size:11px;color:var(--tx3);">'+r.author+'</div>':'')+'</div><select onchange="updateReading('+r.id+',this.value)" style="font-size:11px;padding:2px 4px;color:'+(sc[r.status]||'var(--tx3)')+';">'+['want','reading','done'].map(s=>'<option value="'+s+'"'+(s===r.status?' selected':'')+'>'+{want:'Want to read',reading:'Reading',done:'Finished'}[s]+'</option>').join('')+'</select><button onclick="delReading('+r.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>').join('')+'</div>';}
 
 // ── REFLECTION JOURNAL ──
-function saveJournalEntry(){const body=document.getElementById('jnl-body')?.value?.trim();if(!body)return;const d=getData();if(!d.jnlEntries)d.jnlEntries=[];d.jnlEntries.unshift({date:new Date().toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short',year:'numeric'}),mood:document.getElementById('jnl-mood-word')?.value||'',tag:document.getElementById('jnl-tag')?.value||'',body});setData(d);document.getElementById('jnl-body').value='';document.getElementById('jnl-mood-word').value='';renderJnlHistory();showToast('Entry saved');}
-function renderJnlHistory(){const d=getData(),entries=d.jnlEntries||[];const el=document.getElementById('jnl-history');if(!el)return;if(!entries.length){el.innerHTML='<div class="note-box">Nothing yet. Write your first entry above.</div>';return;}el.innerHTML=entries.map((e,i)=>'<div class="journal-entry"><div class="journal-date">'+e.date+(e.mood?' -- <em>'+e.mood+'</em>':'')+(e.tag?'<span class="tag tn" style="margin-left:6px;">'+e.tag+'</span>':'')+'<button onclick="delJnlEntry('+i+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;float:right;">&#x2715;</button></div><div class="journal-body">'+e.body.replace(/\n/g,'<br>')+'</div></div>').join('');}
-function delJnlEntry(i){const d=getData();d.jnlEntries.splice(i,1);setData(d);renderJnlHistory();}
-
-// ── CONTACTS ──
 function addContact(){const name=document.getElementById('con-name')?.value?.trim();if(!name)return;const d=getData();if(!d.contacts)d.contacts=[];d.contacts.push({id:Date.now(),name,rel:document.getElementById('con-rel')?.value||'',bday:document.getElementById('con-bday')?.value||'',notes:document.getElementById('con-notes')?.value||'',lastSeen:''});setData(d);document.getElementById('con-name').value='';document.getElementById('con-notes').value='';renderContacts();}
 function logSeen(id){const d=getData();const c=(d.contacts||[]).find(c=>c.id===id);if(c){c.lastSeen=new Date().toLocaleDateString('en-AU');setData(d);renderContacts();}}
 function delContact(id){const d=getData();d.contacts=(d.contacts||[]).filter(c=>c.id!==id);setData(d);renderContacts();}
@@ -1619,9 +1955,416 @@ function savePsSub(i,val){const d=getData();if(!d.psSubs)d.psSubs={};d.psSubs[i]
 function loadPsSubs(){const d=getData();if(!d.psSubs)return;Object.entries(d.psSubs).forEach(([i,val])=>{const el=document.getElementById('ps-sub-'+i);if(el)el.innerHTML=val;});}
 
 // ── SAVE / LOAD ──
+
+
+// ── CAREER ROLE CARD ──
+function renderCareerRoleDisplay() {
+  const d = getData();
+  const formEl = document.getElementById('career-role-form');
+  const dispEl = document.getElementById('career-role-display');
+  if (!dispEl) return;
+  if (!d.careerRole) {
+    // No saved role yet — show form directly
+    if (formEl) formEl.style.display = 'block';
+    dispEl.innerHTML = '';
+    return;
+  }
+  if (formEl) formEl.style.display = 'none';
+  dispEl.innerHTML = '<div class="career-card" style="margin-bottom:1.5rem;">' +
+    '<div class="ch"><div><div style="font-size:1.1rem;font-family:Cormorant Garamond,serif;font-weight:600;">' + d.careerRole + '</div>' +
+    (d.careerCompany ? '<div style="font-size:12px;color:var(--tx3);">' + d.careerCompany + '</div>' : '') + '</div>' +
+    '<button onclick="editCareerRole()" style="background:none;border:none;cursor:pointer;color:var(--tx3);font-size:16px;padding:4px 8px;">&#x270F;</button></div>' +
+    (d.careerActual ? '<div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);font-size:13px;color:var(--tx2);">' + d.careerActual + '</div>' : '') +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--bd2);">' +
+    (d.careerGood ? '<div style="padding:.75rem 1.25rem;border-right:1px solid var(--bd2);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px;">Going well</div><div style="font-size:13px;color:var(--tx2);">' + d.careerGood + '</div></div>' : '') +
+    (d.careerChallenges ? '<div style="padding:.75rem 1.25rem;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px;">Challenges</div><div style="font-size:13px;color:var(--tx2);">' + d.careerChallenges + '</div></div>' : '') +
+    '</div>' +
+    (d.careerPriorities ? '<div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px;">This week</div><div style="font-size:13px;color:var(--tx2);">' + d.careerPriorities + '</div></div>' : '') +
+    '</div>';
+}
+function editCareerRole() {
+  const d = getData();
+  ['career-role','career-company','career-actual','career-good','career-challenges','career-priorities'].forEach(id => {
+    const el = document.getElementById(id);
+    const key = id.replace('career-','').replace(/-([a-z])/g, (_,c) => c.toUpperCase());
+    const dKey = 'career' + key.charAt(0).toUpperCase() + key.slice(1);
+    if (el && d[dKey]) el.value = d[dKey];
+  });
+  document.getElementById('career-role-form').style.display = 'block';
+  document.getElementById('career-role-display').innerHTML = '';
+}
+function cancelCareerEdit() {
+  const d = getData();
+  document.getElementById('career-role-form').style.display = 'none';
+  renderCareerRoleDisplay();
+}
+function saveCareerRole() {
+  const d = getData();
+  d.careerRole = document.getElementById('career-role')?.value || '';
+  d.careerCompany = document.getElementById('career-company')?.value || '';
+  d.careerActual = document.getElementById('career-actual')?.value || '';
+  d.careerGood = document.getElementById('career-good')?.value || '';
+  d.careerChallenges = document.getElementById('career-challenges')?.value || '';
+  d.careerPriorities = document.getElementById('career-priorities')?.value || '';
+  setData(d);
+  document.getElementById('career-role-form').style.display = 'none';
+  renderCareerRoleDisplay();
+  showToast('Role saved!');
+}
+
+// ── DREAM ROLE ──
+function showAddDreamBtn() {
+  document.getElementById('career-dream-form').style.display = 'block';
+  document.getElementById('career-dream-form').scrollIntoView({behavior:'smooth'});
+}
+function hideDreamForm() {
+  document.getElementById('career-dream-form').style.display = 'none';
+}
+function saveDreamRole() {
+  const title = document.getElementById('dream-title')?.value?.trim();
+  if (!title) { showToast('Enter a role target'); return; }
+  const d = getData();
+  if (!d.dreamRoles) d.dreamRoles = [];
+  d.dreamRoles.push({
+    id: Date.now(),
+    title,
+    why: document.getElementById('dream-why')?.value || '',
+    skills: document.getElementById('dream-skills')?.value || '',
+    vision: document.getElementById('dream-vision')?.value || '',
+    date: new Date().toLocaleDateString('en-AU')
+  });
+  setData(d);
+  ['dream-title','dream-why','dream-skills','dream-vision'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  hideDreamForm();
+  renderDreamRoles();
+  showToast('Dream role saved!');
+}
+function delDreamRole(id) {
+  const d = getData();
+  d.dreamRoles = (d.dreamRoles||[]).filter(r => r.id !== id);
+  setData(d); renderDreamRoles();
+}
+function renderDreamRoles() {
+  const el = document.getElementById('career-dream-display'); if (!el) return;
+  const d = getData(); const roles = d.dreamRoles || [];
+  if (!roles.length) { el.innerHTML = ''; return; }
+  el.innerHTML = roles.map(r => '<div class="career-card" style="margin-bottom:1rem;">' +
+    '<div class="ch"><div><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:3px;">Dream Role</div><div style="font-size:1rem;font-family:Cormorant Garamond,serif;font-weight:600;">'+r.title+'</div>' +
+    '<div style="font-size:11px;color:var(--tx3);">Saved '+r.date+'</div></div>' +
+    '<button onclick="delDreamRole('+r.id+')" style="background:none;border:none;cursor:pointer;color:var(--tx3);font-size:14px;">&#x2715;</button></div>' +
+    (r.why ? '<div style="padding:.75rem 1.25rem;border-top:1px solid var(--bd2);font-size:13px;color:var(--tx2);">' + r.why + '</div>' : '') +
+    (r.skills || r.vision ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--bd2);">' +
+      (r.skills ? '<div style="padding:.75rem 1.25rem;border-right:1px solid var(--bd2);"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px;">Skills</div><div style="font-size:13px;color:var(--tx2);">'+r.skills+'</div></div>' : '') +
+      (r.vision ? '<div style="padding:.75rem 1.25rem;"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--tx3);margin-bottom:4px;">Vision</div><div style="font-size:13px;color:var(--tx2);">'+r.vision+'</div></div>' : '') +
+      '</div>' : '') +
+    '</div>').join('');
+}
+
+// ── CAREER COURSES ──
+function addCareerCourse() {
+  const name = document.getElementById('cc-name')?.value?.trim(); if (!name) return;
+  const d = getData(); if (!d.careerCourses) d.careerCourses = [];
+  d.careerCourses.push({id:Date.now(),name,provider:document.getElementById('cc-provider')?.value||'',cost:document.getElementById('cc-cost')?.value||'',status:document.getElementById('cc-status')?.value||'watchlist'});
+  setData(d);
+  ['cc-name','cc-provider','cc-cost'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  renderCareerCourses();
+}
+function delCareerCourse(id){const d=getData();d.careerCourses=(d.careerCourses||[]).filter(c=>c.id!==id);setData(d);renderCareerCourses();}
+function renderCareerCourses(){
+  const el=document.getElementById('career-courses-list');if(!el)return;
+  const d=getData();const courses=d.careerCourses||[];
+  if(!courses.length){el.innerHTML='<div style="padding:1rem 1.25rem;font-size:13px;color:var(--tx3);">No courses added yet.</div>';return;}
+  const sc={watchlist:'var(--tx3)',enrolled:'var(--gold)',done:'var(--grn)'};
+  el.innerHTML=courses.map(c=>'<div style="display:flex;align-items:center;gap:10px;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);">'+
+    '<div style="flex:1;"><div style="font-size:13px;color:var(--tx);">'+c.name+'</div>'+
+    '<div style="font-size:11px;color:var(--tx3);">'+(c.provider?c.provider+' ':'')+(c.cost?'· $'+c.cost:'')+'</div></div>'+
+    '<select onchange="updateCCStatus('+c.id+',this.value)" style="font-size:11px;padding:2px 4px;color:'+(sc[c.status]||'var(--tx3)')+';">'+
+    ['watchlist','enrolled','done'].map(s=>'<option value="'+s+'"'+(s===c.status?' selected':'')+'>'+{watchlist:'Watchlist',enrolled:'Enrolled',done:'Done'}[s]+'</option>').join('')+
+    '</select><button onclick="delCareerCourse('+c.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>').join('');
+}
+function updateCCStatus(id,status){const d=getData();const c=(d.careerCourses||[]).find(c=>c.id===id);if(c){c.status=status;setData(d);}}
+
+
+
+function renderDashTasks() {
+  const el = document.getElementById('dash-tasks-today'); if (!el) return;
+  const today = new Date().toISOString().split('T')[0];
+  const all = getAllTasks ? getAllTasks() : [];
+  const due = all.filter(t => !t.done && t.due === today);
+  const overdue = all.filter(t => !t.done && t.due && t.due < today);
+  if (!due.length && !overdue.length) {
+    el.innerHTML = '<div style="padding:.75rem 1.25rem;font-size:13px;color:var(--tx3);">Nothing due today.</div>';
+    return;
+  }
+  const srcTag = {personal:'<span class="tag tpk">personal</span>',uni:'<span class="tag tgrn">uni</span>',career:'<span class="tag tbl">career</span>',semester:'<span class="tag tgold">semester</span>'};
+  const rows = [...overdue.slice(0,3).map(t => ({...t, _overdue: true})), ...due.slice(0,5)];
+  el.innerHTML = rows.map(t =>
+    '<div style="display:flex;align-items:center;gap:8px;padding:6px 1.25rem;border-bottom:1px solid var(--bd2);">' +
+      (t.readonly ? '<div style="width:16px;height:16px;border-radius:3px;background:var(--bd);flex-shrink:0;"></div>' :
+        '<div onclick="toggleTask(' + t.id + ');renderDashTasks();refreshSnap();" style="width:16px;height:16px;border-radius:3px;border:1.5px solid var(--bd);cursor:pointer;flex-shrink:0;"></div>') +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-size:12px;color:' + (t._overdue ? 'var(--pk)' : 'var(--tx)') + ';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' +
+          (t._overdue ? '&#x26A0; ' : '') + t.title +
+        '</div>' +
+        (srcTag[t.source] || '') +
+      '</div>' +
+    '</div>'
+  ).join('') + (due.length > 5 || overdue.length > 3 ? '<div style="padding:5px 1.25rem;font-size:11px;color:var(--tx3);">+' + (all.filter(t=>!t.done&&t.due&&t.due<=today).length - rows.length) + ' more</div>' : '');
+}
+
+// ── JOURNAL MODAL ──
+function openJournalModal(){
+  const m=document.getElementById('jnl-modal');
+  if(m){m.style.display='flex';}
+}
+function closeJournalModal(){
+  const m=document.getElementById('jnl-modal');
+  if(m){m.style.display='none';}
+}
+function saveJournalEntry(){
+  const body=document.getElementById('jnl-body')?.value?.trim();
+  if(!body)return;
+  const d=getData();if(!d.jnlEntries)d.jnlEntries=[];
+  d.jnlEntries.unshift({
+    id:Date.now(),
+    date:new Date().toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short',year:'numeric'}),
+    mood:document.getElementById('jnl-mood-word')?.value||'',
+    tag:document.getElementById('jnl-tag')?.value||'',
+    body,
+    expanded:false
+  });
+  setData(d);
+  document.getElementById('jnl-body').value='';
+  document.getElementById('jnl-mood-word').value='';
+  closeJournalModal();
+  renderJnlHistory();
+  showToast('Entry saved');
+}
+function toggleJnlEntry(id){
+  const d=getData();
+  const e=(d.jnlEntries||[]).find(e=>e.id===id);
+  if(e){e.expanded=!e.expanded;setData(d);renderJnlHistory();}
+}
+function renderJnlHistory(){
+  const d=getData(),entries=d.jnlEntries||[];
+  const el=document.getElementById('jnl-history');if(!el)return;
+  const countEl=document.getElementById('jnl-count');
+  const emptyEl=document.getElementById('jnl-empty');
+  if(countEl)countEl.textContent=entries.length?entries.length+' entries':'';
+  if(!entries.length){
+    el.innerHTML='';
+    if(emptyEl)emptyEl.style.display='block';
+    return;
+  }
+  if(emptyEl)emptyEl.style.display='none';
+  el.innerHTML=entries.map((e,i)=>{
+    const title=e.date+(e.mood?' — <em>'+e.mood+'</em>':'')+(e.tag?'<span class="tag tn" style="margin-left:6px;">'+e.tag+'</span>':'');
+    const expanded=e.expanded||false;
+    return '<div class="journal-entry" style="cursor:pointer;" onclick="toggleJnlEntry('+(e.id||i)+')">'+
+      '<div class="journal-date" style="display:flex;justify-content:space-between;align-items:center;">'+
+        '<span>'+title+'</span>'+
+        '<div style="display:flex;align-items:center;gap:6px;">'+
+          '<span style="font-size:11px;color:var(--tx3);">'+(expanded?'&#9662;':'&#9656;')+'</span>'+
+          '<button onclick="event.stopPropagation();delJnlEntry('+i+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;">&#x2715;</button>'+
+        '</div>'+
+      '</div>'+
+      (expanded?'<div class="journal-body" style="margin-top:8px;">'+e.body.replace(/\n/g,'<br>')+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+function delJnlEntry(i){
+  const d=getData();d.jnlEntries.splice(i,1);setData(d);renderJnlHistory();
+}
+
+// ── REFLECT PAGE INIT ──
+function initReflect(){
+  renderJnlHistory();
+  renderGoals();
+  renderReviewHistory();
+  initHabits();
+}
+
+// ── CURATE TAB ──
+let curateTab='reading';
+function setCurateTab(tab,btn){
+  curateTab=tab;
+  ['reading','watching','substacks','podcasts'].forEach(t=>{
+    const el=document.getElementById('ctab-'+t);
+    if(el)el.style.display=t===tab?'block':'none';
+  });
+  document.querySelectorAll('.curate-tab').forEach(b=>{
+    b.style.color='var(--tx3)';b.style.borderBottom='2px solid transparent';b.style.fontWeight='400';
+  });
+  if(btn){btn.style.color='var(--pk)';btn.style.borderBottom='2px solid var(--pk)';btn.style.fontWeight='500';}
+  if(tab==='reading')renderReading();
+  if(tab==='watching')renderWatchList();
+  if(tab==='substacks')renderSubstacks();
+  if(tab==='podcasts')renderPodcasts();
+}
+
+// ── WISHLIST ──
+function addWishItem(){
+  const name=document.getElementById('wish-name')?.value?.trim();if(!name)return;
+  const d=getData();if(!d.wishlist)d.wishlist=[];
+  d.wishlist.push({id:Date.now(),name,cat:document.getElementById('wish-cat')?.value||'',price:document.getElementById('wish-price')?.value||'',prio:document.getElementById('wish-prio')?.value||'want',done:false});
+  setData(d);document.getElementById('wish-name').value='';document.getElementById('wish-price').value='';
+  renderWishlist();
+}
+function toggleWish(id){const d=getData();const w=(d.wishlist||[]).find(w=>w.id===id);if(w){w.done=!w.done;setData(d);renderWishlist();}}
+function delWish(id){const d=getData();d.wishlist=(d.wishlist||[]).filter(w=>w.id!==id);setData(d);renderWishlist();}
+function renderWishlist(){
+  const el=document.getElementById('wishlist-items');if(!el)return;
+  const d=getData();const items=d.wishlist||[];
+  const active=items.filter(w=>!w.done);
+  const purchased=items.filter(w=>w.done);
+  const prioCol={want:'var(--pk)',need:'var(--gold)',someday:'var(--tx3)'};
+
+  if(!active.length){
+    el.innerHTML='<div style="padding:1rem 1.25rem;font-size:13px;color:var(--tx3);">Nothing on your wishlist yet.</div>';
+  } else {
+    el.innerHTML=active.map(w=>
+      '<div style="display:flex;align-items:center;gap:10px;padding:8px 1.25rem;border-bottom:1px solid var(--bd2);">'+
+        '<div onclick="toggleWish('+w.id+')" style="width:18px;height:18px;border-radius:4px;border:1.5px solid var(--bd);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;"></div>'+
+        '<div style="flex:1;min-width:0;"><div style="font-size:13px;color:var(--tx);">'+w.name+'</div>'+
+        '<div style="display:flex;gap:5px;font-size:11px;color:var(--tx3);">'+(w.cat?'<span>'+w.cat+'</span>':'')+(w.price?'<span>$'+w.price+'</span>':'')+'<span style="color:'+prioCol[w.prio||'want']+';">'+w.prio+'</span></div></div>'+
+        '<button onclick="delWish('+w.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>'
+    ).join('');
+  }
+
+  const pEl=document.getElementById('wishlist-purchased');
+  const piEl=document.getElementById('wishlist-purchased-items');
+  if(pEl&&piEl){
+    if(!purchased.length){pEl.style.display='none';return;}
+    pEl.style.display='block';
+    piEl.innerHTML=purchased.map(w=>
+      '<div style="display:flex;align-items:center;gap:10px;padding:7px 1.25rem;border-bottom:1px solid var(--bd2);opacity:0.65;">'+
+        '<div onclick="toggleWish('+w.id+')" style="width:18px;height:18px;border-radius:4px;border:1.5px solid var(--pk);background:var(--pk);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;flex-shrink:0;">&#x2713;</div>'+
+        '<div style="flex:1;font-size:13px;color:var(--tx3);text-decoration:line-through;">'+w.name+(w.price?' · $'+w.price:'')+'</div>'+
+        '<button onclick="delWish('+w.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>'
+    ).join('');
+  }
+}
+function exportWishlistCSV(){
+  const d=getData();const items=d.wishlist||[];
+  const csv=['Name,Category,Price,Priority,Done',...items.map(w=>[w.name,w.cat,w.price,w.prio,w.done].join(','))].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv,'+encodeURIComponent(csv);a.download='wishlist.csv';a.click();
+}
+
+// ── WATCH LIST ──
+function addWatchItem(){
+  const title=document.getElementById('watch-title')?.value?.trim();if(!title)return;
+  const d=getData();if(!d.watchlist)d.watchlist=[];
+  d.watchlist.push({id:Date.now(),title,type:document.getElementById('watch-type')?.value||'movie',status:document.getElementById('watch-status')?.value||'want'});
+  setData(d);document.getElementById('watch-title').value='';renderWatchList();
+}
+function updateWatch(id,status){const d=getData();const w=(d.watchlist||[]).find(w=>w.id===id);if(w){w.status=status;setData(d);renderWatchList();}}
+function delWatch(id){const d=getData();d.watchlist=(d.watchlist||[]).filter(w=>w.id!==id);setData(d);renderWatchList();}
+function renderWatchList(){
+  const el=document.getElementById('watch-list');if(!el)return;
+  const d=getData();const items=d.watchlist||[];
+  if(!items.length){el.innerHTML='<div class="note-box">Nothing to watch yet.</div>';return;}
+  const ti={movie:'&#127916;',show:'&#128250;',doco:'&#127900;',other:'&#9654;'};
+  const sc={want:'var(--tx3)',watching:'var(--gold)',done:'var(--grn)'};
+  el.innerHTML='<div class="card">'+items.map(w=>'<div style="display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);"><span style="font-size:16px;flex-shrink:0;">'+(ti[w.type]||'&#9654;')+'</span><div style="flex:1;font-size:13px;color:var(--tx);">'+w.title+'<span style="font-size:11px;color:var(--tx3);margin-left:6px;">'+w.type+'</span></div><select onchange="updateWatch('+w.id+',this.value)" style="font-size:11px;padding:2px 4px;color:'+(sc[w.status]||'var(--tx3)')+';">'+['want','watching','done'].map(s=>'<option value="'+s+'"'+(s===w.status?' selected':'')+'>'+{want:'Want to watch',watching:'Watching',done:'Watched'}[s]+'</option>').join('')+'</select><button onclick="delWatch('+w.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>').join('')+'</div>';
+}
+
+// ── SUBSTACKS ──
+function addSubstack(){
+  const name=document.getElementById('sub-name')?.value?.trim();if(!name)return;
+  const d=getData();if(!d.substacks)d.substacks=[];
+  d.substacks.push({id:Date.now(),name,url:document.getElementById('sub-url')?.value||'',note:document.getElementById('sub-note')?.value||''});
+  setData(d);document.getElementById('sub-name').value='';document.getElementById('sub-url').value='';document.getElementById('sub-note').value='';renderSubstacks();
+}
+function delSubstack(id){const d=getData();d.substacks=(d.substacks||[]).filter(s=>s.id!==id);setData(d);renderSubstacks();}
+function renderSubstacks(){
+  const el=document.getElementById('substacks-list');if(!el)return;
+  const d=getData();const items=d.substacks||[];
+  if(!items.length){el.innerHTML='<div class="note-box">No substacks added yet.</div>';return;}
+  el.innerHTML='<div class="card">'+items.map(s=>'<div style="display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);"><div style="flex:1;"><div style="font-size:13px;color:var(--tx);">'+(s.url?'<a href="'+s.url+'" target="_blank" style="color:var(--pk);text-decoration:none;">'+s.name+'</a>':s.name)+'</div>'+(s.note?'<div style="font-size:11px;color:var(--tx3);">'+s.note+'</div>':'')+'</div><button onclick="delSubstack('+s.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>').join('')+'</div>';
+}
+
+// ── PODCASTS ──
+function addPodcast(){
+  const name=document.getElementById('pod-name')?.value?.trim();if(!name)return;
+  const d=getData();if(!d.podcasts)d.podcasts=[];
+  d.podcasts.push({id:Date.now(),name,host:document.getElementById('pod-host')?.value||'',note:document.getElementById('pod-note')?.value||''});
+  setData(d);document.getElementById('pod-name').value='';document.getElementById('pod-host').value='';document.getElementById('pod-note').value='';renderPodcasts();
+}
+function delPodcast(id){const d=getData();d.podcasts=(d.podcasts||[]).filter(p=>p.id!==id);setData(d);renderPodcasts();}
+function renderPodcasts(){
+  const el=document.getElementById('podcasts-list');if(!el)return;
+  const d=getData();const items=d.podcasts||[];
+  if(!items.length){el.innerHTML='<div class="note-box">No podcasts added yet.</div>';return;}
+  el.innerHTML='<div class="card">'+items.map(p=>'<div style="display:flex;align-items:center;gap:10px;padding:9px 1.25rem;border-bottom:1px solid var(--bd2);"><span style="font-size:16px;flex-shrink:0;">&#127897;</span><div style="flex:1;"><div style="font-size:13px;color:var(--tx);">'+p.name+(p.host?'<span style="font-size:11px;color:var(--tx3);margin-left:6px;">'+p.host+'</span>':'')+'</div>'+(p.note?'<div style="font-size:11px;color:var(--tx3);">'+p.note+'</div>':'')+'</div><button onclick="delPodcast('+p.id+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button></div>').join('')+'</div>';
+}
+
+// ── CAREER ENTRY CARDS ──
+function addJournalEntry(){
+  const text=document.getElementById('journal-new')?.value?.trim();if(!text)return;
+  const d=getData();if(!d.journalEntries)d.journalEntries=[];
+  const nextRole='';
+  d.journalEntries.unshift({id:Date.now(),date:new Date().toLocaleDateString('en-AU'),text,nextRole,editing:false});
+  setData(d);
+  document.getElementById('journal-new').value='';
+  renderJournal();
+}
+function toggleJournalEdit(id){
+  const d=getData();
+  const e=(d.journalEntries||[]).find(e=>e.id===id);
+  if(e){e.editing=!e.editing;setData(d);renderJournal();}
+}
+function saveJournalEdit(id){
+  const d=getData();
+  const e=(d.journalEntries||[]).find(e=>e.id===id);
+  if(e){
+    const ta=document.getElementById('jedit-'+id);
+    if(ta)e.text=ta.value;
+    e.editing=false;
+    setData(d);renderJournal();
+  }
+}
+function renderJournal(){
+  const d=getData(),entries=d.journalEntries||[];
+  const el=document.getElementById('journal-list');if(!el)return;
+  if(!entries.length){el.innerHTML='<div class="note-box">No entries yet.</div>';return;}
+  el.innerHTML=entries.map((e,i)=>{
+    const eid=e.id||i;
+    if(e.editing){
+      return '<div class="journal-entry">'+
+        '<div class="journal-date">'+e.date+(e.nextRole?'<span class="tag tbl" style="margin-left:6px;">Target: '+e.nextRole+'</span>':'')+'</div>'+
+        '<textarea id="jedit-'+eid+'" style="width:100%;min-height:100px;margin-top:8px;font-size:13px;">'+e.text+'</textarea>'+
+        '<div style="display:flex;gap:6px;margin-top:8px;">'+
+          '<button class="btn btn-primary btn-sm" onclick="saveJournalEdit('+eid+')">Save</button>'+
+          '<button class="btn btn-sm" onclick="toggleJournalEdit('+eid+')">Cancel</button>'+
+        '</div>'+
+      '</div>';
+    }
+    return '<div class="journal-entry">'+
+      '<div class="journal-date" style="display:flex;justify-content:space-between;align-items:center;">'+
+        '<span>'+e.date+(e.nextRole?'<span class="tag tbl" style="margin-left:6px;">Target: '+e.nextRole+'</span>':'')+'</span>'+
+        '<div style="display:flex;gap:4px;">'+
+          '<button onclick="toggleJournalEdit('+eid+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:13px;">&#x270F;</button>'+
+          '<button onclick="delJournalEntry('+i+')" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;">&#x2715;</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="journal-body">'+e.text.replace(/\n/g,'<br>')+'</div>'+
+    '</div>';
+  }).join('');
+}
+
+
+let _saveFlashTimer=null;
+function showSaveFlash(){
+  clearTimeout(_saveFlashTimer);
+  const el=document.getElementById('save-indicator');
+  if(!el)return;
+  el.style.opacity='1';
+  _saveFlashTimer=setTimeout(()=>{el.style.opacity='0';},1200);
+}
+
 function saveAll(){
   const d=getData();
-  const tm={'quick-notes':'quickNotes','social-notes':'socialNotes','study-notes':'studyNotes','skin-notes':'skinNotes','meal-notes':'mealNotes','habit-notes':'habitNotes','sem-notes':'semNotes','staples-txt':'staplesTxt'};
+  const tm={'quick-notes':'quickNotes','social-notes':'socialNotes','study-notes':'studyNotes','skin-notes':'skinNotes','meal-notes':'mealNotes','habit-notes':'habitNotes','sem-notes':'semNotes','staples-txt':'staplesTxt','career-actual':'careerActual','career-good':'careerGood','career-challenges':'careerChallenges','career-priorities':'careerPriorities','career-role':'careerRole','career-company':'careerCompany'};
   Object.entries(tm).forEach(([id,key])=>{const el=document.getElementById(id);if(el)d[key]=el.value;});
   const dm={'period-start':'budgetPeriod','sem-start':'semStart','sem-end':'semEnd'};
   Object.entries(dm).forEach(([id,key])=>{const el=document.getElementById(id);if(el)d[key]=el.value;});
@@ -1630,11 +2373,12 @@ function saveAll(){
   d.savings=Array.from(document.querySelectorAll('.sav-row')).map(r=>({name:r.querySelector('[contenteditable]')?.textContent||'',contrib:r.querySelector('.sav-c')?.value||'',saved:r.querySelector('.sav-s')?.value||'',target:r.querySelector('.sav-t')?.value||''}));
   d.subscriptions=getSubData();
   setData(d);
+  showSaveFlash();
   if(driveReady)syncToDrive();
 }
 function loadData(){
   const d=getData();
-  const tm={'quick-notes':'quickNotes','social-notes':'socialNotes','study-notes':'studyNotes','skin-notes':'skinNotes','meal-notes':'mealNotes','habit-notes':'habitNotes','sem-notes':'semNotes','staples-txt':'staplesTxt'};
+  const tm={'quick-notes':'quickNotes','social-notes':'socialNotes','study-notes':'studyNotes','skin-notes':'skinNotes','meal-notes':'mealNotes','habit-notes':'habitNotes','sem-notes':'semNotes','staples-txt':'staplesTxt','career-actual':'careerActual','career-good':'careerGood','career-challenges':'careerChallenges','career-priorities':'careerPriorities','career-role':'careerRole','career-company':'careerCompany'};
   Object.entries(tm).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key])el.value=d[key];});
   if(d.budgetPeriod){const el=document.getElementById('period-start');if(el)el.value=d.budgetPeriod;updatePeriod();}
   if(d.semStart){const el=document.getElementById('sem-start');if(el)el.value=d.semStart;}
@@ -1649,8 +2393,17 @@ function loadData(){
   if(d.savings&&d.savings.length)d.savings.forEach(s=>addSavingsRow(s.name,s.contrib,s.saved,s.target));else DEF_SAV.forEach(s=>addSavingsRow(s.n,'','',s.t));
   recalcBudget();refreshDashHabMini();refreshSnap();
   if(d.journalEntries)renderJournal();
+  setTimeout(()=>{renderCareerRoleDisplay();renderDreamRoles();renderCareerCourses();},50);
+  // Restore career fields
+  const careerFields = {
+    'career-role':'careerRole','career-company':'careerCompany',
+    'career-actual':'careerActual','career-good':'careerGood',
+    'career-challenges':'careerChallenges','career-priorities':'careerPriorities'
+  };
+  Object.entries(careerFields).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&d[key])el.value=d[key];});
   if(d.courses&&d.courses.length)setTimeout(renderCourseList,100);
-  renderSocialList();renderPRs();loadPsSubs();
+  renderSocialList();renderPRs();loadPsSubs();renderDashTasks();
+  renderWishlist();renderWatchList();renderSubstacks();renderPodcasts();
   setTimeout(()=>{renderSavingsChart();renderNWChart();renderNWBreakdown();},50);
 }
 
@@ -1672,14 +2425,19 @@ window.addEventListener('load',()=>{
   initDate();
   renderSchedule('mon');
   renderGym('d1');
+  renderMeas();
   renderRoutines();
   initHabits();
   initTimerBlocks();
   renderMeals();
+  const gd=getData();renderGroc(gd.grocery||[]);
   loadData();
   renderTomorrow();
   renderPWList();
   showTodayAff();
+  renderCareerRoleDisplay();
+  renderDreamRoles();
+  renderCareerCourses();
 });
 window.addEventListener('beforeunload',saveAll);
 
